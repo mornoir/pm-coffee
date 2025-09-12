@@ -1,3 +1,118 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero",
+      "description": "Cozy and warm interior of Kabar Baik Coffee shop with people working and enjoying coffee.",
+      "imageUrl": "https://picsum.photos/seed/hero/1920/1080",
+      "imageHint": "coffee shop interior"
+    },
+    {
+      "id": "menu1",
+      "description": "A cup of expertly brewed latte with art.",
+      "imageUrl": "https://picsum.photos/seed/menu1/600/400",
+      "imageHint": "latte art"
+    },
+    {
+      "id": "menu2",
+      "description": "A freshly baked croissant on a plate.",
+      "imageUrl": "https://picsum.photos/seed/menu2/600/400",
+      "imageHint": "croissant pastry"
+    },
+    {
+      "id": "menu3",
+      "description": "A hearty bowl of chicken katsu curry.",
+      "imageUrl": "https://picsum.photos/seed/menu3/600/400",
+      "imageHint": "chicken katsu"
+    },
+    {
+      "id": "menu4",
+      "description": "A workspace package with coffee and a snack.",
+      "imageUrl": "https://picsum.photos/seed/menu4/600/400",
+      "imageHint": "desk coffee"
+    },
+    {
+      "id": "gallery1",
+      "description": "A group of people collaborating in a meeting room.",
+      "imageUrl": "https://picsum.photos/seed/gallery1/600/400",
+      "imageHint": "business meeting"
+    },
+    {
+      "id": "gallery2",
+      "description": "Close up of a person typing on a laptop with a coffee nearby.",
+      "imageUrl": "https://picsum.photos/seed/gallery2/600/400",
+      "imageHint": "laptop coffee"
+    },
+    {
+      "id": "gallery3",
+      "description": "The exterior of the Kabar Baik coffee shop.",
+      "imageUrl": "https://picsum.photos/seed/gallery3/600/400",
+      "imageHint": "cafe exterior"
+    },
+    {
+      "id": "gallery4",
+      "description": "A barista carefully preparing a pour-over coffee.",
+      "imageUrl": "https://picsum.photos/seed/gallery4/600/400",
+      "imageHint": "barista brewing"
+    },
+    {
+      "id": "gallery5",
+      "description": "Friends laughing and drinking coffee together.",
+      "imageUrl": "https://picsum.photos/seed/gallery5/600/400",
+      "imageHint": "friends coffee"
+    },
+    {
+      "id": "gallery6",
+      "description": "Cozy corner with an armchair and a small table.",
+      "imageUrl": "https://picsum.photos/seed/gallery6/600/400",
+      "imageHint": "reading nook"
+    },
+    {
+      "id": "gallery7",
+      "description": "A delicious looking slice of cake on a plate.",
+      "imageUrl": "https://picsum.photos/seed/gallery7/600/400",
+      "imageHint": "cake slice"
+    },
+    {
+      "id": "gallery8",
+      "description": "A community event happening at the coffee shop.",
+      "imageUrl": "https://picsum.photos/seed/gallery8/600/400",
+      "imageHint": "community event"
+    },
+    {
+      "id": "social1",
+      "description": "A picture of a latte with intricate leaf art.",
+      "imageUrl": "https://picsum.photos/seed/social1/400/400",
+      "imageHint": "latte art"
+    },
+    {
+      "id": "social2",
+      "description": "A person working on their laptop in the cafe.",
+      "imageUrl": "https://picsum.photos/seed/social2/400/400",
+      "imageHint": "people working"
+    },
+    {
+      "id": "social3",
+      "description": "A wide shot of the bustling coffee shop interior.",
+      "imageUrl": "https://picsum.photos/seed/social3/400/400",
+      "imageHint": "coffee shop interior"
+    },
+    {
+      "id": "social4",
+      "description": "A picture of a tasty avocado toast.",
+      "imageUrl": "https://picsum.photos/seed/social4/400/400",
+      "imageHint": "avocado toast"
+    },
+    {
+      "id": "social5",
+      "description": "People gathered for a community open mic night.",
+      "imageUrl": "https://picsum.photos/seed/social5/400/400",
+      "imageHint": "community event"
+    },
+    {
+      "id": "social6",
+      "description": "Two friends chatting over coffee.",
+      "imageUrl": "https://picsum.photos/seed/social6/400/400",
+      "imageHint": "friends chatting"
+    }
+  ]
 }
