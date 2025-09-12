@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import { Button } from '@/components/ui/button';
@@ -424,7 +425,7 @@ export default function Home() {
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
-        <div className="relative z-10 flex h-full flex-col items-center justify-end text-center text-foreground pb-16 md:pb-24 p-4">
+        <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-foreground p-4">
           <h1 className="font-headline text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter">
             Experience the Perfect Brew
           </h1>
