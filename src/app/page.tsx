@@ -5,7 +5,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { placeHolderImages } from '@/lib/placeholder-images';
-import { ArrowRight, Utensils, Wifi, Users, Star, Clock, Mail, MapPin, Phone, Twitter, Instagram, Facebook, CalendarIcon, Loader2 } from 'lucide-react';
+import { ArrowRight, Utensils, Wifi, Users, Star, Clock, Mail, MapPin, Phone, Twitter, Instagram, Facebook, CalendarIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Badge } from "@/components/ui/badge";
@@ -21,14 +21,9 @@ import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
-import { useState, useEffect }
+import { useState }
 from 'react';
 import { useToast } from '@/hooks/use-toast';
-import { useFormState, useFormStatus } from 'react-dom';
-import { handleOptimizeSchedule, OptimizerState } from '@/app/booking/actions';
-import { Textarea } from '@/components/ui/textarea';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Label } from '@/components/ui/label';
 
 
 const highlights = [
@@ -283,127 +278,6 @@ function BookingForm({ schema, isRoomBooking = false }: { schema: typeof seatBoo
   );
 }
 
-const initialState: OptimizerState = {};
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <Button type="submit" disabled={pending} className="w-full sm:w-auto">
-      {pending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-      {pending ? 'Optimizing...' : 'Generate Optimized Schedule'}
-    </Button>
-  );
-}
-
-function OptimizerForm() {
-  const [state, formAction] = useFormState(handleOptimizeSchedule, initialState);
-  const { toast } = useToast();
-  const [optimizedScheduleData, setOptimizedScheduleData] = useState<any[]>([]);
-
-  useEffect(() => {
-    if (state.error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description: typeof state.error === 'string' ? state.error : 'Please check the form for errors.',
-      });
-    }
-    if (state.result?.optimizedSchedule) {
-      try {
-        const parsed = JSON.parse(state.result.optimizedSchedule);
-        setOptimizedScheduleData(Array.isArray(parsed) ? parsed : [parsed]);
-      } catch (error) {
-        console.error("Failed to parse optimized schedule JSON:", error);
-        toast({
-          variant: 'destructive',
-          title: 'Error',
-          description: 'The AI returned an invalid schedule format.',
-        });
-        setOptimizedScheduleData([]);
-      }
-    }
-  }, [state, toast]);
-
-  return (
-    <>
-      <Card className="shadow-lg">
-        <form action={formAction}>
-          <CardHeader>
-            <CardTitle className="font-headline">AI Schedule Optimizer</CardTitle>
-            <CardDescription>
-              Input historical data and current schedules to receive an AI-powered optimization plan.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="usageData">Historical Usage Data</Label>
-              <Textarea id="usageData" name="usageData" placeholder="e.g., Monday 9-11 AM: 80% full, Tuesday 2-4 PM: 50% full..." required />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="cleaningSchedule">Current Cleaning Schedule</Label>
-              <Textarea id="cleaningSchedule" name="cleaningSchedule" placeholder="e.g., Cleaned daily at 8 AM and 6 PM." required />
-            </div>
-             <div className="grid sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                    <Label htmlFor="roomCapacity">Room Capacity</Label>
-                    <Input id="roomCapacity" name="roomCapacity" type="number" placeholder="e.g., 8" required />
-                </div>
-                <div className="space-y-2">
-                    <Label htmlFor="customerSatisfactionMetrics">Customer Satisfaction Metrics</Label>
-                    <Input id="customerSatisfactionMetrics" name="customerSatisfactionMetrics" placeholder="e.g., Complaints about cleanliness: 3/week" required />
-                </div>
-             </div>
-          </CardContent>
-          <CardFooter>
-            <SubmitButton />
-          </CardFooter>
-        </form>
-      </Card>
-
-      {state.result && (
-        <div className="mt-8 space-y-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="font-headline">Optimization Results</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-                <div>
-                    <h3 className="font-semibold mb-2">Optimized Schedule</h3>
-                    {optimizedScheduleData.length > 0 ? (
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-sm">
-                        <thead className="text-left">
-                            <tr className="border-b">
-                            {Object.keys(optimizedScheduleData[0]).map(key => <th key={key} className="p-2 font-medium">{key}</th>)}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {optimizedScheduleData.map((row, index) => (
-                            <tr key={index} className="border-b">
-                                {Object.values(row).map((val, i) => <td key={i} className="p-2">{String(val)}</td>)}
-                            </tr>
-                            ))}
-                        </tbody>
-                        </table>
-                    </div>
-                    ) : <p className="text-muted-foreground">No schedule data to display.</p>}
-                </div>
-                <div>
-                    <h3 className="font-semibold mb-2">Suggested Improvements</h3>
-                    <Alert>
-                        <AlertTitle>Recommendations</AlertTitle>
-                        <AlertDescription>{state.result.suggestedImprovements}</AlertDescription>
-                    </Alert>
-                </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
-    </>
-  );
-}
-
-
 export default function Home() {
   const heroImage = placeHolderImages.find((img) => img.id === 'hero');
   const aboutBaristaImage = placeHolderImages.find(img => img.id === 'gallery4');
@@ -426,19 +300,21 @@ export default function Home() {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-foreground p-4">
-          <h1 className="font-headline text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter">
-            Experience the Perfect Brew
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg md:text-xl text-muted-foreground">
-            Crafting flavors, handcrafted coffee. Delivered to you. Indulge in the richest coffee experience that transcends your taste.
-          </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-4">
-            <Button asChild size="lg">
-              <Link href="#booking">Book a Seat</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link href="#menu">View Menu</Link>
-            </Button>
+          <div className="flex flex-col items-center">
+            <h1 className="font-headline text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter">
+              Experience the Perfect Brew
+            </h1>
+            <p className="mt-4 max-w-2xl text-lg md:text-xl text-muted-foreground">
+              Crafting flavors, handcrafted coffee. Delivered to you. Indulge in the richest coffee experience that transcends your taste.
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row gap-4">
+              <Button asChild size="lg">
+                <Link href="#booking">Book a Seat</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link href="#menu">View Menu</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -632,19 +508,6 @@ export default function Home() {
                </Card>
             </TabsContent>
           </Tabs>
-        </div>
-      </section>
-
-      {/* AI Optimizer Section */}
-      <section id="optimizer" className="bg-background py-16 md:py-24">
-        <div className="container mx-auto px-4 max-w-4xl">
-           <header className="text-center mb-8 md:mb-12">
-              <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tighter">Optimize Room Schedule (Admin)</h2>
-              <p className="mt-3 max-w-2xl mx-auto text-muted-foreground">
-                  Use our AI-powered tool to analyze usage data and generate an optimized schedule for room utilization and cleaning.
-              </p>
-          </header>
-          <OptimizerForm />
         </div>
       </section>
 
