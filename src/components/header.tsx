@@ -73,7 +73,7 @@ export function Header() {
   return (
     <header className={cn(
         "sticky top-0 z-50 w-full border-b backdrop-blur supports-[backdrop-filter]:bg-background/60",
-        isScrolled ? "border-border/40 bg-background/95" : "border-transparent bg-transparent"
+        isScrolled ? "border-border bg-background/95" : "border-transparent bg-transparent"
       )}>
       <div className="container flex h-20 items-center justify-between transition-all duration-300">
         <Link href="#home" className="flex items-center gap-2" onClick={(e) => handleNavClick(e, "#home")}>
@@ -89,7 +89,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-           <Button asChild className="hidden md:flex bg-accent hover:bg-accent/90 text-accent-foreground">
+           <Button asChild className="hidden md:flex">
              <a href="#booking" onClick={(e) => handleNavClick(e, "#booking")}>Reserve Now</a>
            </Button>
 
@@ -118,7 +118,7 @@ export function Header() {
                     <NavLink key={link.href} {...link} className="text-xl"/>
                   ))}
                 </nav>
-                <Button asChild className="w-full mt-8 bg-accent hover:bg-accent/90 text-accent-foreground">
+                <Button asChild className="w-full mt-8">
                   <a href="#booking" onClick={(e) => handleNavClick(e, "#booking")}>Reserve Now</a>
                 </Button>
               </div>
@@ -129,5 +129,3 @@ export function Header() {
     </header>
   );
 }
-
-    

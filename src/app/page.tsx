@@ -32,17 +32,17 @@ import { Label } from '@/components/ui/label';
 
 const highlights = [
   {
-    icon: <Wifi className="h-8 w-8 text-accent" />,
+    icon: <Wifi className="h-8 w-8 text-primary" />,
     title: 'Blazing-Fast Wi-Fi',
     description: 'Stay connected with our high-speed fiber internet, perfect for video calls and heavy workloads.',
   },
   {
-    icon: <Users className="h-8 w-8 text-accent" />,
+    icon: <Users className="h-8 w-8 text-primary" />,
     title: 'Comfortable Seating',
     description: 'Choose from a variety of seating options designed for comfort and productivity during long work sessions.',
   },
   {
-    icon: <Utensils className="h-8 w-8 text-accent" />,
+    icon: <Utensils className="h-8 w-8 text-primary" />,
     title: 'Specialty Coffee & Food',
     description: 'Fuel your day with our expertly crafted coffees and a delicious menu of food to keep you going.',
   },
@@ -105,9 +105,9 @@ const galleryImageIds = [
 ];
 
 const contactDetails = [
-  { icon: <MapPin className="h-5 w-5 text-accent" />, text: "Jl. Produktif No. 123, Jakarta, Indonesia" },
-  { icon: <Phone className="h-5 w-5 text-accent" />, text: "+62 123 4567 890 (WhatsApp available)" },
-  { icon: <Mail className="h-5 w-5 text-accent" />, text: "hello@kababaikhub.com" },
+  { icon: <MapPin className="h-5 w-5 text-primary" />, text: "Jl. Produktif No. 123, Jakarta, Indonesia" },
+  { icon: <Phone className="h-5 w-5 text-primary" />, text: "+62 123 4567 890 (WhatsApp available)" },
+  { icon: <Mail className="h-5 w-5 text-primary" />, text: "hello@kababaikhub.com" },
 ];
 
 const openingHours = [
@@ -274,7 +274,7 @@ function BookingForm({ schema, isRoomBooking = false }: { schema: typeof seatBoo
             )}
           />
         )}
-        <Button type="submit" className="w-full sm:w-auto bg-accent hover:bg-accent/90" disabled={isSubmitting}>
+        <Button type="submit" className="w-full sm:w-auto" disabled={isSubmitting}>
           {isSubmitting ? 'Booking...' : 'Confirm Booking'}
         </Button>
       </form>
@@ -287,7 +287,7 @@ const initialState: OptimizerState = {};
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" disabled={pending} className="w-full sm:w-auto bg-accent hover:bg-accent/90">
+    <Button type="submit" disabled={pending} className="w-full sm:w-auto">
       {pending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
       {pending ? 'Optimizing...' : 'Generate Optimized Schedule'}
     </Button>
@@ -432,7 +432,7 @@ export default function Home() {
             Crafting flavors, handcrafted coffee. Delivered to you. Indulge in the richest coffee experience that transcends your taste.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
-            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+            <Button asChild size="lg">
               <Link href="#booking">Book a Seat</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
@@ -443,17 +443,17 @@ export default function Home() {
       </section>
 
       {/* Highlights Section */}
-      <section id="highlights" className="py-16 md:py-24 bg-secondary/10">
+      <section id="highlights" className="py-16 md:py-24 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-2">Discover Our Impact</p>
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Discover Our Impact</p>
             <h2 className="font-headline text-3xl md:text-4xl font-bold">Crafted with Care and Passion</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {highlights.map((item) => (
-              <Card key={item.title} className="text-center shadow-lg bg-card/80 backdrop-blur-sm">
+              <Card key={item.title} className="text-center shadow-lg bg-background">
                 <CardHeader className="items-center">
-                  <div className="bg-accent/10 p-4 rounded-full">
+                  <div className="bg-primary/10 p-4 rounded-full">
                     {item.icon}
                   </div>
                   <CardTitle className="font-headline mt-4">{item.title}</CardTitle>
@@ -528,10 +528,10 @@ export default function Home() {
       </section>
 
        {/* Testimonial */}
-       <section className="py-16 md:py-24 bg-secondary/10">
+       <section className="py-16 md:py-24 bg-secondary">
         <div className="container mx-auto px-4 text-center max-w-3xl">
            <div className="flex justify-center gap-1 mb-4">
-              {[...Array(5)].map((_,i) => <Star key={i} className="w-5 h-5 text-accent fill-accent" />)}
+              {[...Array(5)].map((_,i) => <Star key={i} className="w-5 h-5 text-primary fill-primary" />)}
            </div>
           <blockquote className="text-xl md:text-2xl font-light italic text-foreground">
              "This coffee shop has transformed my mornings! The atmosphere is inviting, and the brews are simply exceptional."
@@ -575,7 +575,7 @@ export default function Home() {
                                         data-ai-hint={imageHint}
                                     />
                                 )}
-                                {item.isSpecial && <Badge className="absolute top-2 right-2 bg-accent text-accent-foreground">Special Offer</Badge>}
+                                {item.isSpecial && <Badge className="absolute top-2 right-2 bg-primary text-primary-foreground">Special Offer</Badge>}
                             </div>
                             <CardHeader>
                                 <CardTitle className="font-headline">{item.name}</CardTitle>
@@ -594,7 +594,7 @@ export default function Home() {
       </section>
 
       {/* Booking Section */}
-      <section id="booking" className="bg-secondary/10 py-16 md:py-24">
+      <section id="booking" className="bg-secondary py-16 md:py-24">
         <div className="container mx-auto px-4">
           <header className="text-center mb-12 md:mb-16">
             <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Book Your Space</h2>
@@ -648,7 +648,7 @@ export default function Home() {
       </section>
 
       {/* Gallery Section */}
-      <section id="gallery" className="bg-secondary/10 py-16 md:py-24">
+      <section id="gallery" className="bg-secondary py-16 md:py-24">
         <div className="container mx-auto px-4">
           <header className="text-center mb-12 md:mb-16">
             <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Gallery</h2>
@@ -703,7 +703,7 @@ export default function Home() {
                 
                 <div className="border-t pt-6">
                    <h3 className="font-headline flex items-center gap-2 mb-4 text-lg font-semibold">
-                      <Clock className="h-5 w-5 text-accent"/>
+                      <Clock className="h-5 w-5 text-primary"/>
                       Opening Hours
                   </h3>
                    <div className="space-y-2">
@@ -748,5 +748,3 @@ export default function Home() {
     </div>
   );
 }
-
-    
