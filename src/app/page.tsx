@@ -29,7 +29,7 @@ const socialPosts = [
   { id: 'social3', hint: 'coffee shop interior' },
   { id: 'social4', hint: 'avocado toast' },
   { id: 'social5', hint: 'community event' },
-  { id_o: 'social6', hint: 'friends chatting' },
+  { id: 'social6', hint: 'friends chatting' },
 ];
 
 export default function Home() {
