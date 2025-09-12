@@ -314,6 +314,7 @@ export default function Home() {
   const menuTags = ['recommend', 'coffee', 'non-coffee', 'eatery', 'snack & dessert'];
   const filteredMenuItems = menuItems.filter(item => {
     if (activeTag === 'recommend') return item.isSpecial;
+    if (activeTag === 'all') return true;
     return item.tags.includes(activeTag);
   });
 
@@ -443,39 +444,39 @@ export default function Home() {
                         key={tag}
                         variant={activeTag === tag ? 'default' : 'outline'}
                         onClick={() => setActiveTag(tag)}
-                        className="capitalize"
+                        className="capitalize transition-all duration-300"
                     >
                         {tag}
                     </Button>
                 ))}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8">
                 {filteredMenuItems.map(item => {
                     const imageData = placeHolderImages.find(p => p.id === item.id);
                     const imageUrl = imageData?.imageUrl || item.imageUrl;
                     const imageHint = imageData?.imageHint || item.imageHint;
                     
                     return (
-                        <div key={item.name} className="flex flex-col group transition-all duration-300">
+                        <div key={item.name} className="flex items-center gap-4 group transition-opacity duration-300">
                            {imageUrl && (
-                                <div className="relative h-60 w-full rounded-lg overflow-hidden mb-4">
+                                <div className="relative h-20 w-20 rounded-md overflow-hidden flex-shrink-0">
                                     <Image
                                         src={imageUrl}
                                         alt={item.name}
                                         fill
-                                        className="object-cover transform group-hover:scale-110 transition-transform duration-300"
-                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                        className="object-cover"
+                                        sizes="80px"
                                         data-ai-hint={imageHint}
                                     />
-                                     {item.isSpecial && <Badge className="absolute top-2 right-2 text-xs">Special</Badge>}
+                                     {item.isSpecial && <Badge className="absolute top-1 right-1 text-xs px-1.5 py-0.5">Special</Badge>}
                                 </div>
                             )}
                             <div className="flex-grow">
                                 <h3 className="font-headline text-lg font-semibold">{item.name}</h3>
                                 <p className="text-muted-foreground text-sm mt-1">{item.description}</p>
                             </div>
-                            <div className="mt-4">
+                            <div className="flex-shrink-0">
                                 <p className="font-semibold text-lg text-primary">{item.price}</p>
                             </div>
                         </div>
@@ -627,10 +628,3 @@ export default function Home() {
     </div>
   );
 }
-
-    
-
-    
-
-    
-
