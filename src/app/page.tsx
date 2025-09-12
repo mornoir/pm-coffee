@@ -129,7 +129,7 @@ const galleryImageIds = [
 const contactDetails = [
   { icon: <MapPin className="h-5 w-5 text-primary" />, text: "Jl. Produktif No. 123, Jakarta, Indonesia" },
   { icon: <Phone className="h-5 w-5 text-primary" />, text: "+62 123 4567 890 (WhatsApp available)" },
-  { icon: <Mail className="h-5 w-5 text-primary" />, text: "hello@kababaikhub.com" },
+  { icon: <Mail className="h-5 w-5 text-primary" />, text: "hello@cofee.com" },
 ];
 
 const openingHours = [
@@ -224,7 +224,7 @@ function BookingForm({ schema, isRoomBooking = false }: { schema: typeof seatBoo
                     <FormControl>
                       <Button
                         variant={"outline"}
-                        className={cn("pl-3 text-left font-normal", !field.value && "text-muted-foreground")}
+                        className={cn("w-full justify-start pl-3 text-left font-normal", !field.value && "text-muted-foreground")}
                       >
                         {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
                         <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
@@ -397,9 +397,9 @@ export default function Home() {
             </div>
             <div className="prose prose-lg max-w-none text-foreground prose-headings:font-headline prose-headings:text-primary">
               <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Our Story</p>
-              <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter !mt-0">About Kabar Baik</h2>
+              <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter !mt-0">About Cofee</h2>
               <p className="mt-4 text-muted-foreground">
-                Kabar Baik—meaning "Good News" in Indonesian—is more than just a coffee shop. It's a community hub born from a simple idea: to create a welcoming space where productivity and connection flow as freely as our ethically-sourced local coffee. Join us to work, relax, and share good news.
+                Cofee is more than just a coffee shop. It's a community hub born from a simple idea: to create a welcoming space where productivity and connection flow as freely as our ethically-sourced local coffee. Join us to work, relax, and share good news.
               </p>
                <Button asChild size="lg" variant="outline" className="mt-4">
                 <Link href="#contact">Learn More</Link>
@@ -533,7 +533,7 @@ export default function Home() {
           <header className="text-center mb-12 md:mb-16">
             <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Gallery</h2>
             <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-              A glimpse into the life and energy of Kabar Baik Hub.
+              A glimpse into the life and energy of Cofee.
             </p>
           </header>
 
@@ -617,7 +617,7 @@ export default function Home() {
                 style={{ border: 0 }}
                 allowFullScreen={true}
                 loading="lazy"
-                title="Kabar Baik Hub Location"
+                title="Cofee Location"
                 className="grayscale-[30%]"
               ></iframe>
             </div>

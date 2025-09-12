@@ -6,7 +6,7 @@ export function Logo(props: SVGProps<SVGSVGElement>) {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 100 100"
-      aria-label="Kabar Baik Hub Logo"
+      aria-label="Cofee Logo"
       {...props}
       className={cn(props.className)}
     >

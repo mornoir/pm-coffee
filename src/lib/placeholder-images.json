@@ -2,7 +2,7 @@
   "placeholderImages": [
     {
       "id": "hero",
-      "description": "Cozy and warm interior of Kabar Baik Coffee shop with people working and enjoying coffee.",
+      "description": "Cozy and warm interior of Cofee shop with people working and enjoying coffee.",
       "imageUrl": "https://images.pexels.com/photos/31680051/pexels-photo-31680051.jpeg",
       "imageHint": "coffee shop interior"
     },
@@ -56,7 +56,7 @@
     },
     {
       "id": "gallery3",
-      "description": "The exterior of the Kabar Baik coffee shop.",
+      "description": "The exterior of the Cofee coffee shop.",
       "imageUrl": "https://picsum.photos/seed/gallery3/600/400",
       "imageHint": "cafe exterior"
     },
