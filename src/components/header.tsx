@@ -102,7 +102,7 @@ export function Header() {
       <div className="container flex h-20 items-center justify-between transition-all duration-300">
         <Link href="#home" className="flex items-center gap-2" onClick={(e) => handleNavClick(e, "#home")}>
           <Logo className="h-8 w-8 text-primary" />
-          <span className="font-headline font-bold text-lg">Cofee</span>
+          <span className="font-headline font-bold text-lg">PM Coffee</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -130,7 +130,7 @@ export function Header() {
                 <div className="flex justify-between items-center mb-8">
                    <Link href="#home" className="flex items-center gap-2" onClick={(e) => handleNavClick(e, "#home")}>
                     <Logo className="h-8 w-8 text-primary" />
-                    <span className="font-headline font-bold text-lg">Cofee</span>
+                    <span className="font-headline font-bold text-lg">PM Coffee</span>
                    </Link>
                 </div>
                 <nav className="flex flex-col gap-6">

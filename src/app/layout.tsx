@@ -18,8 +18,8 @@ const fontHeadline = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'Cofee',
-  description: 'Work, Coffee, Community. Your favorite spot to be productive and relax.',
+  title: 'PM Coffee',
+  description: 'PM Coffee - Co-Working Space',
 };
 
 export default function RootLayout({

@@ -1,5 +1,3 @@
-
-
 'use client';
 
 import { Button } from '@/components/ui/button';
@@ -129,7 +127,7 @@ const galleryImageIds = [
 const contactDetails = [
   { icon: <MapPin className="h-5 w-5 text-primary" />, text: "Jl. Produktif No. 123, Jakarta, Indonesia" },
   { icon: <Phone className="h-5 w-5 text-primary" />, text: "+62 123 4567 890 (WhatsApp available)" },
-  { icon: <Mail className="h-5 w-5 text-primary" />, text: "hello@cofee.com" },
+  { icon: <Mail className="h-5 w-5 text-primary" />, text: "hello@pmcoffee.com" },
 ];
 
 const openingHours = [
@@ -397,9 +395,9 @@ export default function Home() {
             </div>
             <div className="prose prose-lg max-w-none text-foreground prose-headings:font-headline prose-headings:text-primary">
               <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Our Story</p>
-              <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter !mt-0">About Cofee</h2>
+              <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter !mt-0">About PM Coffee</h2>
               <p className="mt-4 text-muted-foreground">
-                Cofee is more than just a coffee shop. It's a community hub born from a simple idea: to create a welcoming space where productivity and connection flow as freely as our ethically-sourced local coffee. Join us to work, relax, and share good news.
+                PM Coffee is more than just a coffee shop. It's a community hub born from a simple idea: to create a welcoming space where productivity and connection flow as freely as our ethically-sourced local coffee. Join us to work, relax, and share good news.
               </p>
                <Button asChild size="lg" variant="outline" className="mt-4">
                 <Link href="#contact">Learn More</Link>
@@ -533,7 +531,7 @@ export default function Home() {
           <header className="text-center mb-12 md:mb-16">
             <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Gallery</h2>
             <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-              A glimpse into the life and energy of Cofee.
+              A glimpse into the life and energy of PM Coffee.
             </p>
           </header>
 
@@ -617,7 +615,7 @@ export default function Home() {
                 style={{ border: 0 }}
                 allowFullScreen={true}
                 loading="lazy"
-                title="Cofee Location"
+                title="PM Coffee Location"
                 className="grayscale-[30%]"
               ></iframe>
             </div>

@@ -43,9 +43,9 @@ export function Footer() {
           <div className="md:col-span-1">
             <a href="#home" onClick={(e) => handleScroll(e, '#home')} className="flex items-center gap-2 mb-4 cursor-pointer">
               <Logo className="h-8 w-8 text-primary" />
-              <span className="font-headline font-bold text-xl">Cofee</span>
+              <span className="font-headline font-bold text-xl">PM Coffee</span>
             </a>
-            <p className="text-muted-foreground text-sm">Work, Coffee, Community.</p>
+            <p className="text-muted-foreground text-sm">Co-Working Space</p>
           </div>
           <div className="md:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-8">
             <div>
@@ -63,7 +63,7 @@ export function Footer() {
             <div>
               <h3 className="font-headline font-semibold text-foreground mb-4">Contact</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>hello@cofee.com</li>
+                <li>hello@pmcoffee.com</li>
                 <li>+62 123 4567 890</li>
                 <li>Jl. Produktif No. 123, Jakarta</li>
               </ul>
@@ -81,11 +81,9 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-12 pt-8 border-t border-border/40 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Cofee. All Rights Reserved.</p>
+          <p>&copy; {new Date().getFullYear()} PM Coffee. All Rights Reserved.</p>
         </div>
       </div>
     </footer>
   );
 }
-
-    
