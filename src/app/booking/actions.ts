@@ -15,7 +15,7 @@ export type OptimizerState = {
     optimizedSchedule: string;
     suggestedImprovements: string;
   };
-  error?: string;
+  error?: any;
   message?: string;
 };
 
