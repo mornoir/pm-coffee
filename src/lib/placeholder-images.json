@@ -31,6 +31,18 @@
       "imageHint": "desk coffee"
     },
     {
+      "id": "menu-matcha",
+      "description": "A smooth and creamy matcha latte.",
+      "imageUrl": "https://picsum.photos/seed/matcha/600/400",
+      "imageHint": "matcha latte"
+    },
+    {
+      "id": "menu-brownie",
+      "description": "A rich and decadent chocolate brownie.",
+      "imageUrl": "https://picsum.photos/seed/brownie/600/400",
+      "imageHint": "chocolate brownie"
+    },
+    {
       "id": "gallery1",
       "description": "A group of people collaborating in a meeting room.",
       "imageUrl": "https://picsum.photos/seed/gallery1/600/400",

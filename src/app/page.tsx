@@ -51,6 +51,7 @@ const menuItems = [
         name: "Signature Latte",
         description: "A perfect blend of rich espresso and steamed milk, topped with delicate latte art.",
         price: "Rp 35.000",
+        tags: ['coffee'],
     },
     {
         id: "menu2",
@@ -58,6 +59,7 @@ const menuItems = [
         name: "Butter Croissant",
         description: "Flaky, buttery, and freshly baked throughout the day. An ideal companion for your coffee.",
         price: "Rp 25.000",
+        tags: ['snack & dessert'],
     },
     {
         id: "menu3",
@@ -65,6 +67,7 @@ const menuItems = [
         name: "Chicken Katsu Curry",
         description: "Crispy chicken katsu served with a savory Japanese curry sauce and warm rice.",
         price: "Rp 65.000",
+        tags: ['eatery'],
     },
     {
         id: "menu4",
@@ -73,6 +76,7 @@ const menuItems = [
         description: "Includes one coffee of your choice, a pastry, and a guaranteed seat with power access for 4 hours.",
         price: "Rp 100.000",
         isSpecial: true,
+        tags: ['coffee', 'snack & dessert'],
     },
      {
         id: "menu-americano",
@@ -82,6 +86,7 @@ const menuItems = [
         name: "Americano",
         description: "Rich espresso shots diluted with hot water, giving it a similar strength to, but different flavor from, traditionally brewed coffee.",
         price: "Rp 30.000",
+        tags: ['coffee'],
     },
     {
         id: "menu-avotoast",
@@ -91,6 +96,27 @@ const menuItems = [
         name: "Avocado Toast",
         description: "Smashed avocado on sourdough toast, topped with chili flakes and a sprinkle of sea salt.",
         price: "Rp 55.000",
+        tags: ['eatery'],
+    },
+    {
+        id: "menu-matcha",
+        imageUrl: "https://picsum.photos/seed/matcha/600/400",
+        imageHint: "matcha latte",
+        category: "Non-Coffee",
+        name: "Matcha Latte",
+        description: "A smooth and creamy matcha latte, made with premium Japanese green tea.",
+        price: "Rp 40.000",
+        tags: ['non-coffee'],
+    },
+    {
+        id: "menu-brownie",
+        imageUrl: "https://picsum.photos/seed/brownie/600/400",
+        imageHint: "chocolate brownie",
+        category: "Dessert",
+        name: "Fudgy Chocolate Brownie",
+        description: "A rich and decadent chocolate brownie, served warm with a scoop of vanilla ice cream.",
+        price: "Rp 45.000",
+        tags: ['snack & dessert'],
     },
 ];
 
@@ -109,7 +135,7 @@ const contactDetails = [
 const openingHours = [
   { day: "Monday - Friday", hours: "08:00 AM - 10:00 PM" },
   { day: "Saturday", hours: "09:00 AM - 11:00 PM" },
-  { day: "Sunday", hours: "09:00 AM - 09:00 PM" },
+  { day: "Sunday", hours: "09:00 PM - 09:00 PM" },
 ];
 
 const socialLinks = [
@@ -284,6 +310,11 @@ export default function Home() {
 
   const galleryImages = galleryImageIds.map(id => placeHolderImages.find(img => img.id === id)).filter(Boolean);
 
+  const [activeTag, setActiveTag] = useState('all');
+  const menuTags = ['all', 'coffee', 'non-coffee', 'eatery', 'snack & dessert'];
+  const filteredMenuItems = menuItems.filter(item => activeTag === 'all' || item.tags.includes(activeTag));
+
+
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -402,9 +433,22 @@ export default function Home() {
                     Crafted with care, from our coffee to our kitchen.
                 </p>
             </header>
+            
+            <div className="flex justify-center flex-wrap gap-2 mb-12">
+                {menuTags.map(tag => (
+                    <Button
+                        key={tag}
+                        variant={activeTag === tag ? 'default' : 'outline'}
+                        onClick={() => setActiveTag(tag)}
+                        className="capitalize"
+                    >
+                        {tag}
+                    </Button>
+                ))}
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
-                {menuItems.map(item => {
+                {filteredMenuItems.map(item => {
                     const imageData = placeHolderImages.find(p => p.id === item.id);
                     const imageUrl = imageData?.imageUrl || item.imageUrl;
                     const imageHint = imageData?.imageHint || item.imageHint;
@@ -511,7 +555,7 @@ export default function Home() {
       {/* Contact Section */}
       <section id="contact" className="bg-background py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <header className="text-center mb-12 md:mb-16">
+          <header className="text-center mb-12 md-mb-16">
             <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Get In Touch</h2>
             <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
               We're here to help. Whether you have a question about booking, our menu, or just want to say hello.
@@ -586,3 +630,4 @@ export default function Home() {
     
 
     
+
