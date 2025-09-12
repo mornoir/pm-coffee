@@ -310,9 +310,12 @@ export default function Home() {
 
   const galleryImages = galleryImageIds.map(id => placeHolderImages.find(img => img.id === id)).filter(Boolean);
 
-  const [activeTag, setActiveTag] = useState('all');
-  const menuTags = ['all', 'coffee', 'non-coffee', 'eatery', 'snack & dessert'];
-  const filteredMenuItems = menuItems.filter(item => activeTag === 'all' || item.tags.includes(activeTag));
+  const [activeTag, setActiveTag] = useState('recommend');
+  const menuTags = ['recommend', 'coffee', 'non-coffee', 'eatery', 'snack & dessert'];
+  const filteredMenuItems = menuItems.filter(item => {
+    if (activeTag === 'recommend') return item.isSpecial;
+    return item.tags.includes(activeTag);
+  });
 
 
   return (
@@ -447,32 +450,32 @@ export default function Home() {
                 ))}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredMenuItems.map(item => {
                     const imageData = placeHolderImages.find(p => p.id === item.id);
                     const imageUrl = imageData?.imageUrl || item.imageUrl;
                     const imageHint = imageData?.imageHint || item.imageHint;
                     
                     return (
-                        <div key={item.name} className="flex items-center gap-4 group border-b-2 border-dotted border-border/50 pb-8">
-                            {imageUrl && (
-                                <div className="relative h-20 w-20 rounded-md overflow-hidden flex-shrink-0">
+                        <div key={item.name} className="flex flex-col group transition-all duration-300">
+                           {imageUrl && (
+                                <div className="relative h-60 w-full rounded-lg overflow-hidden mb-4">
                                     <Image
                                         src={imageUrl}
                                         alt={item.name}
                                         fill
                                         className="object-cover transform group-hover:scale-110 transition-transform duration-300"
-                                        sizes="80px"
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         data-ai-hint={imageHint}
                                     />
-                                     {item.isSpecial && <Badge className="absolute top-1 right-1 text-xs">Special</Badge>}
+                                     {item.isSpecial && <Badge className="absolute top-2 right-2 text-xs">Special</Badge>}
                                 </div>
                             )}
                             <div className="flex-grow">
                                 <h3 className="font-headline text-lg font-semibold">{item.name}</h3>
                                 <p className="text-muted-foreground text-sm mt-1">{item.description}</p>
                             </div>
-                            <div className="flex-shrink-0">
+                            <div className="mt-4">
                                 <p className="font-semibold text-lg text-primary">{item.price}</p>
                             </div>
                         </div>
@@ -630,4 +633,3 @@ export default function Home() {
     
 
     
-
