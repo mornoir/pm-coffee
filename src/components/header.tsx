@@ -3,12 +3,11 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Logo } from './logo';
 import { cn } from '@/lib/utils';
-import { usePathname } from 'next/navigation';
 
 const navLinks = [
   { href: '#home', label: 'Home' },
@@ -27,7 +26,17 @@ export function Header() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
-      const sections = navLinks.map(link => document.getElementById(link.href.substring(1)));
+      const sections = navLinks.map(link => {
+        const href = link.href;
+        if (href.startsWith('/#')) {
+          return document.getElementById(href.substring(2));
+        }
+        if (href.startsWith('#')) {
+          return document.getElementById(href.substring(1));
+        }
+        return null;
+      }).filter(Boolean);
+      
       let currentSection = '#home';
       for (const section of sections) {
         if (section && window.scrollY >= section.offsetTop - 100) {
@@ -43,7 +52,23 @@ export function Header() {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) => {
     e.preventDefault();
-    const targetId = href.substring(1);
+    
+    let targetId;
+    if (href.startsWith('/#')) {
+      targetId = href.substring(2);
+    } else if (href.startsWith('#')) {
+      targetId = href.substring(1);
+    } else if (href === '/') {
+        window.scrollTo({ top: 0, behavior: 'smooth'});
+        setIsMenuOpen(false);
+        return;
+    } else {
+        // Handle external links or other pages if any
+        window.location.href = href;
+        setIsMenuOpen(false);
+        return;
+    }
+
     const targetElement = document.getElementById(targetId);
     if (targetElement) {
         window.scrollTo({
@@ -72,7 +97,7 @@ export function Header() {
   return (
     <header className={cn(
         "sticky top-0 z-50 w-full border-b backdrop-blur supports-[backdrop-filter]:bg-background/60",
-        isScrolled ? "border-border bg-background/95" : "border-transparent bg-transparent"
+        isScrolled ? "border-border bg-background/95" : "border-transparent bg-background/10"
       )}>
       <div className="container flex h-20 items-center justify-between transition-all duration-300">
         <Link href="#home" className="flex items-center gap-2" onClick={(e) => handleNavClick(e, "#home")}>
@@ -107,10 +132,6 @@ export function Header() {
                     <Logo className="h-8 w-8 text-primary" />
                     <span className="font-headline font-bold text-lg">Kabar Baik Hub</span>
                    </Link>
-                   <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(false)}>
-                    <X className="h-6 w-6" />
-                    <span className="sr-only">Close menu</span>
-                  </Button>
                 </div>
                 <nav className="flex flex-col gap-6">
                   {navLinks.map((link) => (
