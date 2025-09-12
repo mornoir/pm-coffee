@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import { Button } from '@/components/ui/button';
@@ -402,37 +403,35 @@ export default function Home() {
                 </p>
             </header>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
                 {menuItems.map(item => {
                     const imageData = placeHolderImages.find(p => p.id === item.id);
                     const imageUrl = imageData?.imageUrl || item.imageUrl;
                     const imageHint = imageData?.imageHint || item.imageHint;
                     
                     return (
-                        <Card key={item.name} className="flex flex-col overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
-                            <div className="relative h-56 w-full">
-                                {imageUrl && (
+                        <div key={item.name} className="flex items-center gap-4 group border-b-2 border-dotted border-border/50 pb-8">
+                            {imageUrl && (
+                                <div className="relative h-20 w-20 rounded-md overflow-hidden flex-shrink-0">
                                     <Image
                                         src={imageUrl}
                                         alt={item.name}
                                         fill
-                                        className="object-cover"
-                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                        className="object-cover transform group-hover:scale-110 transition-transform duration-300"
+                                        sizes="80px"
                                         data-ai-hint={imageHint}
                                     />
-                                )}
-                                {item.isSpecial && <Badge className="absolute top-2 right-2 bg-primary text-primary-foreground">Special Offer</Badge>}
+                                     {item.isSpecial && <Badge className="absolute top-1 right-1 text-xs">Special</Badge>}
+                                </div>
+                            )}
+                            <div className="flex-grow">
+                                <h3 className="font-headline text-lg font-semibold">{item.name}</h3>
+                                <p className="text-muted-foreground text-sm mt-1">{item.description}</p>
                             </div>
-                            <CardHeader>
-                                <CardTitle className="font-headline">{item.name}</CardTitle>
-                            </CardHeader>
-                            <CardContent className="flex-grow">
-                                <p className="text-muted-foreground text-sm">{item.description}</p>
-                            </CardContent>
-                            <CardFooter>
-                                <p className="font-semibold text-primary">{item.price}</p>
-                            </CardFooter>
-                        </Card>
+                            <div className="flex-shrink-0">
+                                <p className="font-semibold text-lg text-primary">{item.price}</p>
+                            </div>
+                        </div>
                     );
                 })}
             </div>
