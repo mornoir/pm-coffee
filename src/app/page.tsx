@@ -96,7 +96,7 @@ export default function Home() {
       </section>
       
       {/* Product Showcase */}
-       <section id="products" className="py-24 md:py-40 bg-secondary">
+       <section id="products" className="py-24 md:py-40 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
               <p className="text-primary font-semibold mb-4 text-sm tracking-widest uppercase">Our Menu</p>
@@ -172,7 +172,7 @@ export default function Home() {
 
 
       {/* About Section 2 */}
-      <section className="py-24 md:py-40 bg-secondary">
+      <section className="py-24 md:py-40 bg-background">
         <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
                 <div>
