@@ -27,8 +27,11 @@ export function Footer() {
         const targetId = href.substring(1);
         const targetElement = document.getElementById(targetId);
         if (targetElement) {
+            const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+            const offsetPosition = elementPosition - (window.innerHeight / 2) + (targetElement.clientHeight / 2);
+            
             window.scrollTo({
-                top: targetElement.offsetTop - 80,
+                top: offsetPosition,
                 behavior: 'smooth',
             });
         }

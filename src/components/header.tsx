@@ -28,30 +28,31 @@ export function Header() {
   const isHomePage = pathname === '/';
 
   useEffect(() => {
-    if (isHomePage) {
-      const handleScroll = () => {
-        setIsScrolled(window.scrollY > 10);
-      };
-      window.addEventListener('scroll', handleScroll);
-      handleScroll(); // Check scroll position on initial load
-      return () => window.removeEventListener('scroll', handleScroll);
-    } else {
-      setIsScrolled(true);
-    }
-  }, [pathname, isHomePage]);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check scroll position on initial load
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) => {
-    if (href.startsWith('#') && pathname === '/') {
+    if (href.startsWith('#') && isHomePage) {
       e.preventDefault();
       const targetId = href.substring(1);
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
+          const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - (window.innerHeight / 2) + (targetElement.clientHeight / 2);
+          
           window.scrollTo({
-              top: targetElement.offsetTop - 80,
+              top: offsetPosition,
               behavior: 'smooth',
           });
       }
-    } else if (!href.startsWith('#')) {
+    } else if (href.startsWith('#') && !isHomePage) {
+      router.push('/' + href);
+    } else {
         router.push(href);
     }
     setIsMenuOpen(false);
@@ -63,7 +64,7 @@ export function Header() {
       onClick={(e) => handleNavClick(e, href)}
       className={cn(
         "text-sm font-medium transition-colors hover:text-primary",
-        isScrolled || !isHomePage ? 'text-foreground' : 'text-white/80 hover:text-white',
+        !isHomePage || isScrolled ? 'text-foreground' : 'text-white/80 hover:text-white',
         className
       )}
     >
@@ -74,12 +75,12 @@ export function Header() {
   return (
     <header className={cn(
         "fixed top-0 z-50 w-full transition-all duration-300",
-        isScrolled || !isHomePage ? "bg-background/80 border-b border-border/50 backdrop-blur-lg" : "bg-transparent"
+        !isHomePage || isScrolled ? "bg-background/80 border-b border-border/50 backdrop-blur-lg" : "bg-transparent"
       )}>
       <div className="container flex h-20 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <Logo className={cn("h-6 w-6 transition-colors", isScrolled || !isHomePage ? 'text-foreground' : 'text-white')} />
-          <span className={cn("font-semibold text-lg transition-colors", isScrolled || !isHomePage ? 'text-foreground' : 'text-white')}>PM COFFEE</span>
+          <Logo className={cn("h-6 w-6 transition-colors", !isHomePage || isScrolled ? 'text-foreground' : 'text-white')} />
+          <span className={cn("font-semibold text-lg transition-colors", !isHomePage || isScrolled ? 'text-foreground' : 'text-white')}>PM COFFEE</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -87,13 +88,13 @@ export function Header() {
           {navLinks.map((link) => (
             <NavLink key={link.href} {...link} />
           ))}
-          <ThemeToggle className={cn(isScrolled || !isHomePage ? 'text-foreground' : 'text-white')} />
+          <ThemeToggle className={cn(!isHomePage || isScrolled ? 'text-foreground' : 'text-white')} />
         </nav>
 
         {/* Mobile Navigation */}
         <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
           <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon" className={cn(isScrolled || !isHomePage ? 'text-foreground hover:text-foreground' : 'text-white hover:text-white')}>
+            <Button variant="ghost" size="icon" className={cn(!isHomePage || isScrolled ? 'text-foreground hover:text-foreground' : 'text-white hover:text-white')}>
               <Menu className="h-6 w-6" />
               <span className="sr-only">Open menu</span>
             </Button>
