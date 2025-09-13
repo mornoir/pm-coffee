@@ -116,6 +116,47 @@ const menuItems = [
         price: "Rp 45.000",
         tags: ['snack & dessert'],
     },
+    {
+        id: "menu-cappuccino",
+        imageUrl: "https://picsum.photos/seed/cappuccino/600/400",
+        imageHint: "cappuccino cup",
+        category: "Coffee",
+        name: "Cappuccino",
+        description: "An espresso-based coffee drink that originated in Italy, and is traditionally prepared with steamed milk foam.",
+        price: "Rp 35.000",
+        tags: ['coffee'],
+    },
+    {
+        id: "menu-spaghetti",
+        imageUrl: "https://picsum.photos/seed/spaghetti/600/400",
+        imageHint: "spaghetti bolognese",
+        category: "Main Course",
+        name: "Spaghetti Bolognese",
+        description: "A classic Italian dish with a rich meat sauce, served over a bed of perfectly cooked spaghetti.",
+        price: "Rp 75.000",
+        tags: ['eatery'],
+    },
+    {
+        id: "menu-iced-tea",
+        imageUrl: "https://picsum.photos/seed/icedtea/600/400",
+        imageHint: "iced lemon tea",
+        category: "Non-Coffee",
+        name: "Iced Lemon Tea",
+        description: "A refreshing blend of black tea and lemon, served over ice. The perfect thirst-quencher.",
+        price: "Rp 25.000",
+        tags: ['non-coffee'],
+    },
+    {
+        id: "menu-cheesecake",
+        imageUrl: "https://picsum.photos/seed/cheesecake/600/400",
+        imageHint: "strawberry cheesecake",
+        category: "Dessert",
+        name: "Basque Burnt Cheesecake",
+        description: "A crustless cheesecake with a rich, creamy center and a beautifully caramelized top.",
+        price: "Rp 50.000",
+        tags: ['snack & dessert'],
+        isSpecial: true,
+    }
 ];
 
 const galleryImageIds = [
@@ -626,3 +667,5 @@ export default function Home() {
     </div>
   );
 }
+
+    
