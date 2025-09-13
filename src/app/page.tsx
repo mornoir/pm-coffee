@@ -8,6 +8,9 @@ import { ArrowRight, Wifi, Users, Coffee, MapPin, Phone, Mail, Briefcase } from 
 import Image from 'next/image';
 import Link from 'next/link';
 import { FadeIn } from '@/components/fade-in';
+import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
+
 
 const highlights = [
   {
@@ -38,7 +41,7 @@ export default function Home() {
   const aboutImage2 = placeHolderImages.find((img) => img.id === 'about2');
   const aboutImage3 = placeHolderImages.find((img) => img.id === 'about3');
   const ctaImage = placeHolderImages.find((img) => img.id === 'cta');
-  const productImages = placeHolderImages.filter(img => img.id.startsWith('product')).slice(0, 8);
+  const featuredMenuItems = menuItems.filter(item => item.tags.includes('recommended')).slice(0, 4);
   
 
   return (
@@ -113,27 +116,43 @@ export default function Home() {
           </FadeIn>
           
           <FadeIn>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {productImages.map((image, index) => (
-                <Link href="/menu" key={index}>
-                  <div className="group">
-                      <div className="relative aspect-square rounded-lg overflow-hidden bg-background mb-4 shadow-lg">
-                          <Image
-                              src={image.imageUrl}
-                              alt={image.description}
-                              fill
-                              className="object-cover transition-transform duration-300 group-hover:scale-105"
-                              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                              data-ai-hint={image.imageHint}
-                          />
+            <div className="max-w-4xl mx-auto">
+              <ul className="space-y-8">
+                {featuredMenuItems.map(item => (
+                  <li key={item.id} className="flex gap-6 items-start border-b border-border/50 pb-8 last:border-b-0 last:pb-0">
+                    <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-lg overflow-hidden shadow-md shrink-0">
+                      <Image
+                        src={item.imageUrl}
+                        alt={item.name}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 80px, 96px"
+                      />
+                    </div>
+                    <div className="flex-grow">
+                      <div className="flex justify-between items-baseline">
+                        <h3 className="font-semibold text-xl">{item.name}</h3>
+                        <p className="text-muted-foreground font-medium">{item.price}</p>
                       </div>
-                      <div className="flex justify-between items-center mt-4">
-                        <h3 className="font-semibold text-lg">{image.description}</h3>
-                        <p className="text-sm text-muted-foreground">{menuItems.find(m => m.id === `menu-${image.description.toLowerCase().replace(/\s+/g, '')}`)?.price}</p>
+                      <p className="text-muted-foreground mt-2 text-base leading-relaxed">{item.description}</p>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {item.tags?.map(tag => (
+                          <Badge
+                            key={tag}
+                            variant={tag === 'recommended' ? 'default' : 'secondary'}
+                            className={cn(
+                              'capitalize',
+                              tag === 'recommended' && 'bg-primary/90 text-primary-foreground'
+                            )}
+                          >
+                            {tag}
+                          </Badge>
+                        ))}
                       </div>
-                  </div>
-                </Link>
-              ))}
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
           </FadeIn>
           
@@ -260,3 +279,4 @@ export default function Home() {
     
     
     
+
