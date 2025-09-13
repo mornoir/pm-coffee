@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { placeHolderImages } from '@/lib/placeholder-images';
 import { menuItems } from '@/lib/menu-data';
-import { ArrowRight, Wifi, Users, Coffee, MapPin, Phone, Mail } from 'lucide-react';
+import { ArrowRight, Wifi, Users, Coffee, MapPin, Phone, Mail, Briefcase } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FadeIn } from '@/components/fade-in';
@@ -35,6 +35,11 @@ const highlights = [
     title: 'Community',
     description: 'A network of innovators and creators, just like you.',
   },
+  {
+    icon: <Briefcase className="h-8 w-8 text-primary" />,
+    title: 'Private Rooms',
+    description: 'Bookable private rooms for meetings, calls, or focused work.',
+  }
 ];
 
 export default function Home() {
@@ -291,4 +296,5 @@ export default function Home() {
       </section>
     </div>
   );
-}
+
+    
