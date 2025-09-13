@@ -116,40 +116,45 @@ export default function Home() {
           </FadeIn>
           
           <FadeIn>
-            <div className="max-w-4xl mx-auto">
-              <ul className="space-y-8">
+            <div className="max-w-5xl mx-auto">
+              <ul className="grid grid-cols-1 md:grid-cols-2 md:gap-x-12 lg:gap-x-16 gap-y-8">
                 {featuredMenuItems.map(item => (
-                  <li key={item.id} className="flex gap-6 items-start border-b border-border/50 pb-8 last:border-b-0 last:pb-0">
-                    <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-lg overflow-hidden shadow-md shrink-0">
-                      <Image
-                        src={item.imageUrl}
-                        alt={item.name}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 80px, 96px"
-                      />
-                    </div>
-                    <div className="flex-grow">
-                      <div className="flex justify-between items-baseline">
-                        <h3 className="font-semibold text-xl">{item.name}</h3>
-                        <p className="text-muted-foreground font-medium">{item.price}</p>
+                  <li key={item.id} className="space-y-4">
+                    <div className="flex gap-4 items-start">
+                      {item.imageUrl && (
+                        <div className="relative w-20 h-20 rounded-md overflow-hidden shadow-sm shrink-0">
+                          <Image
+                            src={item.imageUrl}
+                            alt={item.name}
+                            fill
+                            className="object-cover"
+                            sizes="80px"
+                          />
+                        </div>
+                      )}
+                      <div className="flex-grow">
+                        <div className="flex justify-between items-baseline">
+                          <h3 className="font-semibold text-lg">{item.name}</h3>
+                          <p className="text-muted-foreground font-medium shrink-0">{item.price}</p>
+                        </div>
+                        <p className="text-muted-foreground text-sm mt-1">{item.description}</p>
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {item.tags?.map(tag => (
+                            <Badge
+                              key={tag}
+                              variant={tag === 'recommended' ? 'default' : 'secondary'}
+                              className={cn(
+                                'capitalize',
+                                tag === 'recommended' && 'bg-primary/90 text-primary-foreground'
+                              )}
+                            >
+                              {tag.replace(/_/g, ' ')}
+                            </Badge>
+                          ))}
+                        </div>
                       </div>
-                      <p className="text-muted-foreground mt-2 text-base leading-relaxed">{item.description}</p>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {item.tags?.map(tag => (
-                          <Badge
-                            key={tag}
-                            variant={tag === 'recommended' ? 'default' : 'secondary'}
-                            className={cn(
-                              'capitalize',
-                              tag === 'recommended' && 'bg-primary/90 text-primary-foreground'
-                            )}
-                          >
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
                     </div>
+                     <div className="border-b border-dashed border-border/50"></div>
                   </li>
                 ))}
               </ul>
@@ -279,4 +284,5 @@ export default function Home() {
     
     
     
+
 
