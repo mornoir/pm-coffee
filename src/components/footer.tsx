@@ -3,11 +3,13 @@
 import { Logo } from './logo';
 import { Twitter, Instagram, Facebook } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
 
 const navLinks = [
   { href: '#about', label: 'About' },
-  { href: '#products', label: 'Menu' },
-  { href: '#highlights', label: 'Features' },
+  { href: '/menu', label: 'Menu' },
+  { href: '/discover', label: 'Gallery' },
 ];
 
 const socialLinks = [
@@ -17,15 +19,19 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const pathname = usePathname();
+  
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) => {
-    e.preventDefault();
-    const targetId = href.substring(1);
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-        window.scrollTo({
-            top: targetElement.offsetTop - 80,
-            behavior: 'smooth',
-        });
+    if (href.startsWith('#') && pathname === '/') {
+        e.preventDefault();
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth',
+            });
+        }
     }
   };
 
@@ -42,9 +48,9 @@ export function Footer() {
                     <ul className="space-y-2">
                         {navLinks.map(link => (
                         <li key={link.href}>
-                            <a href={link.href} onClick={(e) => handleScroll(e, link.href)} className="text-foreground hover:text-foreground/70 transition-colors cursor-pointer">
+                            <Link href={link.href} onClick={(e) => handleScroll(e, link.href)} className="text-foreground hover:text-foreground/70 transition-colors cursor-pointer">
                             {link.label}
-                            </a>
+                            </Link>
                         </li>
                         ))}
                     </ul>

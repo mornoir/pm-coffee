@@ -109,7 +109,7 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {productImages.map((image, index) => (
               <FadeIn key={image.id} animationDelay={index * 0.1}>
-                <Link href="/discover#menu">
+                <Link href="/menu">
                   <div className="group">
                       <div className="relative aspect-square rounded-lg overflow-hidden bg-background mb-4 shadow-lg">
                           <Image
@@ -132,7 +132,7 @@ export default function Home() {
           </div>
           <FadeIn className="text-center mt-16">
             <Button asChild variant="outline">
-              <Link href="/discover#menu">
+              <Link href="/menu">
                 View Full Menu <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>

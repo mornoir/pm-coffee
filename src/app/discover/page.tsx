@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { menuItems } from '@/lib/menu-data';
 
 export default function DiscoverPage() {
   const galleryImages = placeHolderImages.filter(img => img.id.startsWith('gallery'));
@@ -42,28 +41,6 @@ export default function DiscoverPage() {
               )
             ))}
         </div>
-
-        <section id="menu" className="mt-24 md:mt-32">
-           <header className="text-center mb-12 md:mb-16">
-                <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Full Menu</h2>
-                <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-                    Crafted with care, from our coffee to our kitchen.
-                </p>
-            </header>
-             <div className="max-w-2xl mx-auto">
-                <ul className="space-y-2">
-                {menuItems.map(item => {
-                    return (
-                        <li key={item.id} className="border-b border-border/50 py-3 flex justify-between items-baseline">
-                            <span className="font-semibold">{item.name}</span>
-                            <span className="text-muted-foreground">{item.price}</span>
-                        </li>
-                    );
-                })}
-                </ul>
-            </div>
-        </section>
-
       </div>
     </div>
   );
