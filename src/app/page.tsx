@@ -348,16 +348,23 @@ export default function Home() {
   const galleryImages = galleryImageIds.map(id => placeHolderImages.find(img => img.id === id)).filter(Boolean);
 
   const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-  const [count, setCount] = useState(0);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     if (!api) return;
-    setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap());
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap());
-    });
+    
+    const updateProgress = () => {
+        const scrollProgress = api.scrollProgress() * 100;
+        setProgress(scrollProgress);
+    };
+
+    api.on("scroll", updateProgress);
+    updateProgress();
+
+    return () => {
+      api.off("scroll", updateProgress);
+    };
+
   }, [api]);
   
   const scrollPrev = useCallback(() => api?.scrollPrev(), [api]);
@@ -464,22 +471,16 @@ export default function Home() {
                             ))}
                         </CarouselContent>
                     </Carousel>
-                    <div className="absolute inset-0 flex items-center justify-between px-2">
-                        <Button variant="ghost" size="icon" className="h-12 w-12 rounded-full bg-background/50 text-foreground hover:bg-background/80 transition-all opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0" onClick={scrollPrev} disabled={current === 0}>
-                            <ChevronLeft className="h-6 w-6" />
-                        </Button>
-                        <Button variant="ghost" size="icon" className="h-12 w-12 rounded-full bg-background/50 text-foreground hover:bg-background/80 transition-all opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0" onClick={scrollNext} disabled={current === count - 1}>
-                            <ChevronRight className="h-6 w-6" />
-                        </Button>
-                    </div>
-                     <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-                        {galleryImages.map((_, i) => (
-                            <button
-                                key={i}
-                                onClick={() => api?.scrollTo(i)}
-                                className={cn("h-2 w-2 rounded-full transition-all", current === i ? "w-6 bg-primary" : "bg-background/50 hover:bg-background/80")}
-                            />
-                        ))}
+                    <div className="absolute inset-x-0 bottom-6">
+                        <div className="container flex items-center justify-center gap-4">
+                            <Button variant="outline" size="icon" className="h-10 w-10 rounded-full bg-background/70 backdrop-blur-sm text-foreground hover:bg-background transition-all" onClick={scrollPrev}>
+                                <ChevronLeft className="h-5 w-5" />
+                            </Button>
+                            <Progress value={progress} className="w-full max-w-xs h-1 bg-background/50" />
+                            <Button variant="outline" size="icon" className="h-10 w-10 rounded-full bg-background/70 backdrop-blur-sm text-foreground hover:bg-background transition-all" onClick={scrollNext}>
+                                <ChevronRight className="h-5 w-5" />
+                            </Button>
+                        </div>
                     </div>
                 </div>
             </div>
