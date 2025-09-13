@@ -145,7 +145,7 @@ export default function Home() {
       </section>
 
       {/* Highlights Section */}
-      <section id="highlights" className="bg-foreground text-background py-24 md:py-40">
+      <section id="highlights" className="bg-background text-foreground py-24 md:py-40">
         <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
                  {aboutImage2 && (
