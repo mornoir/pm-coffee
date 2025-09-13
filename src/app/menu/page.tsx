@@ -30,13 +30,13 @@ export default function MenuPage() {
                 return (
                   <li key={item.id} className="flex gap-6 items-center border-b border-border/50 pb-6">
                     {item.imageUrl && (
-                      <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-lg overflow-hidden shadow-md shrink-0">
+                      <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-lg overflow-hidden shadow-md shrink-0">
                         <Image
                           src={item.imageUrl}
                           alt={item.name}
                           fill
                           className="object-cover"
-                          sizes="(max-width: 768px) 96px, 128px"
+                          sizes="(max-width: 768px) 80px, 96px"
                         />
                       </div>
                     )}
