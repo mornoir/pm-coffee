@@ -331,7 +331,7 @@ export default function Home() {
             data-ai-hint={heroImage.imageHint}
           />
         )}
-        <div className="absolute inset-0 bg-white/70" />
+        <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-foreground p-4">
           <div className="flex flex-col items-center">
             <h1 className="font-headline text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter">
