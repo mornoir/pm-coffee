@@ -231,10 +231,10 @@ export default function Home() {
       <section id="booking" className="py-24 md:py-40 bg-background">
           <div className="container mx-auto px-4 max-w-4xl">
               <FadeIn className="text-center mb-16">
-                <p className="text-primary font-semibold mb-4 text-sm tracking-widest uppercase">Join Us</p>
-                <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Join the Movement</h2>
+                <p className="text-primary font-semibold mb-4 text-sm tracking-widest uppercase">Secure Your Spot</p>
+                <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Book Your Table</h2>
                 <p className="mt-6 max-w-2xl mx-auto text-lg text-muted-foreground">
-                    Reserve your place in a community driven by passion and purpose.
+                    Guarantee your spot for productivity. Reserve a table for yourself or your team and get ready to do your best work.
                 </p>
               </FadeIn>
 
@@ -243,11 +243,11 @@ export default function Home() {
                   <CardContent className="p-8 md:p-12">
                       <div className="grid md:grid-cols-2 gap-10">
                           <div>
-                              <h3 className="font-headline text-3xl font-semibold mb-4">Book a Tour</h3>
-                              <p className="text-muted-foreground mb-8">Experience the space firsthand. We'll show you around and treat you to a coffee on the house.</p>
+                              <h3 className="font-headline text-3xl font-semibold mb-4">Reserve a Table</h3>
+                              <p className="text-muted-foreground mb-8">Fill out the form and we'll confirm your booking. We're excited to host you.</p>
                               <form className="space-y-4">
                                   <input type="email" placeholder="Enter your email" className="w-full bg-background border-border/50 rounded-md p-3 text-sm" />
-                                  <Button type="submit" size="lg" className="w-full">Request a Tour</Button>
+                                  <Button type="submit" size="lg" className="w-full">Request Booking</Button>
                               </form>
                           </div>
                           <div className="border-t md:border-t-0 md:border-l border-border/50 pt-10 md:pt-0 md:pl-10">
@@ -270,6 +270,7 @@ export default function Home() {
     
     
     
+
 
 
 
