@@ -297,7 +297,7 @@ function BookingForm({ schema, isRoomBooking = false }: { schema: typeof seatBoo
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {Array.from({ length: 12 }, (_, i) => `${i + 9}:00`).map(time => (
+                    {Array.from({ length: 14 }, (_, i) => `${i + 8}:00`.padStart(5, '0')).map(time => (
                       <SelectItem key={time} value={time}>{time}</SelectItem>
                     ))}
                   </SelectContent>
@@ -394,32 +394,28 @@ export default function Home() {
       </section>
 
       {/* Highlights Section */}
-      <section id="highlights" className="py-16 md:py-24 bg-secondary">
+      <section id="highlights" className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Discover Our Impact</p>
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Why Choose Us</p>
             <h2 className="font-headline text-3xl md:text-4xl font-bold">Crafted with Care and Passion</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {highlights.map((item) => (
-              <Card key={item.title} className="text-center shadow-lg bg-background">
-                <CardHeader className="items-center">
-                  <div className="bg-primary/10 p-4 rounded-full">
-                    {item.icon}
-                  </div>
-                  <CardTitle className="font-headline mt-4">{item.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{item.description}</p>
-                </CardContent>
-              </Card>
+              <div key={item.title} className="flex flex-col items-center text-center">
+                <div className="bg-primary/10 p-4 rounded-full mb-4">
+                  {item.icon}
+                </div>
+                <h3 className="font-headline text-xl font-semibold mb-2">{item.title}</h3>
+                <p className="text-muted-foreground">{item.description}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="bg-background py-16 md:py-24">
+      <section id="about" className="bg-secondary py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
             <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
@@ -449,7 +445,7 @@ export default function Home() {
       </section>
 
        {/* Testimonial */}
-       <section className="py-16 md:py-24 bg-secondary">
+       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 text-center max-w-3xl">
            <div className="flex justify-center gap-1 mb-4">
               {[...Array(5)].map((_,i) => <Star key={i} className="w-5 h-5 text-primary fill-primary" />)}
@@ -468,7 +464,7 @@ export default function Home() {
       </section>
 
       {/* Menu Section */}
-      <section id="menu" className="bg-background py-16 md:py-24">
+      <section id="menu" className="bg-secondary py-16 md:py-24">
         <div className="container mx-auto px-4">
             <header className="text-center mb-12 md:mb-16">
                 <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Our Menu</h2>
@@ -490,35 +486,35 @@ export default function Home() {
                 ))}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredMenuItems.map(item => {
                     const imageData = placeHolderImages.find(p => p.id === item.id);
                     const imageUrl = imageData?.imageUrl || item.imageUrl;
                     const imageHint = imageData?.imageHint || item.imageHint;
                     
                     return (
-                        <div key={item.name} className="flex items-center gap-4 group transition-opacity duration-300">
-                           {imageUrl && (
-                                <div className="relative h-20 w-20 rounded-md overflow-hidden flex-shrink-0">
-                                    <Image
-                                        src={imageUrl}
-                                        alt={item.name}
-                                        fill
-                                        className="object-cover"
-                                        sizes="80px"
-                                        data-ai-hint={imageHint}
-                                    />
-                                     {item.isSpecial && <Badge className="absolute top-1 right-1 text-xs px-1.5 py-0.5">Special</Badge>}
-                                </div>
-                            )}
-                            <div className="flex-grow">
-                                <h3 className="font-headline text-lg font-semibold">{item.name}</h3>
-                                <p className="text-muted-foreground text-sm mt-1">{item.description}</p>
-                            </div>
-                            <div className="flex-shrink-0">
-                                <p className="font-semibold text-lg text-primary">{item.price}</p>
-                            </div>
-                        </div>
+                      <Card key={item.id} className="bg-background overflow-hidden shadow-lg group">
+                        {imageUrl && (
+                          <div className="relative h-48 w-full">
+                            <Image
+                              src={imageUrl}
+                              alt={item.name}
+                              fill
+                              className="object-cover transition-transform duration-300 group-hover:scale-105"
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                              data-ai-hint={imageHint}
+                            />
+                            {item.isSpecial && <Badge className="absolute top-2 right-2">Special</Badge>}
+                          </div>
+                        )}
+                        <CardContent className="p-4">
+                           <div className="flex justify-between items-start">
+                              <h3 className="font-headline text-lg font-semibold pr-2">{item.name}</h3>
+                              <p className="font-semibold text-lg text-primary flex-shrink-0">{item.price}</p>
+                           </div>
+                           <p className="text-muted-foreground text-sm mt-1">{item.description}</p>
+                        </CardContent>
+                      </Card>
                     );
                 })}
             </div>
@@ -526,7 +522,7 @@ export default function Home() {
       </section>
 
       {/* Booking Section */}
-      <section id="booking" className="bg-secondary py-16 md:py-24">
+      <section id="booking" className="bg-background py-16 md:py-24">
         <div className="container mx-auto px-4">
           <header className="text-center mb-12 md:mb-16">
             <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Book Your Space</h2>
@@ -541,7 +537,7 @@ export default function Home() {
               <TabsTrigger value="room">Reserve a Private Room</TabsTrigger>
             </TabsList>
             <TabsContent value="seat">
-              <Card className="max-w-4xl mx-auto mt-8 shadow-lg">
+              <Card className="max-w-4xl mx-auto mt-8 shadow-lg border-border/50 bg-secondary/50">
                 <CardHeader>
                   <CardTitle className="font-headline">Co-working Seat Reservation</CardTitle>
                   <CardDescription>Book a comfortable seat in our general co-working area. Perfect for individuals or small groups.</CardDescription>
@@ -552,7 +548,7 @@ export default function Home() {
               </Card>
             </TabsContent>
             <TabsContent value="room">
-               <Card className="max-w-4xl mx-auto mt-8 shadow-lg">
+               <Card className="max-w-4xl mx-auto mt-8 shadow-lg border-border/50 bg-secondary/50">
                   <CardHeader>
                       <CardTitle className="font-headline">Private Meeting Room</CardTitle>
                       <CardDescription>Ideal for team meetings, presentations, or private calls. Amenities include high-speed Wi-Fi, a whiteboard, and a projector upon request.</CardDescription>
@@ -606,7 +602,7 @@ export default function Home() {
           </header>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-            <Card className="shadow-lg">
+            <Card className="shadow-lg bg-secondary/50 border-border/50">
               <CardHeader>
                 <CardTitle className="font-headline text-2xl">Contact Information</CardTitle>
               </CardHeader>
@@ -620,7 +616,7 @@ export default function Home() {
                   ))}
                 </div>
                 
-                <div className="border-t pt-6">
+                <div className="border-t pt-6 border-border/50">
                    <h3 className="font-headline flex items-center gap-2 mb-4 text-lg font-semibold">
                       <Clock className="h-5 w-5 text-primary"/>
                       Opening Hours
@@ -635,7 +631,7 @@ export default function Home() {
                    </div>
                 </div>
 
-                <div className="border-t pt-6">
+                <div className="border-t pt-6 border-border/50">
                   <h3 className="font-headline font-semibold text-lg mb-4">Follow Us</h3>
                   <div className="flex space-x-2">
                    {socialLinks.map(social => (
