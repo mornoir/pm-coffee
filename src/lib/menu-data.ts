@@ -26,6 +26,46 @@ export const menuItems: MenuItem[] = [
         tags: ["coffee", "recommended"]
     },
     {
+        id: 'menu-cappuccino',
+        name: 'Cappuccino',
+        price: 'Rp 35.000',
+        description: "A classic blend of espresso, steamed milk, and a thick layer of creamy foam.",
+        imageUrl: "https://images.unsplash.com/photo-1572442388796-11668a65343d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxjYXBwdWNjaW5vfGVufDB8fHx8MTc1Nzc0ODI5N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+        tags: ["coffee"]
+    },
+    {
+        id: "menu-espresso",
+        name: "Espresso",
+        price: "Rp 25.000",
+        description: "A concentrated coffee brewed by forcing a small amount of nearly boiling water through finely-ground coffee beans.",
+        imageUrl: "https://images.unsplash.com/photo-1596707833141-547a4b3b2a2e?q=80&w=1287&auto=format&fit=crop",
+        tags: ["coffee"]
+    },
+    {
+        id: "menu-macchiato",
+        name: "Macchiato",
+        price: "Rp 32.000",
+        description: "An espresso coffee drink with a small amount of milk, usually foamed.",
+        imageUrl: "https://images.unsplash.com/photo-1571224230846-9636b1511059?q=80&w=1287&auto=format&fit=crop",
+        tags: ["coffee"]
+    },
+    {
+        id: "menu-mocha",
+        name: "Mocha",
+        price: "Rp 38.000",
+        description: "A delightful blend of espresso, chocolate, and steamed milk.",
+        imageUrl: "https://images.unsplash.com/photo-1542990253-a7814f27a22c?q=80&w=1287&auto=format&fit=crop",
+        tags: ["coffee", "recommended"]
+    },
+    {
+        id: "menu-flatwhite",
+        name: "Flat White",
+        price: "Rp 35.000",
+        description: "Espresso with steamed milk, consisting of a thin layer of microfoam.",
+        imageUrl: "https://images.unsplash.com/photo-1561882468-91866540424d?q=80&w=1287&auto=format&fit=crop",
+        tags: ["coffee"]
+    },
+    {
         id: "menu-croissant",
         name: "Croissant",
         price: "Rp 25.000",
@@ -40,14 +80,6 @@ export const menuItems: MenuItem[] = [
         description: "Smashed avocado on toasted sourdough, with a sprinkle of chili flakes.",
         imageUrl: "https://images.unsplash.com/photo-1628556820645-63ba5f90e6a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxhdm9jYWRvJTIwdG9hc3R8ZW58MHx8fHwxNzU3NzQ4NTMxfDA&ixlib=rb-4.1.0&q=80&w=1080",
         tags: ["eatery", "recommended"]
-    },
-    {
-        id: 'menu-cappuccino',
-        name: 'Cappuccino',
-        price: 'Rp 35.000',
-        description: "A classic blend of espresso, steamed milk, and a thick layer of creamy foam.",
-        imageUrl: "https://images.unsplash.com/photo-1572442388796-11668a65343d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxjYXBwdWNjaW5vfGVufDB8fHx8MTc1Nzc0ODI5N3ww&ixlib=rb-4.1.0&q=80&w=1080",
-        tags: ["coffee"]
     },
     {
         id: 'menu-matchalatte',
@@ -106,3 +138,5 @@ export const menuItems: MenuItem[] = [
         tags: ["snack & desserts"]
     },
 ];
+
+    

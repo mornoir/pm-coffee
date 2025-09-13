@@ -104,6 +104,30 @@
       "imageHint": "chocolate chip cookie"
     },
     {
+      "id": "product13",
+      "description": "Espresso",
+      "imageUrl": "https://images.unsplash.com/photo-1596707833141-547a4b3b2a2e?q=80&w=1287&auto=format&fit=crop",
+      "imageHint": "espresso shot"
+    },
+    {
+      "id": "product14",
+      "description": "Macchiato",
+      "imageUrl": "https://images.unsplash.com/photo-1571224230846-9636b1511059?q=80&w=1287&auto=format&fit=crop",
+      "imageHint": "macchiato coffee"
+    },
+    {
+      "id": "product15",
+      "description": "Mocha",
+      "imageUrl": "https://images.unsplash.com/photo-1542990253-a7814f27a22c?q=80&w=1287&auto=format&fit=crop",
+      "imageHint": "mocha chocolate"
+    },
+    {
+      "id": "product16",
+      "description": "Flat White",
+      "imageUrl": "https://images.unsplash.com/photo-1561882468-91866540424d?q=80&w=1287&auto=format&fit=crop",
+      "imageHint": "flat white coffee"
+    },
+    {
       "id": "gallery1",
       "description": "A group of people collaborating in a meeting room.",
       "imageUrl": "https://picsum.photos/seed/gallery1/600/400",
@@ -153,3 +177,5 @@
     }
   ]
 }
+
+    
