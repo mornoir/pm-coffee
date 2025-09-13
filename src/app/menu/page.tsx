@@ -1,3 +1,5 @@
+'use client';
+
 import { menuItems } from '@/lib/menu-data';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -5,8 +7,18 @@ import { ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import { useState } from 'react';
+
+const allTags = ['All', ...Array.from(new Set(menuItems.flatMap(item => item.tags)))];
 
 export default function MenuPage() {
+  const [activeFilter, setActiveFilter] = useState('All');
+
+  const filteredMenuItems = activeFilter === 'All'
+    ? menuItems
+    : menuItems.filter(item => item.tags.includes(activeFilter.toLowerCase().replace(' & ', ' & ')));
+
+
   return (
     <div className="bg-background text-foreground">
       <div className="container mx-auto px-4 py-24 md:py-32">
@@ -26,9 +38,23 @@ export default function MenuPage() {
               Crafted with care, from our coffee to our kitchen.
             </p>
           </header>
+          
+          <div className="flex justify-center flex-wrap gap-2 mb-12">
+            {allTags.map(tag => (
+              <Button
+                key={tag}
+                variant={activeFilter === tag ? 'default' : 'outline'}
+                onClick={() => setActiveFilter(tag)}
+                className="capitalize"
+              >
+                {tag}
+              </Button>
+            ))}
+          </div>
+
           <div className="max-w-4xl mx-auto">
             <ul className="space-y-8">
-              {menuItems.map(item => {
+              {filteredMenuItems.map(item => {
                 return (
                   <li key={item.id} className="flex gap-4 items-start border-b border-border/50 pb-8">
                     {item.imageUrl && (
