@@ -7,7 +7,9 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Logo } from './logo';
 import { cn } from '@/lib/utils';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter }
+ 
+from 'next/navigation';
 import { ThemeToggle } from './theme-toggle';
 
 const navLinks = [
@@ -21,6 +23,7 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,8 +44,9 @@ export function Header() {
               behavior: 'smooth',
           });
       }
+    } else if (!href.startsWith('#')) {
+        router.push(href);
     }
-    // For external links or different pages, let the default Link behavior happen
     setIsMenuOpen(false);
   };
   
@@ -52,7 +56,7 @@ export function Header() {
       onClick={(e) => handleNavClick(e, href)}
       className={cn(
         "text-sm font-medium transition-colors hover:text-primary",
-        isScrolled ? 'text-foreground' : 'text-muted-foreground',
+        isScrolled ? 'text-foreground' : 'text-white/80 hover:text-white',
         className
       )}
     >
@@ -67,8 +71,8 @@ export function Header() {
       )}>
       <div className="container flex h-20 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <Logo className="h-6 w-6 text-foreground" />
-          <span className="font-semibold text-lg">PM COFFEE</span>
+          <Logo className={cn("h-6 w-6 transition-colors", isScrolled ? 'text-foreground' : 'text-white')} />
+          <span className={cn("font-semibold text-lg transition-colors", isScrolled ? 'text-foreground' : 'text-white')}>PM COFFEE</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -76,13 +80,13 @@ export function Header() {
           {navLinks.map((link) => (
             <NavLink key={link.href} {...link} />
           ))}
-          <ThemeToggle />
+          <ThemeToggle className={cn(isScrolled ? 'text-foreground' : 'text-white')} />
         </nav>
 
         {/* Mobile Navigation */}
         <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
           <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" className={cn(isScrolled ? 'text-foreground' : 'text-white hover:text-white')}>
               <Menu className="h-6 w-6" />
               <span className="sr-only">Open menu</span>
             </Button>
