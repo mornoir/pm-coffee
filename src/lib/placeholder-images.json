@@ -2,9 +2,9 @@
   "placeholderImages": [
     {
       "id": "hero",
-      "description": "Person putting a flat object into their back pocket.",
-      "imageUrl": "https://images.pexels.com/photos/20480336/pexels-photo-20480336.jpeg",
-      "imageHint": "stylish person city"
+      "description": "Modern co-working space with minimalist interior design.",
+      "imageUrl": "https://images.pexels.com/photos/31680051/pexels-photo-31680051.jpeg",
+      "imageHint": "coworking space interior"
     },
     {
       "id": "about1",
