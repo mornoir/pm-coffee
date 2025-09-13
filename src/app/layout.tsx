@@ -1,21 +1,20 @@
 import type { Metadata } from 'next';
-import { DM_Serif_Display, Lato } from 'next/font/google';
+import { Playfair_Display, Inter } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Toaster } from "@/components/ui/toaster"
 
-const fontBody = Lato({
+const fontBody = Inter({
   subsets: ['latin'],
   variable: '--font-body',
-  weight: ['400', '700'],
 });
 
-const fontHeadline = DM_Serif_Display({
+const fontHeadline = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-headline',
-  weight: '400',
+  weight: '700',
 });
 
 

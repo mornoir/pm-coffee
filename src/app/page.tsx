@@ -50,11 +50,11 @@ export default function Home() {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         <div className="container relative mx-auto h-full px-4 flex flex-col justify-end pb-24 md:pb-32">
-          <div className="max-w-xl text-white">
+          <div className="max-w-2xl text-white">
              <h1 className="font-headline text-5xl md:text-8xl font-bold tracking-tighter">
                 Space for Ideas.
             </h1>
-            <p className="mt-6 text-lg md:text-xl text-white/80 max-w-md">
+            <p className="mt-6 text-lg md:text-xl text-white/80 max-w-lg">
                 A thoughtfully designed co-working space where productivity and comfort converge. Find your focus, fuel your creativity.
             </p>
           </div>
@@ -62,25 +62,25 @@ export default function Home() {
       </section>
 
       {/* About Section 1 */}
-      <section id="about" className="py-24 md:py-32 bg-background">
+      <section id="about" className="py-24 md:py-40 bg-background">
         <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
                 <div className="md:order-2">
-                    <p className="text-primary font-semibold mb-2">Workspace Redefined</p>
-                    <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tight mb-6">
+                    <p className="text-primary font-semibold mb-4 text-sm tracking-widest uppercase">Workspace Redefined</p>
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight mb-6">
                         Designed for Flow, Built for Community.
                     </h2>
-                    <p className="text-muted-foreground leading-relaxed mb-6">
+                    <p className="text-muted-foreground leading-relaxed text-lg mb-8">
                        PM Coffee is more than just a place to work. It’s an environment crafted to eliminate distractions and foster connection. Every detail, from the acoustics to the aroma of freshly brewed coffee, is considered to help you achieve your best work.
                     </p>
-                    <Button asChild variant="link" className="p-0 text-base">
+                    <Button asChild variant="link" className="p-0 text-base text-primary hover:text-primary/80">
                         <Link href="/discover">
                             Explore Our Space <ArrowRight className="ml-2 h-4 w-4" />
                         </Link>
                     </Button>
                 </div>
                 {aboutImage1 && (
-                     <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-lg md:order-1">
+                     <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-2xl md:order-1">
                         <Image
                             src={aboutImage1.imageUrl}
                             alt={aboutImage1.description}
@@ -96,27 +96,20 @@ export default function Home() {
       </section>
       
       {/* Product Showcase */}
-       <section id="products" className="py-24 md:py-32 bg-secondary">
+       <section id="products" className="py-24 md:py-40 bg-secondary">
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-end mb-12">
-            <div>
-              <p className="text-primary font-semibold mb-2">Our Menu</p>
-              <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tight">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+              <p className="text-primary font-semibold mb-4 text-sm tracking-widest uppercase">Our Menu</p>
+              <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight">
                 Fuel Your Day
               </h2>
-            </div>
-            <Button asChild variant="link" className="p-0 text-base hidden sm:flex">
-              <Link href="/discover#menu">
-                View Full Menu <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {productImages.map(image => (
               <Link href="/discover#menu" key={image.id}>
                 <div className="group">
-                    <div className="relative aspect-square rounded-lg overflow-hidden bg-background mb-4">
+                    <div className="relative aspect-square rounded-lg overflow-hidden bg-background mb-4 shadow-lg">
                         <Image
                             src={image.imageUrl}
                             alt={image.description}
@@ -126,16 +119,16 @@ export default function Home() {
                             data-ai-hint={image.imageHint}
                         />
                     </div>
-                    <div className="flex justify-between items-center">
-                      <h3 className="font-semibold">{image.description}</h3>
+                    <div className="flex justify-between items-center mt-4">
+                      <h3 className="font-semibold text-lg">{image.description}</h3>
                       <p className="text-sm text-muted-foreground">{menuItems.find(m => m.id === image.id.replace('product', 'menu-'))?.price}</p>
                     </div>
                 </div>
               </Link>
             ))}
           </div>
-          <div className="text-center mt-12 sm:hidden">
-            <Button asChild variant="link" className="p-0 text-base">
+          <div className="text-center mt-16">
+            <Button asChild variant="outline">
               <Link href="/discover#menu">
                 View Full Menu <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
@@ -147,9 +140,9 @@ export default function Home() {
       {/* Highlights Section */}
       <section id="highlights" className="bg-background text-foreground py-24 md:py-40">
         <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
                  {aboutImage2 && (
-                     <div className="relative aspect-square md:aspect-[4/3] rounded-lg overflow-hidden">
+                     <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl">
                         <Image
                             src={aboutImage2.imageUrl}
                             alt={aboutImage2.description}
@@ -160,15 +153,16 @@ export default function Home() {
                         />
                     </div>
                 )}
-                <div className="grid grid-cols-2 gap-x-8 gap-y-10">
-                    <div className="col-span-2">
-                        <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tight">The Essentials, Perfected.</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-12">
+                    <div className="col-span-1 sm:col-span-2">
+                         <p className="text-primary font-semibold mb-4 text-sm tracking-widest uppercase">The Essentials</p>
+                        <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight">Everything You Need, Perfected.</h2>
                     </div>
                     {highlights.map((item) => (
                       <div key={item.title}>
                         {item.icon}
-                        <h3 className="font-semibold text-lg mt-4 mb-2">{item.title}</h3>
-                        <p className="text-muted-foreground text-sm">{item.description}</p>
+                        <h3 className="font-semibold text-xl mt-6 mb-3">{item.title}</h3>
+                        <p className="text-muted-foreground text-base">{item.description}</p>
                       </div>
                     ))}
                 </div>
@@ -178,25 +172,25 @@ export default function Home() {
 
 
       {/* About Section 2 */}
-      <section className="py-24 md:py-32 bg-background">
+      <section className="py-24 md:py-40 bg-secondary">
         <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
                 <div>
-                    <p className="text-primary font-semibold mb-2">A Space That Adapts to You</p>
-                    <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tight mb-6">
+                    <p className="text-primary font-semibold mb-4 text-sm tracking-widest uppercase">A Space That Adapts to You</p>
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight mb-6">
                         From Solo Focus to Team Synergy.
                     </h2>
-                    <p className="text-muted-foreground leading-relaxed mb-6">
+                    <p className="text-muted-foreground leading-relaxed text-lg mb-8">
                        Our versatile layout includes quiet zones for deep work, collaborative tables for team projects, and private rooms for important meetings. Whatever your workday demands, you'll find the perfect spot at PM Coffee.
                     </p>
-                    <Button asChild variant="link" className="p-0 text-base">
+                    <Button asChild variant="link" className="p-0 text-base text-primary hover:text-primary/80">
                         <Link href="#booking">
                             Book Your Spot <ArrowRight className="ml-2 h-4 w-4" />
                         </Link>
                     </Button>
                 </div>
                 {aboutImage3 && (
-                     <div className="relative aspect-square md:aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
+                     <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl">
                         <Image
                             src={aboutImage3.imageUrl}
                             alt={aboutImage3.description}
@@ -212,32 +206,33 @@ export default function Home() {
       </section>
 
       {/* Booking / Contact Form */}
-      <section id="booking" className="py-24 md:py-32 bg-background">
+      <section id="booking" className="py-24 md:py-40 bg-background">
           <div className="container mx-auto px-4 max-w-4xl">
-              <header className="text-center mb-12 md:mb-16">
+              <header className="text-center mb-16">
+                <p className="text-primary font-semibold mb-4 text-sm tracking-widest uppercase">Join Us</p>
                 <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Join the Movement</h2>
-                <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+                <p className="mt-6 max-w-2xl mx-auto text-lg text-muted-foreground">
                     Reserve your place in a community driven by passion and purpose.
                 </p>
               </header>
 
-              <Card className="border-border/50 bg-secondary/30">
-                <CardContent className="p-6 md:p-10">
-                    <div className="grid md:grid-cols-2 gap-8">
+              <Card className="border-border/50 bg-secondary/30 shadow-2xl">
+                <CardContent className="p-8 md:p-12">
+                    <div className="grid md:grid-cols-2 gap-10">
                         <div>
-                            <h3 className="font-headline text-2xl font-semibold mb-4">Book a Tour</h3>
-                             <p className="text-muted-foreground mb-6">Experience the space firsthand. We'll show you around and treat you to a coffee on the house.</p>
+                            <h3 className="font-headline text-3xl font-semibold mb-4">Book a Tour</h3>
+                             <p className="text-muted-foreground mb-8">Experience the space firsthand. We'll show you around and treat you to a coffee on the house.</p>
                             <form className="space-y-4">
                                 <input type="email" placeholder="Enter your email" className="w-full bg-background border-border/50 rounded-md p-3 text-sm" />
-                                <Button type="submit" className="w-full">Request a Tour</Button>
+                                <Button type="submit" size="lg" className="w-full">Request a Tour</Button>
                             </form>
                         </div>
-                        <div className="border-t md:border-t-0 md:border-l border-border/50 pt-8 md:pt-0 md:pl-8">
-                             <h3 className="font-headline text-2xl font-semibold mb-4">Contact Us</h3>
-                             <div className="space-y-3 text-muted-foreground">
-                                <p className="flex items-center gap-3"><Mail className="h-4 w-4 text-primary" /> hello@pmcoffee.com</p>
-                                <p className="flex items-center gap-3"><Phone className="h-4 w-4 text-primary" /> +62 123 4567 890</p>
-                                <p className="flex items-center gap-3"><MapPin className="h-4 w-4 text-primary" /> Jl. Produktif No. 123, Jakarta</p>
+                        <div className="border-t md:border-t-0 md:border-l border-border/50 pt-10 md:pt-0 md:pl-10">
+                             <h3 className="font-headline text-3xl font-semibold mb-4">Contact Us</h3>
+                             <div className="space-y-4 text-muted-foreground">
+                                <p className="flex items-center gap-4"><Mail className="h-5 w-5 text-primary" /> hello@pmcoffee.com</p>
+                                <p className="flex items-center gap-4"><Phone className="h-5 w-5 text-primary" /> +62 123 4567 890</p>
+                                <p className="flex items-center gap-4"><MapPin className="h-5 w-5 text-primary" /> Jl. Produktif No. 123, Jakarta</p>
                             </div>
                         </div>
                     </div>
