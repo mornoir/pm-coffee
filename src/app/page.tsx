@@ -8,6 +8,13 @@ import { ArrowRight, Wifi, Users, Coffee, MapPin, Phone, Mail } from 'lucide-rea
 import Image from 'next/image';
 import Link from 'next/link';
 import { FadeIn } from '@/components/fade-in';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
 const highlights = [
   {
@@ -106,30 +113,43 @@ export default function Home() {
               </h2>
           </FadeIn>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            {productImages.map((image, index) => (
-              <FadeIn key={image.id} animationDelay={index * 0.1}>
-                <Link href="/menu">
-                  <div className="group">
-                      <div className="relative aspect-square rounded-lg overflow-hidden bg-background mb-4 shadow-lg">
-                          <Image
-                              src={image.imageUrl}
-                              alt={image.description}
-                              fill
-                              className="object-cover transition-transform duration-300 group-hover:scale-105"
-                              sizes="(max-width: 768px) 50vw, 25vw"
-                              data-ai-hint={image.imageHint}
-                          />
+          <FadeIn>
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent>
+                {productImages.map((image, index) => (
+                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/4">
+                     <Link href="/menu">
+                      <div className="group">
+                          <div className="relative aspect-square rounded-lg overflow-hidden bg-background mb-4 shadow-lg">
+                              <Image
+                                  src={image.imageUrl}
+                                  alt={image.description}
+                                  fill
+                                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                  sizes="(max-width: 768px) 50vw, 25vw"
+                                  data-ai-hint={image.imageHint}
+                              />
+                          </div>
+                          <div className="flex justify-between items-center mt-4">
+                            <h3 className="font-semibold text-lg">{image.description}</h3>
+                            <p className="text-sm text-muted-foreground">{menuItems.find(m => m.id === image.id.replace('product', 'menu-'))?.price}</p>
+                          </div>
                       </div>
-                      <div className="flex justify-between items-center mt-4">
-                        <h3 className="font-semibold text-lg">{image.description}</h3>
-                        <p className="text-sm text-muted-foreground">{menuItems.find(m => m.id === image.id.replace('product', 'menu-'))?.price}</p>
-                      </div>
-                  </div>
-                </Link>
-              </FadeIn>
-            ))}
-          </div>
+                    </Link>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
+          </FadeIn>
+
           <FadeIn className="text-center mt-16">
             <Button asChild variant="outline">
               <Link href="/menu">
