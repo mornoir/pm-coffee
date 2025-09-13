@@ -449,27 +449,25 @@ export default function Home() {
       {/* About Section */}
       <section id="about" className="bg-secondary py-24 sm:py-32">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-16 items-start">
-            
-            <div className="lg:col-span-2 space-y-8">
-              <p className="text-sm font-semibold text-primary uppercase tracking-wider">About Us</p>
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+            <div className="lg:col-span-2">
+              <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-4">About Us</p>
               <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">
                 Productivity Made Effortless. No More Distractions.
               </h2>
-              <p className="text-lg text-muted-foreground">
+              <p className="mt-6 text-lg text-muted-foreground">
                   Inspired by the need for a focused environment, PM Coffee provides the perfect space to be productive, whether it's for your startup or your freelance work.
               </p>
-              <Button asChild variant="link" className="p-0 text-base">
+              <Button asChild variant="link" className="p-0 mt-6 text-base text-primary hover:text-primary/80">
                 <Link href="/discover">
                   Discover More <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </div>
-
-            <div className="lg:col-span-3 relative">
-                <p className="text-muted-foreground mb-8 lg:absolute lg:top-0 lg:left-8">At PM Coffee, we believe that great ideas shouldn't be confined to a traditional office. We were born from the local startup scene.</p>
+            <div className="lg:col-span-3 lg:col-start-3">
+              <p className="text-muted-foreground mb-8">At PM Coffee, we believe that great ideas shouldn't be confined to a traditional office. We were born from the local startup scene to foster innovation and community.</p>
                 {aboutImage && (
-                    <div className="relative aspect-[4/3] lg:ml-24 lg:mt-24 rounded-lg overflow-hidden shadow-lg">
+                    <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
                         <Image
                             src={aboutImage.imageUrl}
                             alt={aboutImage.description}
@@ -480,19 +478,7 @@ export default function Home() {
                         />
                     </div>
                 )}
-                {aboutImage2 && (
-                    <div className="hidden lg:block absolute -bottom-16 -left-16 w-1/2 aspect-square rounded-lg overflow-hidden shadow-2xl">
-                        <Image
-                            src={aboutImage2.imageUrl}
-                            alt={aboutImage2.description}
-                            fill
-                            className="object-cover"
-                            data-ai-hint={aboutImage2.imageHint}
-                        />
-                    </div>
-                )}
             </div>
-            
           </div>
         </div>
       </section>
