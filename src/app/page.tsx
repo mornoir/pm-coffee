@@ -16,7 +16,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel"
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 const highlights = [
@@ -52,14 +52,28 @@ export default function Home() {
   
   const [api, setApi] = useState<CarouselApi>()
   const [canScrollNext, setCanScrollNext] = useState(true);
+  const [current, setCurrent] = useState(0)
+  const [count, setCount] = useState(0)
+
+  const onDotButtonClick = useCallback((index: number) => {
+    if (!api) {
+      return
+    }
+    api.scrollTo(index)
+  }, [api]);
+
 
   useEffect(() => {
     if (!api) {
       return
     }
 
+    setCount(api.scrollSnapList().length)
+    setCurrent(api.selectedScrollSnap() + 1)
+
     const onSelect = () => {
       setCanScrollNext(api.canScrollNext())
+      setCurrent(api.selectedScrollSnap() + 1)
     }
 
     onSelect();
@@ -178,8 +192,21 @@ export default function Home() {
               <CarouselNext />
             </Carousel>
           </FadeIn>
-
+          
           <FadeIn className="text-center mt-16">
+              <div className="flex gap-2 justify-center mb-8">
+                {Array.from({ length: count }).map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => onDotButtonClick(index)}
+                    className={cn(
+                      'h-2 w-2 rounded-full transition-colors',
+                      current - 1 === index ? 'bg-primary' : 'bg-primary/20'
+                    )}
+                    />
+                ))}
+              </div>
+
             <Button asChild variant={!canScrollNext ? 'default' : 'outline'} className="transition-colors">
               <Link href="/menu">
                 View Full Menu <ArrowRight className="ml-2 h-4 w-4" />
@@ -299,5 +326,6 @@ export default function Home() {
     </div>
   );
 
+    
     
     
