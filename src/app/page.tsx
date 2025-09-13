@@ -43,7 +43,7 @@ export default function Home() {
   const productImages = placeHolderImages.filter(img => img.id.startsWith('product'));
 
   return (
-    <div className="flex flex-col text-foreground">
+    <div className="flex flex-col text-foreground overflow-hidden">
       {/* Hero Section */}
       <section id="home" className="relative h-[80vh] md:h-screen w-full bg-background">
         {heroImage && (
@@ -113,7 +113,7 @@ export default function Home() {
               </h2>
           </FadeIn>
           
-          <FadeIn>
+          <FadeIn className="relative">
             <Carousel
               opts={{
                 align: "start",
@@ -138,7 +138,7 @@ export default function Home() {
                           </div>
                           <div className="flex justify-between items-center mt-4">
                             <h3 className="font-semibold text-lg">{image.description}</h3>
-                            <p className="text-sm text-muted-foreground">{menuItems.find(m => m.id === image.id.replace('product', 'menu-'))?.price}</p>
+                            <p className="text-sm text-muted-foreground">{menuItems.find(m => m.id === `menu-${image.description.toLowerCase().replace(' ', '')}`)?.price}</p>
                           </div>
                       </div>
                     </Link>
