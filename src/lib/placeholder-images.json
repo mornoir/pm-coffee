@@ -14,9 +14,9 @@
     },
     {
       "id": "about2",
-      "description": "A flat bottle placed inside a modern handbag.",
-      "imageUrl": "https://images.pexels.com/photos/20480335/pexels-photo-20480335.jpeg",
-      "imageHint": "handbag accessory"
+      "description": "A modern and bright co-working space with long tables.",
+      "imageUrl": "https://images.unsplash.com/photo-1606836576983-8b458e75221d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjb3dvcmtpbmclMjBzcGFjZXxlbnwwfHx8fDE3NTc3NDg1ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "coworking space"
     },
     {
       "id": "about3",
