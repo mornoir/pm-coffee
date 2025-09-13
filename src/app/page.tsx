@@ -41,7 +41,7 @@ export default function Home() {
   const aboutImage2 = placeHolderImages.find((img) => img.id === 'about2');
   const aboutImage3 = placeHolderImages.find((img) => img.id === 'about3');
   const ctaImage = placeHolderImages.find((img) => img.id === 'cta');
-  const featuredMenuItems = menuItems.filter(item => item.tags.includes('recommended')).slice(0, 4);
+  const featuredMenuItems = menuItems.filter(item => item.tags.includes('recommended')).slice(0, 6);
   
 
   return (
@@ -270,6 +270,7 @@ export default function Home() {
     
     
     
+
 
 
 
