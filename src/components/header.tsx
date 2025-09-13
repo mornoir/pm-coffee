@@ -35,23 +35,36 @@ export function Header() {
     handleScroll(); // Check scroll position on initial load
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    const targetElement = document.getElementById(sectionId);
+    if (targetElement) {
+      const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - (window.innerHeight / 2) + (targetElement.clientHeight / 2);
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }
+  }
   
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) => {
-    if (href.startsWith('#') && isHomePage) {
-      e.preventDefault();
-      const targetId = href.substring(1);
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-          const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
-          const offsetPosition = elementPosition - (window.innerHeight / 2) + (targetElement.clientHeight / 2);
-          
-          window.scrollTo({
-              top: offsetPosition,
-              behavior: 'smooth',
-          });
+    e.preventDefault();
+    if (href.startsWith('#')) {
+      const sectionId = href.substring(1);
+      if (isHomePage) {
+        scrollToSection(sectionId);
+      } else {
+        router.push('/');
+        const checkExist = setInterval(() => {
+            const el = document.getElementById(sectionId);
+            if(el) {
+                scrollToSection(sectionId);
+                clearInterval(checkExist);
+            }
+        }, 100);
       }
-    } else if (href.startsWith('#') && !isHomePage) {
-      router.push('/' + href);
     } else {
         router.push(href);
     }
@@ -88,7 +101,7 @@ export function Header() {
           {navLinks.map((link) => (
             <NavLink key={link.href} {...link} />
           ))}
-          <ThemeToggle className={cn(!isHomePage || isScrolled ? 'text-foreground' : 'text-white')} />
+          <ThemeToggle className={cn(!isHomePage || isScrolled ? 'text-foreground' : 'text-white/80 hover:text-white')} />
         </nav>
 
         {/* Mobile Navigation */}
