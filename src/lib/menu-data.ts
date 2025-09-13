@@ -22,7 +22,7 @@ export const menuItems: MenuItem[] = [
         name: "Latte",
         price: "Rp 35.000",
         description: "Smooth espresso with steamed milk, topped with a light layer of foam.",
-        imageUrl: "https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        imageUrl: "https://images.pexels.com/photos/350478/pexels-photo-350478.jpeg",
         tags: ["coffee", "recommended"]
     },
     {
