@@ -51,7 +51,8 @@ export function Header() {
       href={href}
       onClick={(e) => handleNavClick(e, href)}
       className={cn(
-        "text-sm font-medium transition-colors hover:text-primary text-muted-foreground",
+        "text-sm font-medium transition-colors hover:text-primary",
+        isScrolled ? 'text-foreground' : 'text-muted-foreground',
         className
       )}
     >
