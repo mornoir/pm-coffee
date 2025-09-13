@@ -121,7 +121,7 @@ export default function Home() {
                             src={image.imageUrl}
                             alt={image.description}
                             fill
-                            className="object-contain p-4 md:p-8 transition-transform duration-300 group-hover:scale-105"
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
                             sizes="(max-width: 768px) 50vw, 25vw"
                             data-ai-hint={image.imageHint}
                         />
