@@ -56,7 +56,7 @@ export default function MenuPage() {
             <ul className="space-y-8">
               {filteredMenuItems.map(item => {
                 return (
-                  <li key={item.id} className="flex gap-4 items-start border-b border-border/50 pb-8">
+                  <li key={item.id} className="flex gap-6 items-start border-b border-border/50 pb-8">
                     {item.imageUrl && (
                       <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-lg overflow-hidden shadow-md shrink-0">
                         <Image
@@ -73,7 +73,7 @@ export default function MenuPage() {
                         <h3 className="font-semibold text-xl">{item.name}</h3>
                         <p className="text-muted-foreground font-medium">{item.price}</p>
                       </div>
-                      <p className="text-muted-foreground mt-1">{item.description}</p>
+                      <p className="text-muted-foreground mt-2 text-base leading-relaxed">{item.description}</p>
                       <div className="mt-4 flex flex-wrap gap-2">
                         {item.tags?.map(tag => (
                           <Badge
