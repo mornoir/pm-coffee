@@ -98,6 +98,22 @@ export const menuItems: MenuItem[] = [
         tags: ["non-coffee"]
     },
     {
+        id: 'menu-icedtea',
+        name: 'Iced Tea',
+        price: 'Rp 25.000',
+        description: "Freshly brewed tea, served chilled over ice with a slice of lemon.",
+        imageUrl: "https://images.unsplash.com/photo-1556745753-1f3c5fbe6b3c?q=80&w=1287&auto=format&fit=crop",
+        tags: ["non-coffee"]
+    },
+    {
+        id: 'menu-fruitsmoothie',
+        name: 'Fruit Smoothie',
+        price: 'Rp 45.000',
+        description: "A refreshing blend of mixed berries, banana, and yogurt.",
+        imageUrl: "https://images.unsplash.com/photo-1610970881699-44a5c8a23486?q=80&w=1287&auto=format&fit=crop",
+        tags: ["non-coffee"]
+    },
+    {
         id: 'menu-artisan tea',
         name: 'Artisan Tea',
         price: 'Rp 28.000',
