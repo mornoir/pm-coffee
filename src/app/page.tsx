@@ -354,6 +354,8 @@ function BookingForm({ schema, isRoomBooking = false }: { schema: typeof seatBoo
 export default function Home() {
   const heroImage = placeHolderImages.find((img) => img.id === 'hero');
   const galleryImages = galleryImageIds.map(id => placeHolderImages.find(img => img.id === id)).filter(Boolean);
+  const aboutImage = placeHolderImages.find((img) => img.id === 'gallery2');
+  const aboutImage2 = placeHolderImages.find((img) => img.id === 'gallery3');
 
   const [api, setApi] = useState<CarouselApi>();
   const [progress, setProgress] = useState(0);
@@ -444,56 +446,55 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About & Gallery Section */}
-      <section id="about" className="bg-secondary py-16 md:py-24">
-          <div className="container mx-auto px-4">
-              <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
-                  <div className="grid grid-cols-2 grid-rows-2 gap-4 h-[500px]">
-                      {galleryImages.map((image, index) => (
-                        image && <div
-                              key={image.id}
-                              className={cn(
-                                  "relative overflow-hidden rounded-lg shadow-lg",
-                                  index === 0 && "col-span-1 row-span-1",
-                                  index === 1 && "col-span-1 row-span-2",
-                                  index === 2 && "col-span-1 row-span-1",
-                                  index === 3 && "col-span-2 row-span-1"
-                              )}
-                          >
-                              <Image
-                                  src={image.imageUrl}
-                                  alt={image.description}
-                                  fill
-                                  className="object-cover w-full h-full transform hover:scale-105 transition-transform duration-300 ease-in-out"
-                                  sizes="(max-width: 768px) 50vw, 25vw"
-                                  data-ai-hint={image.imageHint}
-                              />
-                          </div>
-                      ))}
-                  </div>
+      {/* About Section */}
+      <section id="about" className="bg-secondary py-24 sm:py-32">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-16 items-start">
+            
+            <div className="lg:col-span-2 space-y-8">
+              <p className="text-sm font-semibold text-primary uppercase tracking-wider">About Us</p>
+              <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">
+                Productivity Made Effortless. No More Distractions.
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                  Inspired by the need for a focused environment, PM Coffee provides the perfect space to be productive, whether it's for your startup or your freelance work.
+              </p>
+              <Button asChild variant="link" className="p-0 text-base">
+                <Link href="/discover">
+                  Discover More <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
 
-                  <div className="flex flex-col justify-center">
-                      <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">About Us</p>
-                      <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter mb-6">Your Perfect Third Place</h2>
-                      <p className="text-muted-foreground text-lg mb-8">
-                          PM Coffee is more than just a coffee shop. It's a community hub born from a simple idea: to create a welcoming space where productivity and connection flow as freely as our ethically-sourced local coffee.
-                      </p>
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 mb-10">
-                          {aboutFeatures.map(feature => (
-                              <li key={feature.text} className="flex items-center gap-3">
-                                  {feature.icon}
-                                  <span className="text-foreground/90">{feature.text}</span>
-                              </li>
-                          ))}
-                      </ul>
-                      <div className="flex items-center">
-                          <Button asChild size="lg">
-                              <Link href="/discover">Discover More <ArrowRight className="ml-2 h-5 w-5" /></Link>
-                          </Button>
-                      </div>
-                  </div>
-              </div>
+            <div className="lg:col-span-3 relative">
+                <p className="text-muted-foreground mb-8 lg:absolute lg:top-0 lg:left-8">At PM Coffee, we believe that great ideas shouldn't be confined to a traditional office. We were born from the local startup scene.</p>
+                {aboutImage && (
+                    <div className="relative aspect-[4/3] lg:ml-24 lg:mt-24 rounded-lg overflow-hidden shadow-lg">
+                        <Image
+                            src={aboutImage.imageUrl}
+                            alt={aboutImage.description}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 1024px) 100vw, 50vw"
+                            data-ai-hint={aboutImage.imageHint}
+                        />
+                    </div>
+                )}
+                {aboutImage2 && (
+                    <div className="hidden lg:block absolute -bottom-16 -left-16 w-1/2 aspect-square rounded-lg overflow-hidden shadow-2xl">
+                        <Image
+                            src={aboutImage2.imageUrl}
+                            alt={aboutImage2.description}
+                            fill
+                            className="object-cover"
+                            data-ai-hint={aboutImage2.imageHint}
+                        />
+                    </div>
+                )}
+            </div>
+            
           </div>
+        </div>
       </section>
 
        {/* Testimonial */}
@@ -683,5 +684,3 @@ export default function Home() {
 
     </div>
   );
-
-    
