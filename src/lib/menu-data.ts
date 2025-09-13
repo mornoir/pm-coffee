@@ -86,7 +86,7 @@ export const menuItems: MenuItem[] = [
         name: 'Matcha Latte',
         price: 'Rp 40.000',
         description: "Earthy Japanese green tea powder whisked with frothy steamed milk.",
-        imageUrl: "https://images.pexels.com/photos/2332686/pexels-photo-2332686.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        imageUrl: "https://images.pexels.com/photos/14704657/pexels-photo-14704657.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
         tags: ["non-coffee", "recommended"]
     },
     {
