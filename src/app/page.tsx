@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { placeHolderImages } from '@/lib/placeholder-images';
+import { menuItems } from '@/lib/menu-data';
 import { ArrowRight, Wifi, Users, Coffee, MapPin, Phone, Mail } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -23,29 +24,6 @@ const highlights = [
     title: 'Community',
     description: 'A network of innovators and creators, just like you.',
   },
-];
-
-const menuItems = [
-    {
-        id: "menu-americano",
-        name: "Americano",
-        price: "Rp 30.000",
-    },
-    {
-        id: "menu-latte",
-        name: "Latte",
-        price: "Rp 35.000",
-    },
-    {
-        id: "menu-croissant",
-        name: "Croissant",
-        price: "Rp 25.000",
-    },
-    {
-        id: "menu-avotoast",
-        name: "Avocado Toast",
-        price: "Rp 55.000",
-    },
 ];
 
 export default function Home() {
@@ -139,7 +117,7 @@ export default function Home() {
                     </div>
                     <div className="flex justify-between items-center">
                       <h3 className="font-semibold">{image.description}</h3>
-                      <p className="text-sm text-muted-foreground">{menuItems.find(m => m.id === image.id)?.price}</p>
+                      <p className="text-sm text-muted-foreground">{menuItems.find(m => m.id === image.id.replace('product', 'menu-'))?.price}</p>
                     </div>
                 </div>
               </Link>
