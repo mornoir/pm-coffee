@@ -1,19 +1,20 @@
 import type { Metadata } from 'next';
-import { Inter, Poppins } from 'next/font/google';
+import { DM_Serif_Display, Lato } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Toaster } from "@/components/ui/toaster"
 
-const fontBody = Inter({
+const fontBody = Lato({
   subsets: ['latin'],
+  weight: ['400', '700'],
   variable: '--font-body',
 });
 
-const fontHeadline = Poppins({
+const fontHeadline = DM_Serif_Display({
   subsets: ['latin'],
-  weight: ['400', '600', '700'],
+  weight: ['400'],
   variable: '--font-headline',
 });
 
