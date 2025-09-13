@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
+import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 
 export default function MenuPage() {
   return (
@@ -28,7 +30,7 @@ export default function MenuPage() {
             <ul className="space-y-8">
               {menuItems.map(item => {
                 return (
-                  <li key={item.id} className="flex gap-6 items-center border-b border-border/50 pb-6">
+                  <li key={item.id} className="flex gap-4 items-start border-b border-border/50 pb-8">
                     {item.imageUrl && (
                       <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-lg overflow-hidden shadow-md shrink-0">
                         <Image
@@ -46,6 +48,20 @@ export default function MenuPage() {
                         <p className="text-muted-foreground font-medium">{item.price}</p>
                       </div>
                       <p className="text-muted-foreground mt-1">{item.description}</p>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {item.tags?.map(tag => (
+                          <Badge
+                            key={tag}
+                            variant={tag === 'recommended' ? 'default' : 'secondary'}
+                            className={cn(
+                              'capitalize',
+                              tag === 'recommended' && 'bg-primary/90 text-primary-foreground'
+                            )}
+                          >
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
                   </li>
                 );
