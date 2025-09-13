@@ -138,20 +138,6 @@ export default function Home() {
                           <p className="text-muted-foreground font-medium shrink-0">{item.price}</p>
                         </div>
                         <p className="text-muted-foreground text-sm mt-1">{item.description}</p>
-                        <div className="mt-3 flex flex-wrap gap-2">
-                          {item.tags?.map(tag => (
-                            <Badge
-                              key={tag}
-                              variant={tag === 'recommended' ? 'default' : 'secondary'}
-                              className={cn(
-                                'capitalize',
-                                tag === 'recommended' && 'bg-primary/90 text-primary-foreground'
-                              )}
-                            >
-                              {tag.replace(/_/g, ' ')}
-                            </Badge>
-                          ))}
-                        </div>
                       </div>
                     </div>
                      <div className="border-b border-dashed border-border/50"></div>
@@ -284,5 +270,6 @@ export default function Home() {
     
     
     
+
 
 
