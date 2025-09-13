@@ -211,34 +211,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="bg-secondary py-24 md:py-32">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            {ctaImage && (
-                <div className="relative h-80 md:h-[600px] w-full rounded-lg overflow-hidden">
-                <Image
-                    src={ctaImage.imageUrl}
-                    alt={ctaImage.description}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    data-ai-hint={ctaImage.imageHint}
-                />
-                </div>
-            )}
-            <div className="max-w-md mx-auto text-center md:text-left">
-                <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight">Carry Your Focus</h2>
-                <p className="mt-6 text-lg text-muted-foreground">Join our community and receive a complimentary PM Coffee tumbler to keep your brew perfect, wherever your day takes you.</p>
-                <p className="mt-4 text-sm text-muted-foreground">Limited to the first 100 members.</p>
-                <Button asChild size="lg" className="mt-8">
-                    <Link href="#booking">Become a Member</Link>
-                </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-      
       {/* Booking / Contact Form */}
       <section id="booking" className="py-24 md:py-32 bg-background">
           <div className="container mx-auto px-4 max-w-4xl">
