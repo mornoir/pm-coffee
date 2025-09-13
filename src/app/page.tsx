@@ -38,12 +38,23 @@ export default function Home() {
     <div className="flex flex-col text-foreground">
       {/* Hero Section */}
       <section id="home" className="relative h-[80vh] md:h-screen w-full bg-background">
-        <div className="container mx-auto h-full px-4 flex flex-col justify-end pb-24 md:pb-32">
-          <div className="max-w-xl">
+        {heroImage && (
+            <Image
+                src={heroImage.imageUrl}
+                alt={heroImage.description}
+                fill
+                className="object-cover"
+                priority
+                data-ai-hint={heroImage.imageHint}
+            />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+        <div className="container relative mx-auto h-full px-4 flex flex-col justify-end pb-24 md:pb-32">
+          <div className="max-w-xl text-white">
              <h1 className="font-headline text-5xl md:text-8xl font-bold tracking-tighter">
                 Space for Ideas.
             </h1>
-            <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-md">
+            <p className="mt-6 text-lg md:text-xl text-white/80 max-w-md">
                 A thoughtfully designed co-working space where productivity and comfort converge. Find your focus, fuel your creativity.
             </p>
           </div>
@@ -265,3 +276,5 @@ export default function Home() {
     </div>
   );
 }
+
+    
