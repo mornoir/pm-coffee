@@ -14,7 +14,10 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel"
+import { useEffect, useState } from 'react';
+import { cn } from '@/lib/utils';
 
 const highlights = [
   {
@@ -41,6 +44,27 @@ export default function Home() {
   const aboutImage3 = placeHolderImages.find((img) => img.id === 'about3');
   const ctaImage = placeHolderImages.find((img) => img.id === 'cta');
   const productImages = placeHolderImages.filter(img => img.id.startsWith('product'));
+  
+  const [api, setApi] = useState<CarouselApi>()
+  const [canScrollNext, setCanScrollNext] = useState(true);
+
+  useEffect(() => {
+    if (!api) {
+      return
+    }
+
+    const onSelect = () => {
+      setCanScrollNext(api.canScrollNext())
+    }
+
+    onSelect();
+    api.on("select", onSelect)
+
+    return () => {
+      api.off("select", onSelect)
+    }
+  }, [api])
+
 
   return (
     <div className="flex flex-col text-foreground overflow-hidden">
@@ -104,7 +128,7 @@ export default function Home() {
       </section>
       
       {/* Product Showcase */}
-       <section id="products" className="py-24 md:py-40 bg-background">
+       <section id="products" className="py-24 md:py-40 bg-background overflow-hidden">
         <div className="container mx-auto px-4">
           <FadeIn className="text-center max-w-3xl mx-auto mb-16">
               <p className="text-primary font-semibold mb-4 text-sm tracking-widest uppercase">Our Menu</p>
@@ -115,9 +139,9 @@ export default function Home() {
           
           <FadeIn className="relative">
             <Carousel
+              setApi={setApi}
               opts={{
                 align: "start",
-                loop: true,
               }}
               className="w-full"
             >
@@ -138,7 +162,7 @@ export default function Home() {
                           </div>
                           <div className="flex justify-between items-center mt-4">
                             <h3 className="font-semibold text-lg">{image.description}</h3>
-                            <p className="text-sm text-muted-foreground">{menuItems.find(m => m.id === `menu-${image.description.toLowerCase().replace(' ', '')}`)?.price}</p>
+                            <p className="text-sm text-muted-foreground">{menuItems.find(m => m.id === `menu-${image.description.toLowerCase().replace(/\s+/g, '')}`)?.price}</p>
                           </div>
                       </div>
                     </Link>
@@ -151,7 +175,7 @@ export default function Home() {
           </FadeIn>
 
           <FadeIn className="text-center mt-16">
-            <Button asChild variant="outline">
+            <Button asChild variant={!canScrollNext ? 'default' : 'outline'} className="transition-colors">
               <Link href="/menu">
                 View Full Menu <ArrowRight className="ml-2 h-4 w-4" />
               </Link>

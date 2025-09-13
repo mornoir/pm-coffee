@@ -15,7 +15,7 @@ export const menuItems = [
         price: "Rp 25.000",
     },
     {
-        id: "menu-avotoast",
+        id: "menu-avocadotoast",
         name: "Avocado Toast",
         price: "Rp 55.000",
     },
@@ -25,37 +25,37 @@ export const menuItems = [
         price: 'Rp 35.000',
     },
     {
-        id: 'menu-matcha',
+        id: 'menu-matchalatte',
         name: 'Matcha Latte',
         price: 'Rp 40.000',
     },
     {
-        id: 'menu-chocolate',
+        id: 'menu-icedchocolate',
         name: 'Iced Chocolate',
         price: 'Rp 38.000',
     },
     {
-        id: 'menu-tea',
+        id: 'menu-artisan tea',
         name: 'Artisan Tea',
         price: 'Rp 28.000',
     },
     {
-        id: 'menu-salad',
+        id: 'menu-quinoasalad',
         name: 'Quinoa Salad',
         price: 'Rp 65.000',
     },
     {
-        id: 'menu-sandwich',
+        id: 'menu-clubsandwich',
         name: 'Club Sandwich',
         price: 'Rp 75.000',
     },
     {
-        id: 'menu-cake',
+        id: 'menu-cheesecakeslice',
         name: 'Cheesecake Slice',
         price: 'Rp 45.000',
     },
     {
-        id: 'menu-cookie',
+        id: 'menu-giantchococookie',
         name: 'Giant Choco Cookie',
         price: 'Rp 30.000',
     },
