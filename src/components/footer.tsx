@@ -1,15 +1,13 @@
-
 'use client';
 
 import { Logo } from './logo';
-import { Button } from './ui/button';
 import { Twitter, Instagram, Facebook } from 'lucide-react';
+import Link from 'next/link';
 
 const navLinks = [
   { href: '#about', label: 'About' },
-  { href: '#menu', label: 'Menu' },
-  { href: '#booking', label: 'Booking' },
-  { href: '#contact', label: 'Contact' },
+  { href: '#products', label: 'Menu' },
+  { href: '#highlights', label: 'Features' },
 ];
 
 const socialLinks = [
@@ -21,66 +19,69 @@ const socialLinks = [
 export function Footer() {
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) => {
     e.preventDefault();
-    if (href === '/') {
-        window.scrollTo({ top: 0, behavior: 'smooth'});
-        return;
-    }
     const targetId = href.substring(1);
     const targetElement = document.getElementById(targetId);
     if (targetElement) {
         window.scrollTo({
-            top: targetElement.offsetTop - 80, // Adjust for header height
+            top: targetElement.offsetTop - 80,
             behavior: 'smooth',
         });
     }
   };
 
   return (
-    <footer className="bg-secondary/40 border-t">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="md:col-span-1">
-            <a href="#home" onClick={(e) => handleScroll(e, '#home')} className="flex items-center gap-2 mb-4 cursor-pointer">
-              <Logo className="h-8 w-8 text-primary" />
-              <span className="font-headline font-bold text-xl">PM Coffee</span>
-            </a>
-            <p className="text-muted-foreground text-sm">Co-Working Space</p>
-          </div>
-          <div className="md:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-8">
-            <div>
-              <h3 className="font-headline font-semibold text-foreground mb-4">Navigate</h3>
-              <ul className="space-y-2">
-                {navLinks.map(link => (
-                  <li key={link.href}>
-                    <a href={link.href} onClick={(e) => handleScroll(e, link.href)} className="text-muted-foreground hover:text-primary transition-colors text-sm cursor-pointer">
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+    <footer className="bg-foreground text-background">
+      <div className="container mx-auto px-4 py-24 md:py-32">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="lg:col-span-5">
+                <h2 className="font-headline text-5xl md:text-6xl font-bold tracking-tighter">Make <br/> Movement.</h2>
             </div>
-            <div>
-              <h3 className="font-headline font-semibold text-foreground mb-4">Contact</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>hello@pmcoffee.com</li>
-                <li>+62 123 4567 890</li>
-                <li>Jl. Produktif No. 123, Jakarta</li>
-              </ul>
+            <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-4 gap-8">
+                 <div>
+                    <h3 className="font-semibold text-muted-foreground mb-4">Navigate</h3>
+                    <ul className="space-y-2">
+                        {navLinks.map(link => (
+                        <li key={link.href}>
+                            <a href={link.href} onClick={(e) => handleScroll(e, link.href)} className="text-background hover:text-background/70 transition-colors cursor-pointer">
+                            {link.label}
+                            </a>
+                        </li>
+                        ))}
+                    </ul>
+                </div>
+                 <div>
+                    <h3 className="font-semibold text-muted-foreground mb-4">Company</h3>
+                    <ul className="space-y-2">
+                        <li><Link href="/discover" className="text-background hover:text-background/70">Our Story</Link></li>
+                        <li><a href="#booking" onClick={(e) => handleScroll(e, '#booking')} className="text-background hover:text-background/70">Contact</a></li>
+                        <li><Link href="#" className="text-background hover:text-background/70">Careers</Link></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 className="font-semibold text-muted-foreground mb-4">Legal</h3>
+                    <ul className="space-y-2">
+                        <li><Link href="#" className="text-background hover:text-background/70">Privacy</Link></li>
+                        <li><Link href="#" className="text-background hover:text-background/70">Terms</Link></li>
+                    </ul>
+                </div>
+                <div>
+                   <h3 className="font-semibold text-muted-foreground mb-4">Connect</h3>
+                    <div className="flex space-x-4">
+                        {socialLinks.map(social => (
+                        <a key={social.label} href={social.href} aria-label={social.label} className="text-background hover:text-background/70 transition-colors">
+                            {social.icon}
+                        </a>
+                        ))}
+                    </div>
+                </div>
             </div>
-            <div>
-               <h3 className="font-headline font-semibold text-foreground mb-4">Connect</h3>
-               <div className="flex space-x-4">
-                 {socialLinks.map(social => (
-                   <Button key={social.label} asChild variant="ghost" size="icon" className="text-muted-foreground hover:text-primary hover:bg-primary/10">
-                     <a href={social.href} aria-label={social.label}>{social.icon}</a>
-                   </Button>
-                 ))}
-              </div>
-            </div>
-          </div>
         </div>
-        <div className="mt-12 pt-8 border-t border-border/40 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} PM Coffee. All Rights Reserved.</p>
+        <div className="mt-24 pt-8 border-t border-border/20 text-sm flex justify-between items-center text-muted-foreground">
+          <div className="flex items-center gap-2">
+            <Logo className="h-5 w-5"/>
+            <span>PM COFFEE</span>
+          </div>
+          <p>&copy; {new Date().getFullYear()} All Rights Reserved.</p>
         </div>
       </div>
     </footer>

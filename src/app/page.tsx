@@ -1,672 +1,289 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { placeHolderImages } from '@/lib/placeholder-images';
-import { ArrowRight, Utensils, Wifi, Users, Star, Clock, Mail, MapPin, Phone, Twitter, Instagram, Facebook, CalendarIcon, CheckCircle, Coffee, Leaf, Zap, Award, Presentation, CakeSlice } from 'lucide-react';
+import { ArrowRight, Wifi, Users, Coffee, MapPin, Phone, Mail } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Badge } from "@/components/ui/badge";
-import { Carousel, CarouselContent, CarouselItem, CarouselApi } from "@/components/ui/carousel";
-import { Progress } from "@/components/ui/progress";
-
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Calendar } from '@/components/ui/calendar';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { cn } from '@/lib/utils';
-import { format } from 'date-fns';
-import { useState, useEffect, useCallback } from 'react';
-import { useToast } from '@/hooks/use-toast';
-
 
 const highlights = [
   {
     icon: <Wifi className="h-8 w-8 text-primary" />,
-    title: 'Blazing-Fast Wi-Fi',
-    description: 'Stay connected with our high-speed fiber internet, perfect for video calls and heavy workloads.',
+    title: 'High-Speed Wi-Fi',
+    description: 'Seamless connectivity to keep your workflow uninterrupted.',
   },
   {
     icon: <Coffee className="h-8 w-8 text-primary" />,
-    title: 'Comfortable Seating',
-    description: 'Choose from a variety of seating options designed for comfort and productivity during long work sessions.',
+    title: 'Artisanal Coffee',
+    description: 'Expertly brewed coffee to fuel your inspiration and focus.',
   },
   {
     icon: <Users className="h-8 w-8 text-primary" />,
-    title: 'Community & Events',
-    description: 'Join our vibrant community with regular workshops, networking events, and social gatherings.',
+    title: 'Community',
+    description: 'A network of innovators and creators, just like you.',
   },
-];
-
-const aboutFeatures = [
-    { text: 'Ethically-sourced local coffee', icon: <Leaf className="h-5 w-5 text-primary" /> },
-    { text: 'High-speed fiber internet', icon: <Zap className="h-5 w-5 text-primary" /> },
-    { text: 'Quiet zones & collaborative areas', icon: <Users className="h-5 w-5 text-primary" /> },
-    { text: 'Regular community events', icon: <Award className="h-5 w-5 text-primary" /> },
-    { text: 'Private meeting rooms available', icon: <Presentation className="h-5 w-5 text-primary" /> },
-    { text: 'Artisan pastries and light bites', icon: <CakeSlice className="h-5 w-5 text-primary" /> },
 ];
 
 const menuItems = [
     {
-        id: "menu1",
-        category: "Coffee",
-        name: "Signature Latte",
-        description: "A perfect blend of rich espresso and steamed milk, topped with delicate latte art.",
-        price: "Rp 35.000",
-        tags: ['coffee'],
-    },
-    {
-        id: "menu2",
-        category: "Pastry",
-        name: "Butter Croissant",
-        description: "Flaky, buttery, and freshly baked throughout the day. An ideal companion for your coffee.",
-        price: "Rp 25.000",
-        tags: ['snack & dessert'],
-    },
-    {
-        id: "menu3",
-        category: "Main Course",
-        name: "Chicken Katsu Curry",
-        description: "Crispy chicken katsu served with a savory Japanese curry sauce and warm rice.",
-        price: "Rp 65.000",
-        tags: ['eatery'],
-    },
-    {
-        id: "menu4",
-        category: "Package",
-        name: "Workspace Package",
-        description: "Includes one coffee of your choice, a pastry, and a guaranteed seat with power access for 4 hours.",
-        price: "Rp 100.000",
-        isSpecial: true,
-        tags: ['coffee', 'snack & dessert'],
-    },
-     {
         id: "menu-americano",
-        imageUrl: "https://picsum.photos/seed/americano/600/400",
-        imageHint: "black coffee",
-        category: "Coffee",
         name: "Americano",
-        description: "Rich espresso shots diluted with hot water, giving it a similar strength to, but different flavor from, traditionally brewed coffee.",
         price: "Rp 30.000",
-        tags: ['coffee'],
+    },
+    {
+        id: "menu-latte",
+        name: "Latte",
+        price: "Rp 35.000",
+    },
+    {
+        id: "menu-croissant",
+        name: "Croissant",
+        price: "Rp 25.000",
     },
     {
         id: "menu-avotoast",
-        imageUrl: "https://picsum.photos/seed/avotoast/600/400",
-        imageHint: "avocado toast",
-        category: "Light Bites",
         name: "Avocado Toast",
-        description: "Smashed avocado on sourdough toast, topped with chili flakes and a sprinkle of sea salt.",
         price: "Rp 55.000",
-        tags: ['eatery'],
     },
-    {
-        id: "menu-matcha",
-        imageUrl: "https://picsum.photos/seed/matcha/600/400",
-        imageHint: "matcha latte",
-        category: "Non-Coffee",
-        name: "Matcha Latte",
-        description: "A smooth and creamy matcha latte, made with premium Japanese green tea.",
-        price: "Rp 40.000",
-        tags: ['non-coffee'],
-    },
-    {
-        id: "menu-brownie",
-        imageUrl: "https://picsum.photos/seed/brownie/600/400",
-        imageHint: "chocolate brownie",
-        category: "Dessert",
-        name: "Fudgy Chocolate Brownie",
-        description: "A rich and decadent chocolate brownie, served warm with a scoop of vanilla ice cream.",
-        price: "Rp 45.000",
-        tags: ['snack & dessert'],
-    },
-    {
-        id: "menu-cappuccino",
-        imageUrl: "https://picsum.photos/seed/cappuccino/600/400",
-        imageHint: "cappuccino cup",
-        category: "Coffee",
-        name: "Cappuccino",
-        description: "An espresso-based coffee drink that originated in Italy, and is traditionally prepared with steamed milk foam.",
-        price: "Rp 35.000",
-        tags: ['coffee'],
-    },
-    {
-        id: "menu-spaghetti",
-        imageUrl: "https://picsum.photos/seed/spaghetti/600/400",
-        imageHint: "spaghetti bolognese",
-        category: "Main Course",
-        name: "Spaghetti Bolognese",
-        description: "A classic Italian dish with a rich meat sauce, served over a bed of perfectly cooked spaghetti.",
-        price: "Rp 75.000",
-        tags: ['eatery'],
-    },
-    {
-        id: "menu-iced-tea",
-        imageUrl: "https://picsum.photos/seed/icedtea/600/400",
-        imageHint: "iced lemon tea",
-        category: "Non-Coffee",
-        name: "Iced Lemon Tea",
-        description: "A refreshing blend of black tea and lemon, served over ice. The perfect thirst-quencher.",
-        price: "Rp 25.000",
-        tags: ['non-coffee'],
-    },
-    {
-        id: "menu-cheesecake",
-        imageUrl: "https://picsum.photos/seed/cheesecake/600/400",
-        imageHint: "strawberry cheesecake",
-        category: "Dessert",
-        name: "Basque Burnt Cheesecake",
-        description: "A crustless cheesecake with a rich, creamy center and a beautifully caramelized top.",
-        price: "Rp 50.000",
-        tags: ['snack & dessert'],
-        isSpecial: true,
-    }
 ];
-
-const galleryImageIds = [
-  'gallery1', 'gallery2', 'gallery3', 'gallery4', 
-];
-
-const contactDetails = [
-  { icon: <MapPin className="h-5 w-5 text-primary" />, text: "Jl. Produktif No. 123, Jakarta, Indonesia" },
-  { icon: <Phone className="h-5 w-5 text-primary" />, text: "+62 123 4567 890 (WhatsApp available)" },
-  { icon: <Mail className="h-5 w-5 text-primary" />, text: "hello@pmcoffee.com" },
-];
-
-const openingHours = [
-  { day: "Monday - Friday", hours: "08:00 AM - 10:00 PM" },
-  { day: "Saturday", hours: "09:00 AM - 11:00 PM" },
-  { day: "Sunday", hours: "09:00 PM - 09:00 PM" },
-];
-
-const socialLinks = [
-  { href: '#', icon: <Twitter className="h-5 w-5" />, label: 'Twitter' },
-  { href: '#', icon: <Instagram className="h-5 w-5" />, label: 'Instagram' },
-  { href: '#', icon: <Facebook className="h-5 w-5" />, label: 'Facebook' },
-];
-
-const seatBookingSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters.'),
-  email: z.string().email('Invalid email address.'),
-  date: z.date({ required_error: 'A date is required.' }),
-  time: z.string({ required_error: 'A time slot is required.' }),
-  guests: z.coerce.number().min(1, 'At least 1 guest is required.'),
-});
-
-const roomBookingSchema = seatBookingSchema.extend({
-    notes: z.string().optional(),
-});
-
-type SeatBookingFormValues = z.infer<typeof seatBookingSchema>;
-type RoomBookingFormValues = z.infer<typeof roomBookingSchema>;
-
-function BookingForm({ schema, isRoomBooking = false }: { schema: typeof seatBookingSchema | typeof roomBookingSchema, isRoomBooking?: boolean }) {
-  const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  
-  const form = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      guests: 1,
-    },
-  });
-
-  async function onSubmit(data: z.infer<typeof schema>) {
-    setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
-    toast({
-      title: "Booking Confirmed!",
-      description: `Thank you, ${data.name}. Your booking for ${data.guests} on ${format(data.date, "PPP")} at ${data.time} is confirmed.`,
-    });
-    form.reset();
-    setIsSubmitting(false);
-  }
-
-  return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid sm:grid-cols-2 gap-6">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Full Name</FormLabel>
-                <FormControl>
-                  <Input placeholder="John Doe" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email Address</FormLabel>
-                <FormControl>
-                  <Input placeholder="you@example.com" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <div className="grid sm:grid-cols-3 gap-6">
-          <FormField
-            control={form.control}
-            name="date"
-            render={({ field }) => (
-              <FormItem className="flex flex-col justify-end">
-                <FormLabel>Date</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant={"outline"}
-                        className={cn("w-full justify-start pl-3 text-left font-normal", !field.value && "text-muted-foreground")}
-                      >
-                        {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) => date < new Date(new Date().setHours(0,0,0,0))}
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="time"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Time Slot</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a time" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {Array.from({ length: 14 }, (_, i) => `${i + 8}:00`.padStart(5, '0')).map(time => (
-                      <SelectItem key={time} value={time}>{time}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="guests"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Number of People</FormLabel>
-                <FormControl>
-                  <Input type="number" min="1" max={isRoomBooking ? "10" : "4"} {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        {isRoomBooking && (
-          <FormField
-            control={form.control}
-            name="notes"
-            render={({ field }) => (
-                <FormItem>
-                    <FormLabel>Special Notes</FormLabel>
-                    <FormControl>
-                        <Input placeholder="e.g., Projector needed" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                </FormItem>
-            )}
-          />
-        )}
-        <Button type="submit" className="w-full sm:w-auto" disabled={isSubmitting}>
-          {isSubmitting ? 'Booking...' : 'Confirm Booking'}
-        </Button>
-      </form>
-    </Form>
-  );
-}
 
 export default function Home() {
   const heroImage = placeHolderImages.find((img) => img.id === 'hero');
-  const galleryImages = galleryImageIds.map(id => placeHolderImages.find(img => img.id === id)).filter(Boolean);
-  const aboutImage = placeHolderImages.find((img) => img.id === 'gallery2');
-  const aboutImage2 = placeHolderImages.find((img) => img.id === 'gallery3');
-
-  const [api, setApi] = useState<CarouselApi>();
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    if (!api) return;
-    
-    const updateProgress = () => {
-        const scrollProgress = api.scrollProgress() * 100;
-        setProgress(scrollProgress);
-    };
-
-    api.on("scroll", updateProgress);
-    updateProgress();
-
-    return () => {
-      api.off("scroll", updateProgress);
-    };
-
-  }, [api]);
-  
-  const scrollPrev = useCallback(() => api?.scrollPrev(), [api]);
-  const scrollNext = useCallback(() => api?.scrollNext(), [api]);
-
-
-  const [activeTag, setActiveTag] = useState('recommend');
-  const menuTags = ['recommend', 'coffee', 'non-coffee', 'eatery', 'snack & dessert'];
-  const filteredMenuItems = menuItems.filter(item => {
-    if (activeTag === 'recommend') return item.isSpecial;
-    if (activeTag === 'all') return true;
-    return item.tags.includes(activeTag);
-  });
-
+  const aboutImage1 = placeHolderImages.find((img) => img.id === 'about1');
+  const aboutImage2 = placeHolderImages.find((img) => img.id === 'about2');
+  const aboutImage3 = placeHolderImages.find((img) => img.id === 'about3');
+  const ctaImage = placeHolderImages.find((img) => img.id === 'cta');
+  const productImages = placeHolderImages.filter(img => img.id.startsWith('product'));
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col text-foreground">
       {/* Hero Section */}
-      <section id="home" className="relative h-[70vh] md:h-[90vh] w-full">
-        {heroImage && (
-          <Image
-            src={heroImage.imageUrl}
-            alt={heroImage.description}
-            fill
-            className="object-cover"
-            priority
-            data-ai-hint={heroImage.imageHint}
-          />
-        )}
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-foreground p-4">
-          <div className="flex flex-col items-center">
-            <h1 className="font-headline text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter">
-              Experience the Perfect Brew
+      <section id="home" className="relative h-[80vh] md:h-screen w-full bg-background">
+        <div className="container mx-auto h-full px-4 flex flex-col justify-end pb-24 md:pb-32">
+          <div className="max-w-xl">
+             <h1 className="font-headline text-5xl md:text-8xl font-bold tracking-tighter">
+                Space for Ideas.
             </h1>
-            <p className="mt-4 max-w-2xl text-lg md:text-xl text-foreground/80">
-              Crafting flavors, handcrafted coffee. Delivered to you. Indulge in the richest coffee experience that transcends your taste.
+            <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-md">
+                A thoughtfully designed co-working space where productivity and comfort converge. Find your focus, fuel your creativity.
             </p>
-            <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <Button asChild size="lg">
-                <Link href="#booking">Book a Seat</Link>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <Link href="#menu">View Menu</Link>
-              </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section 1 */}
+      <section id="about" className="py-24 md:py-32 bg-background">
+        <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
+                <div className="md:order-2">
+                    <p className="text-primary font-semibold mb-2">Workspace Redefined</p>
+                    <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tight mb-6">
+                        Designed for Flow, Built for Community.
+                    </h2>
+                    <p className="text-muted-foreground leading-relaxed mb-6">
+                       PM Coffee is more than just a place to work. It’s an environment crafted to eliminate distractions and foster connection. Every detail, from the acoustics to the aroma of freshly brewed coffee, is considered to help you achieve your best work.
+                    </p>
+                    <Button asChild variant="link" className="p-0 text-base">
+                        <Link href="/discover">
+                            Explore Our Space <ArrowRight className="ml-2 h-4 w-4" />
+                        </Link>
+                    </Button>
+                </div>
+                {aboutImage1 && (
+                     <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-lg md:order-1">
+                        <Image
+                            src={aboutImage1.imageUrl}
+                            alt={aboutImage1.description}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            data-ai-hint={aboutImage1.imageHint}
+                        />
+                    </div>
+                )}
             </div>
+        </div>
+      </section>
+      
+      {/* Product Showcase */}
+       <section id="products" className="py-24 md:py-32 bg-secondary">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-end mb-12">
+            <div>
+              <p className="text-primary font-semibold mb-2">Our Menu</p>
+              <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tight">
+                Fuel Your Day
+              </h2>
+            </div>
+            <Button asChild variant="link" className="p-0 text-base hidden sm:flex">
+              <Link href="/discover#menu">
+                View Full Menu <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {productImages.map(image => (
+              <Link href="/discover#menu" key={image.id}>
+                <div className="group">
+                    <div className="relative aspect-square rounded-lg overflow-hidden bg-background mb-4">
+                        <Image
+                            src={image.imageUrl}
+                            alt={image.description}
+                            fill
+                            className="object-contain p-4 md:p-8 transition-transform duration-300 group-hover:scale-105"
+                            sizes="(max-width: 768px) 50vw, 25vw"
+                            data-ai-hint={image.imageHint}
+                        />
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <h3 className="font-semibold">{image.description}</h3>
+                      <p className="text-sm text-muted-foreground">{menuItems.find(m => m.id === image.id)?.price}</p>
+                    </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div className="text-center mt-12 sm:hidden">
+            <Button asChild variant="link" className="p-0 text-base">
+              <Link href="/discover#menu">
+                View Full Menu <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
 
       {/* Highlights Section */}
-      <section id="highlights" className="py-16 md:py-24 bg-background">
+      <section id="highlights" className="bg-foreground text-background py-24 md:py-40">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12 md:mb-16">
-            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Why Choose Us</p>
-            <h2 className="font-headline text-3xl md:text-4xl font-bold">Crafted with Care and Passion</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-            {highlights.map((item) => (
-              <div key={item.title} className="flex flex-col items-center text-center p-6 rounded-lg transition-all duration-300 hover:bg-secondary/50">
-                <div className="bg-primary/10 p-4 rounded-full mb-6">
-                  {item.icon}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
+                 {aboutImage2 && (
+                     <div className="relative aspect-square md:aspect-[4/3] rounded-lg overflow-hidden">
+                        <Image
+                            src={aboutImage2.imageUrl}
+                            alt={aboutImage2.description}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            data-ai-hint={aboutImage2.imageHint}
+                        />
+                    </div>
+                )}
+                <div className="grid grid-cols-2 gap-x-8 gap-y-10">
+                    <div className="col-span-2">
+                        <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tight">The Essentials, Perfected.</h2>
+                    </div>
+                    {highlights.map((item) => (
+                      <div key={item.title}>
+                        {item.icon}
+                        <h3 className="font-semibold text-lg mt-4 mb-2">{item.title}</h3>
+                        <p className="text-muted-foreground text-sm">{item.description}</p>
+                      </div>
+                    ))}
                 </div>
-                <h3 className="font-headline text-xl font-semibold mb-3">{item.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{item.description}</p>
-              </div>
-            ))}
-          </div>
+            </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="bg-secondary py-24 sm:py-32">
+
+      {/* About Section 2 */}
+      <section className="py-24 md:py-32 bg-background">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
-            <div className="lg:col-span-2">
-              <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-4">About Us</p>
-              <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">
-                Productivity Made Effortless. No More Distractions.
-              </h2>
-              <p className="mt-6 text-lg text-muted-foreground">
-                  Inspired by the need for a focused environment, PM Coffee provides the perfect space to be productive, whether it's for your startup or your freelance work.
-              </p>
-              <Button asChild variant="link" className="p-0 mt-6 text-base text-primary hover:text-primary/80">
-                <Link href="/discover">
-                  Discover More <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-            <div className="lg:col-span-3 lg:col-start-3">
-              <p className="text-muted-foreground mb-8">At PM Coffee, we believe that great ideas shouldn't be confined to a traditional office. We were born from the local startup scene to foster innovation and community.</p>
-                {aboutImage && (
-                    <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
+                <div>
+                    <p className="text-primary font-semibold mb-2">A Space That Adapts to You</p>
+                    <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tight mb-6">
+                        From Solo Focus to Team Synergy.
+                    </h2>
+                    <p className="text-muted-foreground leading-relaxed mb-6">
+                       Our versatile layout includes quiet zones for deep work, collaborative tables for team projects, and private rooms for important meetings. Whatever your workday demands, you'll find the perfect spot at PM Coffee.
+                    </p>
+                    <Button asChild variant="link" className="p-0 text-base">
+                        <Link href="#booking">
+                            Book Your Spot <ArrowRight className="ml-2 h-4 w-4" />
+                        </Link>
+                    </Button>
+                </div>
+                {aboutImage3 && (
+                     <div className="relative aspect-square md:aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
                         <Image
-                            src={aboutImage.imageUrl}
-                            alt={aboutImage.description}
+                            src={aboutImage3.imageUrl}
+                            alt={aboutImage3.description}
                             fill
                             className="object-cover"
-                            sizes="(max-width: 1024px) 100vw, 50vw"
-                            data-ai-hint={aboutImage.imageHint}
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            data-ai-hint={aboutImage3.imageHint}
                         />
                     </div>
                 )}
             </div>
-          </div>
         </div>
       </section>
 
-       {/* Testimonial */}
-       <section className="py-16 md:py-24 bg-background">
-        <div className="container mx-auto px-4 text-center max-w-3xl">
-           <div className="flex justify-center gap-1 mb-4">
-              {[...Array(5)].map((_,i) => <Star key={i} className="w-5 h-5 text-primary fill-primary" />)}
-           </div>
-          <blockquote className="text-xl md:text-2xl font-light italic text-foreground">
-             "This coffee shop has transformed my mornings! The atmosphere is inviting, and the brews are simply exceptional."
-          </blockquote>
-          <div className="mt-6 flex items-center justify-center gap-4">
-            <Image src="https://picsum.photos/seed/avatar1/40/40" alt="Tessa Palmer" width={40} height={40} className="rounded-full" data-ai-hint="woman portrait" />
-            <div>
-              <p className="font-semibold text-foreground">Tessa Palmer</p>
-              <p className="text-sm text-muted-foreground">Freelance Writer</p>
+      {/* CTA Section */}
+      <section className="bg-secondary py-24 md:py-32">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {ctaImage && (
+                <div className="relative h-80 md:h-[600px] w-full rounded-lg overflow-hidden">
+                <Image
+                    src={ctaImage.imageUrl}
+                    alt={ctaImage.description}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    data-ai-hint={ctaImage.imageHint}
+                />
+                </div>
+            )}
+            <div className="max-w-md mx-auto text-center md:text-left">
+                <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight">Carry Your Focus</h2>
+                <p className="mt-6 text-lg text-muted-foreground">Join our community and receive a complimentary PM Coffee tumbler to keep your brew perfect, wherever your day takes you.</p>
+                <p className="mt-4 text-sm text-muted-foreground">Limited to the first 100 members.</p>
+                <Button asChild size="lg" className="mt-8">
+                    <Link href="#booking">Become a Member</Link>
+                </Button>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Menu Section */}
-      <section id="menu" className="bg-secondary py-16 md:py-24">
-        <div className="container mx-auto px-4">
-            <header className="text-center mb-12 md:mb-16">
-                <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Our Menu</h2>
+      
+      {/* Booking / Contact Form */}
+      <section id="booking" className="py-24 md:py-32 bg-background">
+          <div className="container mx-auto px-4 max-w-4xl">
+              <header className="text-center mb-12 md:mb-16">
+                <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Join the Movement</h2>
                 <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-                    Crafted with care, from our coffee to our kitchen.
+                    Reserve your place in a community driven by passion and purpose.
                 </p>
-            </header>
-            
-            <div className="flex justify-center flex-wrap gap-2 mb-12">
-                {menuTags.map(tag => (
-                    <Button
-                        key={tag}
-                        variant={activeTag === tag ? 'default' : 'outline'}
-                        onClick={() => setActiveTag(tag)}
-                        className="capitalize transition-all duration-300 rounded-full px-5"
-                    >
-                        {tag}
-                    </Button>
-                ))}
-            </div>
+              </header>
 
-            <div className="max-w-4xl mx-auto">
-                <ul className="space-y-4">
-                {filteredMenuItems.map(item => {
-                    return (
-                        <li key={item.id} className="bg-background/50 p-4 rounded-lg shadow-sm flex flex-col sm:flex-row items-center gap-4 transition-all hover:shadow-md hover:bg-background">
-                            {item.imageUrl && (
-                                <div className="relative h-24 w-full sm:w-24 flex-shrink-0">
-                                    <Image
-                                        src={item.imageUrl}
-                                        alt={item.name}
-                                        fill
-                                        className="object-cover rounded-md"
-                                        sizes="(max-width: 640px) 100vw, 96px"
-                                        data-ai-hint={item.imageHint}
-                                    />
-                                </div>
-                            )}
-                            <div className="flex-grow text-center sm:text-left">
-                                <div className="flex justify-between items-center">
-                                    <h3 className="font-headline text-lg font-semibold">{item.name}</h3>
-                                    {item.isSpecial && <Badge>Special</Badge>}
-                                </div>
-                                <p className="text-muted-foreground text-sm mt-1">{item.description}</p>
+              <Card className="border-border/50 bg-secondary/30">
+                <CardContent className="p-6 md:p-10">
+                    <div className="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 className="font-headline text-2xl font-semibold mb-4">Book a Tour</h3>
+                             <p className="text-muted-foreground mb-6">Experience the space firsthand. We'll show you around and treat you to a coffee on the house.</p>
+                            <form className="space-y-4">
+                                <input type="email" placeholder="Enter your email" className="w-full bg-background border-border/50 rounded-md p-3 text-sm" />
+                                <Button type="submit" className="w-full">Request a Tour</Button>
+                            </form>
+                        </div>
+                        <div className="border-t md:border-t-0 md:border-l border-border/50 pt-8 md:pt-0 md:pl-8">
+                             <h3 className="font-headline text-2xl font-semibold mb-4">Contact Us</h3>
+                             <div className="space-y-3 text-muted-foreground">
+                                <p className="flex items-center gap-3"><Mail className="h-4 w-4 text-primary" /> hello@pmcoffee.com</p>
+                                <p className="flex items-center gap-3"><Phone className="h-4 w-4 text-primary" /> +62 123 4567 890</p>
+                                <p className="flex items-center gap-3"><MapPin className="h-4 w-4 text-primary" /> Jl. Produktif No. 123, Jakarta</p>
                             </div>
-                            <p className="font-semibold text-lg text-primary flex-shrink-0 sm:ml-4">{item.price}</p>
-                        </li>
-                    );
-                })}
-                </ul>
-            </div>
-        </div>
-      </section>
-
-      {/* Booking Section */}
-      <section id="booking" className="bg-background py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <header className="text-center mb-12 md:mb-16">
-            <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Book Your Space</h2>
-            <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-              Reserve your spot to work, meet, or collaborate.
-            </p>
-          </header>
-
-          <Tabs defaultValue="seat" className="w-full">
-            <TabsList className="grid w-full max-w-md mx-auto grid-cols-2">
-              <TabsTrigger value="seat">Book a Seat</TabsTrigger>
-              <TabsTrigger value="room">Reserve a Private Room</TabsTrigger>
-            </TabsList>
-            <TabsContent value="seat">
-              <Card className="max-w-4xl mx-auto mt-8 shadow-lg border-border/50 bg-secondary/50">
-                <CardHeader>
-                  <CardTitle className="font-headline">Co-working Seat Reservation</CardTitle>
-                  <CardDescription>Book a comfortable seat in our general co-working area. Perfect for individuals or small groups.</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <BookingForm schema={seatBookingSchema} />
+                        </div>
+                    </div>
                 </CardContent>
               </Card>
-            </TabsContent>
-            <TabsContent value="room">
-               <Card className="max-w-4xl mx-auto mt-8 shadow-lg border-border/50 bg-secondary/50">
-                  <CardHeader>
-                      <CardTitle className="font-headline">Private Meeting Room</CardTitle>
-                      <CardDescription>Ideal for team meetings, presentations, or private calls. Amenities include high-speed Wi-Fi, a whiteboard, and a projector upon request.</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                      <BookingForm schema={roomBookingSchema} isRoomBooking={true} />
-                  </CardContent>
-               </Card>
-            </TabsContent>
-          </Tabs>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="bg-background py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <header className="text-center mb-12 md-mb-16">
-            <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Get In Touch</h2>
-            <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-              We're here to help. Whether you have a question about booking, our menu, or just want to say hello.
-            </p>
-          </header>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-            <Card className="shadow-lg bg-secondary/50 border-border/50">
-              <CardHeader>
-                <CardTitle className="font-headline text-2xl">Contact Information</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="space-y-4">
-                  {contactDetails.map((detail, index) => (
-                    <div key={index} className="flex items-start gap-4">
-                      {detail.icon}
-                      <span className="text-foreground">{detail.text}</span>
-                    </div>
-                  ))}
-                </div>
-                
-                <div className="border-t pt-6 border-border/50">
-                   <h3 className="font-headline flex items-center gap-2 mb-4 text-lg font-semibold">
-                      <Clock className="h-5 w-5 text-primary"/>
-                      Opening Hours
-                  </h3>
-                   <div className="space-y-2">
-                      {openingHours.map(item => (
-                          <div key={item.day} className="flex justify-between text-sm">
-                              <span className="text-muted-foreground">{item.day}</span>
-                              <span className="font-medium text-foreground">{item.hours}</span>
-                          </div>
-                      ))}
-                   </div>
-                </div>
-
-                <div className="border-t pt-6 border-border/50">
-                  <h3 className="font-headline font-semibold text-lg mb-4">Follow Us</h3>
-                  <div className="flex space-x-2">
-                   {socialLinks.map(social => (
-                     <Button key={social.label} asChild variant="outline" size="icon" className="text-muted-foreground hover:text-primary hover:bg-primary/10">
-                       <a href={social.href} aria-label={social.label}>{social.icon}</a>
-                     </Button>
-                   ))}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <div className="h-80 md:h-[500px] lg:h-full w-full rounded-lg overflow-hidden shadow-lg">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260322333!2d106.81961131476885!3d-6.194741395514655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f427f7a763d7%3A0x2c6f6f9e31464f1d!2sNational%20Monument!5e0!3m2!1sen!2sid!4v1622533276527!5m2!1sen!2sid"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen={true}
-                loading="lazy"
-                title="PM Coffee Location"
-                className="grayscale-[30%]"
-              ></iframe>
-            </div>
           </div>
-        </div>
       </section>
-
     </div>
   );
+}

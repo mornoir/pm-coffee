@@ -8,15 +8,16 @@ import { Toaster } from "@/components/ui/toaster"
 
 const fontBody = Lato({
   subsets: ['latin'],
-  weight: ['400', '700'],
   variable: '--font-body',
+  weight: ['400', '700'],
 });
 
 const fontHeadline = DM_Serif_Display({
   subsets: ['latin'],
-  weight: ['400'],
   variable: '--font-headline',
+  weight: '400',
 });
+
 
 export const metadata: Metadata = {
   title: 'PM Coffee',

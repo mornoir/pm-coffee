@@ -3,16 +3,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
+import { menuItems as fullMenu } from '@/app/page';
 
 export default function DiscoverPage() {
-  const galleryImages = placeHolderImages.filter(img => img.id.startsWith('gallery') || img.id.startsWith('social'));
+  const galleryImages = placeHolderImages.filter(img => img.id.startsWith('gallery'));
 
   return (
     <div className="bg-background text-foreground">
-      <div className="container mx-auto px-4 py-16 md:py-24">
+      <div className="container mx-auto px-4 py-24 md:py-32">
         <div className="mb-12">
-            <Button asChild variant="outline">
-                <Link href="/#about">
+            <Button asChild variant="link" className="p-0">
+                <Link href="/">
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     Back to Home
                 </Link>
@@ -25,10 +26,10 @@ export default function DiscoverPage() {
           </p>
         </header>
         
-        <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+        <div className="columns-2 md:columns-3 gap-4 space-y-4">
             {galleryImages.map((image) => (
               image && (
-                <div key={image.id} className="overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out">
+                <div key={image.id} className="overflow-hidden rounded-lg shadow-lg">
                   <Image
                     src={image.imageUrl}
                     alt={image.description}
@@ -40,7 +41,28 @@ export default function DiscoverPage() {
                 </div>
               )
             ))}
-          </div>
+        </div>
+
+        <section id="menu" className="mt-24 md:mt-32">
+           <header className="text-center mb-12 md:mb-16">
+                <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Full Menu</h2>
+                <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+                    Crafted with care, from our coffee to our kitchen.
+                </p>
+            </header>
+             <div className="max-w-2xl mx-auto">
+                <ul className="space-y-2">
+                {fullMenu.map(item => {
+                    return (
+                        <li key={item.id} className="border-b border-border/50 py-3 flex justify-between items-baseline">
+                            <span className="font-semibold">{item.name}</span>
+                            <span className="text-muted-foreground">{item.price}</span>
+                        </li>
+                    );
+                })}
+                </ul>
+            </div>
+        </section>
 
       </div>
     </div>
