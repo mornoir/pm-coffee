@@ -39,7 +39,7 @@ export default function MenuPage() {
             </p>
           </header>
           
-          <div className="max-w-2xl mx-auto mb-12">
+          <div className="flex justify-center mb-12">
             <div className="border border-border/50 rounded-lg p-4 flex justify-center gap-2">
                 {allTags.map(tag => (
                 <Button
