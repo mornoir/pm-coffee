@@ -23,13 +23,16 @@ export default function MenuPage() {
               Crafted with care, from our coffee to our kitchen.
             </p>
           </header>
-          <div className="max-w-2xl mx-auto">
-            <ul className="space-y-2">
+          <div className="max-w-3xl mx-auto">
+            <ul className="space-y-6">
               {menuItems.map(item => {
                 return (
-                  <li key={item.id} className="border-b border-border/50 py-3 flex justify-between items-baseline">
-                    <span className="font-semibold">{item.name}</span>
-                    <span className="text-muted-foreground">{item.price}</span>
+                  <li key={item.id} className="border-b border-border/50 pb-4">
+                    <div className="flex justify-between items-baseline">
+                      <h3 className="font-semibold text-xl">{item.name}</h3>
+                      <p className="text-muted-foreground font-medium">{item.price}</p>
+                    </div>
+                    <p className="text-muted-foreground mt-1 pr-12">{item.description}</p>
                   </li>
                 );
               })}
