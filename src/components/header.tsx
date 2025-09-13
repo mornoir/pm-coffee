@@ -8,6 +8,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Logo } from './logo';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
+import { ThemeToggle } from './theme-toggle';
 
 const navLinks = [
   { href: '#about', label: 'About' },
@@ -74,6 +75,7 @@ export function Header() {
           {navLinks.map((link) => (
             <NavLink key={link.href} {...link} />
           ))}
+          <ThemeToggle />
         </nav>
 
         {/* Mobile Navigation */}
@@ -108,6 +110,9 @@ export function Header() {
                     </Link>
                   ))}
                 </nav>
+                 <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+                    <ThemeToggle />
+                </div>
               </div>
           </SheetContent>
         </Sheet>
