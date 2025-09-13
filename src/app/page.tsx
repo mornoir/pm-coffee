@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { placeHolderImages } from '@/lib/placeholder-images';
-import { ArrowRight, Utensils, Wifi, Users, Star, Clock, Mail, MapPin, Phone, Twitter, Instagram, Facebook, CalendarIcon, CheckCircle, Coffee } from 'lucide-react';
+import { ArrowRight, Utensils, Wifi, Users, Star, Clock, Mail, MapPin, Phone, Twitter, Instagram, Facebook, CalendarIcon, CheckCircle, Coffee, Leaf, Zap, Award, Presentation, CakeSlice } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Badge } from "@/components/ui/badge";
@@ -44,13 +44,13 @@ const highlights = [
 ];
 
 const aboutFeatures = [
-    'Ethically-sourced local coffee',
-    'High-speed fiber internet',
-    'Quiet zones & collaborative areas',
-    'Regular community events',
-    'Private meeting rooms available',
-    'Artisan pastries and light bites',
-]
+    { text: 'Ethically-sourced local coffee', icon: <Leaf className="h-5 w-5 text-primary" /> },
+    { text: 'High-speed fiber internet', icon: <Zap className="h-5 w-5 text-primary" /> },
+    { text: 'Quiet zones & collaborative areas', icon: <Users className="h-5 w-5 text-primary" /> },
+    { text: 'Regular community events', icon: <Award className="h-5 w-5 text-primary" /> },
+    { text: 'Private meeting rooms available', icon: <Presentation className="h-5 w-5 text-primary" /> },
+    { text: 'Artisan pastries and light bites', icon: <CakeSlice className="h-5 w-5 text-primary" /> },
+];
 
 const menuItems = [
     {
@@ -480,9 +480,9 @@ export default function Home() {
                       </p>
                       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 mb-10">
                           {aboutFeatures.map(feature => (
-                              <li key={feature} className="flex items-center gap-3">
-                                  <CheckCircle className="h-5 w-5 text-primary" />
-                                  <span className="text-foreground/90">{feature}</span>
+                              <li key={feature.text} className="flex items-center gap-3">
+                                  {feature.icon}
+                                  <span className="text-foreground/90">{feature.text}</span>
                               </li>
                           ))}
                       </ul>
