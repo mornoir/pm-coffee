@@ -22,23 +22,23 @@ import { cn } from '@/lib/utils';
 const highlights = [
   {
     icon: <Wifi className="h-8 w-8 text-primary" />,
-    title: 'High-Speed Wi-Fi',
-    description: 'Seamless connectivity to keep your workflow uninterrupted.',
+    title: 'Fluid Connectivity',
+    description: 'Enjoy uninterrupted, high-speed Wi-Fi designed for a seamless workflow.',
   },
   {
     icon: <Coffee className="h-8 w-8 text-primary" />,
-    title: 'Artisanal Coffee',
-    description: 'Expertly brewed coffee to fuel your inspiration and focus.',
+    title: 'Gourmet Coffee',
+    description: 'Savor artisanal brews, expertly crafted to elevate your focus and delight your senses.',
   },
   {
     icon: <Users className="h-8 w-8 text-primary" />,
-    title: 'Community',
-    description: 'A network of innovators and creators, just like you.',
+    title: 'Vibrant Community',
+    description: 'Connect with a curated network of innovators, creators, and professionals.',
   },
   {
     icon: <Briefcase className="h-8 w-8 text-primary" />,
-    title: 'Private Rooms',
-    description: 'Bookable private rooms for meetings, calls, or focused work.',
+    title: 'Exclusive Spaces',
+    description: 'Reserve private, sound-proofed rooms for your most important meetings and calls.',
   }
 ];
 
@@ -207,8 +207,8 @@ export default function Home() {
                 )}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-12">
                     <FadeIn className="col-span-1 sm:col-span-2">
-                         <p className="text-primary font-semibold mb-4 text-sm tracking-widest uppercase">The Essentials</p>
-                        <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight">Everything You Need, Perfected.</h2>
+                         <p className="text-primary font-semibold mb-4 text-sm tracking-widest uppercase">WHY CHOOSE US</p>
+                        <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight">Elevate Your Workday</h2>
                     </FadeIn>
                     {highlights.map((item, index) => (
                       <FadeIn key={item.title} animationDelay={index * 0.1}>
