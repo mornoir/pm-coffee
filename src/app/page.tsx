@@ -192,33 +192,35 @@ export default function Home() {
       {/* Highlights Section */}
       <section id="highlights" className="bg-background text-foreground py-24 md:py-40">
         <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
-                 {aboutImage2 && (
-                     <FadeIn className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl">
-                        <Image
-                            src={aboutImage2.imageUrl}
-                            alt={aboutImage2.description}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                            data-ai-hint={aboutImage2.imageHint}
-                        />
-                    </FadeIn>
-                )}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-12">
-                    <FadeIn className="col-span-1 sm:col-span-2">
-                         <p className="text-primary font-semibold mb-4 text-sm tracking-widest uppercase">WHY CHOOSE US</p>
-                        <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight">Elevate Your Workday</h2>
-                    </FadeIn>
-                    {highlights.map((item, index) => (
-                      <FadeIn key={item.title} animationDelay={index * 0.1}>
-                        {item.icon}
-                        <h3 className="font-semibold text-xl mt-6 mb-3">{item.title}</h3>
-                        <p className="text-muted-foreground text-base">{item.description}</p>
-                      </FadeIn>
-                    ))}
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
+            {aboutImage2 && (
+              <FadeIn className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl">
+                <Image
+                    src={aboutImage2.imageUrl}
+                    alt={aboutImage2.description}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    data-ai-hint={aboutImage2.imageHint}
+                />
+              </FadeIn>
+            )}
+            <div>
+              <FadeIn>
+                <p className="text-primary font-semibold mb-4 text-sm tracking-widest uppercase">WHY CHOOSE US</p>
+                <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight mb-12">Elevate Your Workday</h2>
+              </FadeIn>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-12">
+                {highlights.map((item, index) => (
+                  <FadeIn key={item.title} animationDelay={index * 0.1}>
+                    {item.icon}
+                    <h3 className="font-semibold text-xl mt-6 mb-3">{item.title}</h3>
+                    <p className="text-muted-foreground text-base">{item.description}</p>
+                  </FadeIn>
+                ))}
+              </div>
             </div>
+          </div>
         </div>
       </section>
 
@@ -297,4 +299,5 @@ export default function Home() {
     </div>
   );
 
+    
     
