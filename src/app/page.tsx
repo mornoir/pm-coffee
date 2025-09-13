@@ -3,10 +3,12 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { placeHolderImages } from '@/lib/placeholder-images';
-import { ArrowRight, Utensils, Wifi, Users, Star, Clock, Mail, MapPin, Phone, Twitter, Instagram, Facebook, CalendarIcon } from 'lucide-react';
+import { ArrowRight, Utensils, Wifi, Users, Star, Clock, Mail, MapPin, Phone, Twitter, Instagram, Facebook, CalendarIcon, ChevronRight, ChevronLeft } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Badge } from "@/components/ui/badge";
+import { Carousel, CarouselContent, CarouselItem, CarouselApi } from "@/components/ui/carousel";
+import { Progress } from "@/components/ui/progress";
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -19,8 +21,7 @@ import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
-import { useState }
-from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
 
@@ -161,8 +162,7 @@ const menuItems = [
 
 const galleryImageIds = [
   'gallery1', 'gallery2', 'gallery3', 'gallery4', 
-  'gallery5', 'gallery6', 'gallery7', 'gallery8',
-  'social1', 'social2', 'social4', 'social6'
+  'gallery5', 'gallery6'
 ];
 
 const contactDetails = [
@@ -345,9 +345,24 @@ function BookingForm({ schema, isRoomBooking = false }: { schema: typeof seatBoo
 
 export default function Home() {
   const heroImage = placeHolderImages.find((img) => img.id === 'hero');
-  const aboutBaristaImage = placeHolderImages.find(img => img.id === 'gallery4');
-
   const galleryImages = galleryImageIds.map(id => placeHolderImages.find(img => img.id === id)).filter(Boolean);
+
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!api) return;
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
+  
+  const scrollPrev = useCallback(() => api?.scrollPrev(), [api]);
+  const scrollNext = useCallback(() => api?.scrollNext(), [api]);
+
 
   const [activeTag, setActiveTag] = useState('recommend');
   const menuTags = ['recommend', 'coffee', 'non-coffee', 'eatery', 'snack & dessert'];
@@ -414,35 +429,61 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Section */}
+      {/* About & Gallery Section */}
       <section id="about" className="bg-secondary py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-            <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
-               {aboutBaristaImage && (
-                  <Image
-                      src={aboutBaristaImage.imageUrl}
-                      alt={aboutBaristaImage.description}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      data-ai-hint={aboutBaristaImage.imageHint}
-                  />
-               )}
+            <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
+                <div className="flex flex-col justify-center">
+                    <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-4">Elegance at the Heart of Coffee</h2>
+                    <p className="text-muted-foreground text-lg mb-8">
+                       PM Coffee is more than just a coffee shop. It's a community hub born from a simple idea: to create a welcoming space where productivity and connection flow as freely as our ethically-sourced local coffee.
+                    </p>
+                    <div className="flex items-center gap-8">
+                        <Button asChild size="lg">
+                            <Link href="/discover">Discover More <ArrowRight className="ml-2 h-5 w-5"/></Link>
+                        </Button>
+                    </div>
+                </div>
+
+                <div className="relative">
+                    <Carousel setApi={setApi} className="w-full">
+                        <CarouselContent>
+                            {galleryImages.map((image, index) => (
+                                image && <CarouselItem key={index}>
+                                    <div className="aspect-[4/3] relative overflow-hidden rounded-lg">
+                                        <Image
+                                            src={image.imageUrl}
+                                            alt={image.description}
+                                            fill
+                                            className="object-cover"
+                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                            data-ai-hint={image.imageHint}
+                                        />
+                                    </div>
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                    </Carousel>
+                    <div className="flex items-center justify-between mt-4">
+                        <div className="flex items-center gap-2 text-sm">
+                            <span>{String(current).padStart(2, '0')}</span>
+                            <Progress value={(current / count) * 100} className="w-24" />
+                            <span>{String(count).padStart(2, '0')}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                             <Button variant="outline" size="icon" className="h-10 w-10" onClick={scrollPrev} disabled={current === 1}>
+                                <ChevronLeft className="h-5 w-5" />
+                             </Button>
+                             <Button variant="outline" size="icon" className="h-10 w-10" onClick={scrollNext} disabled={current === count}>
+                                <ChevronRight className="h-5 w-5" />
+                             </Button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className="prose prose-lg max-w-none text-foreground prose-headings:font-headline prose-headings:text-primary">
-              <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Our Story</p>
-              <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter !mt-0">About PM Coffee</h2>
-              <p className="mt-4 text-muted-foreground">
-                PM Coffee is more than just a coffee shop. It's a community hub born from a simple idea: to create a welcoming space where productivity and connection flow as freely as our ethically-sourced local coffee. Join us to work, relax, and share good news.
-              </p>
-               <Button asChild size="lg" variant="outline" className="mt-4">
-                <Link href="#contact">Learn More</Link>
-              </Button>
-            </div>
-          </div>
         </div>
       </section>
+
 
        {/* Testimonial */}
        <section className="py-16 md:py-24 bg-background">
@@ -559,35 +600,6 @@ export default function Home() {
                </Card>
             </TabsContent>
           </Tabs>
-        </div>
-      </section>
-
-      {/* Gallery Section */}
-      <section id="gallery" className="bg-secondary py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <header className="text-center mb-12 md:mb-16">
-            <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Gallery</h2>
-            <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-              A glimpse into the life and energy of PM Coffee.
-            </p>
-          </header>
-
-          <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
-            {galleryImages.map((image) => (
-              image && (
-                <div key={image.id} className="overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out">
-                  <Image
-                    src={image.imageUrl}
-                    alt={image.description}
-                    width={600}
-                    height={400}
-                    className="w-full h-auto"
-                    data-ai-hint={image.imageHint}
-                  />
-                </div>
-              )
-            ))}
-          </div>
         </div>
       </section>
 
