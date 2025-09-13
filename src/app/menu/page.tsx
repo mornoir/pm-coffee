@@ -39,17 +39,19 @@ export default function MenuPage() {
             </p>
           </header>
           
-          <div className="flex justify-center flex-wrap gap-2 mb-12">
-            {allTags.map(tag => (
-              <Button
-                key={tag}
-                variant={activeFilter === tag ? 'default' : 'outline'}
-                onClick={() => setActiveFilter(tag)}
-                className="capitalize"
-              >
-                {tag}
-              </Button>
-            ))}
+          <div className="max-w-2xl mx-auto mb-12">
+            <div className="border border-border/50 rounded-lg p-4 flex justify-center flex-wrap gap-2">
+                {allTags.map(tag => (
+                <Button
+                    key={tag}
+                    variant={activeFilter === tag ? 'default' : 'outline'}
+                    onClick={() => setActiveFilter(tag)}
+                    className="capitalize"
+                >
+                    {tag}
+                </Button>
+                ))}
+            </div>
           </div>
 
           <div className="max-w-4xl mx-auto">
