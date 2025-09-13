@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { placeHolderImages } from '@/lib/placeholder-images';
-import { ArrowRight, Utensils, Wifi, Users, Star, Clock, Mail, MapPin, Phone, Twitter, Instagram, Facebook, CalendarIcon, ChevronRight, ChevronLeft } from 'lucide-react';
+import { ArrowRight, Utensils, Wifi, Users, Star, Clock, Mail, MapPin, Phone, Twitter, Instagram, Facebook, CalendarIcon, CheckCircle, Coffee } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Badge } from "@/components/ui/badge";
@@ -32,16 +32,25 @@ const highlights = [
     description: 'Stay connected with our high-speed fiber internet, perfect for video calls and heavy workloads.',
   },
   {
-    icon: <Users className="h-8 w-8 text-primary" />,
+    icon: <Coffee className="h-8 w-8 text-primary" />,
     title: 'Comfortable Seating',
     description: 'Choose from a variety of seating options designed for comfort and productivity during long work sessions.',
   },
   {
-    icon: <Utensils className="h-8 w-8 text-primary" />,
-    title: 'Specialty Coffee & Food',
-    description: 'Fuel your day with our expertly crafted coffees and a delicious menu of food to keep you going.',
+    icon: <Users className="h-8 w-8 text-primary" />,
+    title: 'Community & Events',
+    description: 'Join our vibrant community with regular workshops, networking events, and social gatherings.',
   },
 ];
+
+const aboutFeatures = [
+    'Ethically-sourced local coffee',
+    'High-speed fiber internet',
+    'Quiet zones & collaborative areas',
+    'Regular community events',
+    'Private meeting rooms available',
+    'Artisan pastries and light bites',
+]
 
 const menuItems = [
     {
@@ -162,7 +171,6 @@ const menuItems = [
 
 const galleryImageIds = [
   'gallery1', 'gallery2', 'gallery3', 'gallery4', 
-  'gallery5', 'gallery6'
 ];
 
 const contactDetails = [
@@ -223,7 +231,7 @@ function BookingForm({ schema, isRoomBooking = false }: { schema: typeof seatBoo
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid sm:grid-cols-2 gap-4">
+        <div className="grid sm:grid-cols-2 gap-6">
           <FormField
             control={form.control}
             name="name"
@@ -251,7 +259,7 @@ function BookingForm({ schema, isRoomBooking = false }: { schema: typeof seatBoo
             )}
           />
         </div>
-        <div className="grid sm:grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-3 gap-6">
           <FormField
             control={form.control}
             name="date"
@@ -418,18 +426,18 @@ export default function Home() {
       {/* Highlights Section */}
       <section id="highlights" className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 md:mb-16">
             <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Why Choose Us</p>
             <h2 className="font-headline text-3xl md:text-4xl font-bold">Crafted with Care and Passion</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             {highlights.map((item) => (
-              <div key={item.title} className="flex flex-col items-center text-center">
-                <div className="bg-primary/10 p-4 rounded-full mb-4">
+              <div key={item.title} className="flex flex-col items-center text-center p-6 rounded-lg transition-all duration-300 hover:bg-secondary/50">
+                <div className="bg-primary/10 p-4 rounded-full mb-6">
                   {item.icon}
                 </div>
-                <h3 className="font-headline text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-muted-foreground">{item.description}</p>
+                <h3 className="font-headline text-xl font-semibold mb-3">{item.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{item.description}</p>
               </div>
             ))}
           </div>
@@ -438,55 +446,55 @@ export default function Home() {
 
       {/* About & Gallery Section */}
       <section id="about" className="bg-secondary py-16 md:py-24">
-        <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
-                <div className="flex flex-col justify-center">
-                    <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-4">Elegance at the Heart of Coffee</h2>
-                    <p className="text-muted-foreground text-lg mb-8">
-                       PM Coffee is more than just a coffee shop. It's a community hub born from a simple idea: to create a welcoming space where productivity and connection flow as freely as our ethically-sourced local coffee.
-                    </p>
-                    <div className="flex items-center gap-8">
-                        <Button asChild size="lg">
-                            <Link href="/discover">Discover More <ArrowRight className="ml-2 h-5 w-5"/></Link>
-                        </Button>
-                    </div>
-                </div>
+          <div className="container mx-auto px-4">
+              <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
+                  <div className="grid grid-cols-2 grid-rows-2 gap-4 h-[500px]">
+                      {galleryImages.map((image, index) => (
+                        image && <div
+                              key={image.id}
+                              className={cn(
+                                  "relative overflow-hidden rounded-lg shadow-lg",
+                                  index === 0 && "col-span-1 row-span-1",
+                                  index === 1 && "col-span-1 row-span-2",
+                                  index === 2 && "col-span-1 row-span-1",
+                                  index === 3 && "col-span-2 row-span-1"
+                              )}
+                          >
+                              <Image
+                                  src={image.imageUrl}
+                                  alt={image.description}
+                                  fill
+                                  className="object-cover w-full h-full transform hover:scale-105 transition-transform duration-300 ease-in-out"
+                                  sizes="(max-width: 768px) 50vw, 25vw"
+                                  data-ai-hint={image.imageHint}
+                              />
+                          </div>
+                      ))}
+                  </div>
 
-                <div className="relative group">
-                    <Carousel setApi={setApi} className="w-full">
-                        <CarouselContent>
-                            {galleryImages.map((image, index) => (
-                                image && <CarouselItem key={index}>
-                                    <div className="aspect-[4/3] relative overflow-hidden rounded-lg shadow-lg">
-                                        <Image
-                                            src={image.imageUrl}
-                                            alt={image.description}
-                                            fill
-                                            className="object-cover transition-transform duration-300 group-hover:scale-105"
-                                            sizes="(max-width: 768px) 100vw, 50vw"
-                                            data-ai-hint={image.imageHint}
-                                        />
-                                    </div>
-                                </CarouselItem>
-                            ))}
-                        </CarouselContent>
-                    </Carousel>
-                    <div className="absolute inset-x-0 bottom-6">
-                        <div className="container flex items-center justify-center gap-4">
-                            <Button variant="outline" size="icon" className="h-10 w-10 rounded-full bg-background/70 backdrop-blur-sm text-foreground hover:bg-background transition-all" onClick={scrollPrev}>
-                                <ChevronLeft className="h-5 w-5" />
-                            </Button>
-                            <Progress value={progress} className="w-full max-w-xs h-1 bg-background/50" />
-                            <Button variant="outline" size="icon" className="h-10 w-10 rounded-full bg-background/70 backdrop-blur-sm text-foreground hover:bg-background transition-all" onClick={scrollNext}>
-                                <ChevronRight className="h-5 w-5" />
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                  <div className="flex flex-col justify-center">
+                      <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">About Us</p>
+                      <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter mb-6">Your Perfect Third Place</h2>
+                      <p className="text-muted-foreground text-lg mb-8">
+                          PM Coffee is more than just a coffee shop. It's a community hub born from a simple idea: to create a welcoming space where productivity and connection flow as freely as our ethically-sourced local coffee.
+                      </p>
+                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 mb-10">
+                          {aboutFeatures.map(feature => (
+                              <li key={feature} className="flex items-center gap-3">
+                                  <CheckCircle className="h-5 w-5 text-primary" />
+                                  <span className="text-foreground/90">{feature}</span>
+                              </li>
+                          ))}
+                      </ul>
+                      <div className="flex items-center">
+                          <Button asChild size="lg">
+                              <Link href="/discover">Discover More <ArrowRight className="ml-2 h-5 w-5" /></Link>
+                          </Button>
+                      </div>
+                  </div>
+              </div>
+          </div>
       </section>
-
 
        {/* Testimonial */}
        <section className="py-16 md:py-24 bg-background">
@@ -523,44 +531,42 @@ export default function Home() {
                         key={tag}
                         variant={activeTag === tag ? 'default' : 'outline'}
                         onClick={() => setActiveTag(tag)}
-                        className="capitalize transition-all duration-300"
+                        className="capitalize transition-all duration-300 rounded-full px-5"
                     >
                         {tag}
                     </Button>
                 ))}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="max-w-4xl mx-auto">
+                <ul className="space-y-4">
                 {filteredMenuItems.map(item => {
-                    const imageData = placeHolderImages.find(p => p.id === item.id);
-                    const imageUrl = imageData?.imageUrl || item.imageUrl;
-                    const imageHint = imageData?.imageHint || item.imageHint;
-                    
                     return (
-                      <Card key={item.id} className="bg-background overflow-hidden shadow-lg group">
-                        {imageUrl && (
-                          <div className="relative h-48 w-full">
-                            <Image
-                              src={imageUrl}
-                              alt={item.name}
-                              fill
-                              className="object-cover transition-transform duration-300 group-hover:scale-105"
-                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                              data-ai-hint={imageHint}
-                            />
-                            {item.isSpecial && <Badge className="absolute top-2 right-2">Special</Badge>}
-                          </div>
-                        )}
-                        <CardContent className="p-4">
-                           <div className="flex justify-between items-start">
-                              <h3 className="font-headline text-lg font-semibold pr-2">{item.name}</h3>
-                              <p className="font-semibold text-lg text-primary flex-shrink-0">{item.price}</p>
-                           </div>
-                           <p className="text-muted-foreground text-sm mt-1">{item.description}</p>
-                        </CardContent>
-                      </Card>
+                        <li key={item.id} className="bg-background/50 p-4 rounded-lg shadow-sm flex flex-col sm:flex-row items-center gap-4 transition-all hover:shadow-md hover:bg-background">
+                            {item.imageUrl && (
+                                <div className="relative h-24 w-full sm:w-24 flex-shrink-0">
+                                    <Image
+                                        src={item.imageUrl}
+                                        alt={item.name}
+                                        fill
+                                        className="object-cover rounded-md"
+                                        sizes="(max-width: 640px) 100vw, 96px"
+                                        data-ai-hint={item.imageHint}
+                                    />
+                                </div>
+                            )}
+                            <div className="flex-grow text-center sm:text-left">
+                                <div className="flex justify-between items-center">
+                                    <h3 className="font-headline text-lg font-semibold">{item.name}</h3>
+                                    {item.isSpecial && <Badge>Special</Badge>}
+                                </div>
+                                <p className="text-muted-foreground text-sm mt-1">{item.description}</p>
+                            </div>
+                            <p className="font-semibold text-lg text-primary flex-shrink-0 sm:ml-4">{item.price}</p>
+                        </li>
                     );
                 })}
+                </ul>
             </div>
         </div>
       </section>
