@@ -54,7 +54,7 @@ export const menuItems: MenuItem[] = [
         name: "Mocha",
         price: "Rp 38.000",
         description: "A delightful blend of espresso, chocolate, and steamed milk.",
-        imageUrl: "https://images.pexels.com/photos/357283/pexels-photo-357283.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        imageUrl: "https://images.pexels.com/photos/2112749/pexels-photo-2112749.jpeg",
         tags: ["coffee", "recommended"]
     },
     {
@@ -71,7 +71,7 @@ export const menuItems: MenuItem[] = [
         price: "Rp 25.000",
         description: "A buttery, flaky, and golden-brown pastry, perfect with coffee.",
         imageUrl: "https://images.pexels.com/photos/2631613/pexels-photo-2631613.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        tags: ["snack & desserts"]
+        tags: ["snack_&_desserts"]
     },
     {
         id: "menu-avocadotoast",
@@ -143,7 +143,7 @@ export const menuItems: MenuItem[] = [
         price: 'Rp 45.000',
         description: "Creamy, rich, and decadent New York-style cheesecake with a graham cracker crust.",
         imageUrl: "https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        tags: ["snack & desserts", "recommended"]
+        tags: ["snack_&_desserts", "recommended"]
     },
     {
         id: 'menu-giantchococookie',
@@ -151,6 +151,6 @@ export const menuItems: MenuItem[] = [
         price: 'Rp 30.000',
         description: "A warm, soft-baked giant cookie loaded with gooey chocolate chips.",
         imageUrl: "https://images.pexels.com/photos/2067396/pexels-photo-2067396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        tags: ["snack & desserts"]
+        tags: ["snack_&_desserts"]
     },
 ];
