@@ -1,3 +1,4 @@
+
 {
   "placeholderImages": [
     {
@@ -53,6 +54,30 @@
       "description": "Avocado Toast",
       "imageUrl": "https://images.unsplash.com/photo-1628556820645-63ba5f90e6a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxhdm9jYWRvJTIwdG9hc3R8ZW58MHx8fHwxNzU3NzQ4NTMxfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "avocado toast brunch"
+    },
+    {
+      "id": "product5",
+      "description": "Cappuccino",
+      "imageUrl": "https://images.unsplash.com/photo-1572442388796-11668a65343d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxjYXBwdWNjaW5vfGVufDB8fHx8MTc1Nzc0ODI5N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cappuccino foam"
+    },
+    {
+      "id": "product6",
+      "description": "Matcha Latte",
+      "imageUrl": "https://images.unsplash.com/photo-1563822552-3200133AC489?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxtYXRjaGElMjBsYXR0ZXxlbnwwfHx8fDE3NTc3NDg0ODF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "green tea latte"
+    },
+    {
+      "id": "product7",
+      "description": "Cheesecake Slice",
+      "imageUrl": "https://images.unsplash.com/photo-1565792595381-32547a4635ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxjaGVlc2VjYWtlJTIwc2xpY2V8ZW58MHx8fHwxNzU3NzQ4NjI2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "dessert cake"
+    },
+    {
+      "id": "product8",
+      "description": "Club Sandwich",
+      "imageUrl": "https://images.unsplash.com/photo-1592415486699-8d5a71727349?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjbHViJTIwc2FuZHdpY2h8ZW58MHx8fHwxNzU3NzQ4NjU3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "sandwich lunch"
     },
     {
       "id": "gallery1",
