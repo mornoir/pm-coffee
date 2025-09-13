@@ -30,7 +30,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-foreground text-background">
+    <footer className="bg-background text-foreground">
       <div className="container mx-auto px-4 py-24 md:py-32">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div className="lg:col-span-5">
@@ -42,7 +42,7 @@ export function Footer() {
                     <ul className="space-y-2">
                         {navLinks.map(link => (
                         <li key={link.href}>
-                            <a href={link.href} onClick={(e) => handleScroll(e, link.href)} className="text-background hover:text-background/70 transition-colors cursor-pointer">
+                            <a href={link.href} onClick={(e) => handleScroll(e, link.href)} className="text-foreground hover:text-foreground/70 transition-colors cursor-pointer">
                             {link.label}
                             </a>
                         </li>
@@ -52,23 +52,23 @@ export function Footer() {
                  <div>
                     <h3 className="font-semibold text-muted-foreground mb-4">Company</h3>
                     <ul className="space-y-2">
-                        <li><Link href="/discover" className="text-background hover:text-background/70">Our Story</Link></li>
-                        <li><a href="#booking" onClick={(e) => handleScroll(e, '#booking')} className="text-background hover:text-background/70">Contact</a></li>
-                        <li><Link href="#" className="text-background hover:text-background/70">Careers</Link></li>
+                        <li><Link href="/discover" className="text-foreground hover:text-foreground/70">Our Story</Link></li>
+                        <li><a href="#booking" onClick={(e) => handleScroll(e, '#booking')} className="text-foreground hover:text-foreground/70">Contact</a></li>
+                        <li><Link href="#" className="text-foreground hover:text-foreground/70">Careers</Link></li>
                     </ul>
                 </div>
                 <div>
                     <h3 className="font-semibold text-muted-foreground mb-4">Legal</h3>
                     <ul className="space-y-2">
-                        <li><Link href="#" className="text-background hover:text-background/70">Privacy</Link></li>
-                        <li><Link href="#" className="text-background hover:text-background/70">Terms</Link></li>
+                        <li><Link href="#" className="text-foreground hover:text-foreground/70">Privacy</Link></li>
+                        <li><Link href="#" className="text-foreground hover:text-foreground/70">Terms</Link></li>
                     </ul>
                 </div>
                 <div>
                    <h3 className="font-semibold text-muted-foreground mb-4">Connect</h3>
                     <div className="flex space-x-4">
                         {socialLinks.map(social => (
-                        <a key={social.label} href={social.href} aria-label={social.label} className="text-background hover:text-background/70 transition-colors">
+                        <a key={social.label} href={social.href} aria-label={social.label} className="text-foreground hover:text-foreground/70 transition-colors">
                             {social.icon}
                         </a>
                         ))}
