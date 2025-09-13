@@ -8,16 +8,6 @@ import { ArrowRight, Wifi, Users, Coffee, MapPin, Phone, Mail, Briefcase } from 
 import Image from 'next/image';
 import Link from 'next/link';
 import { FadeIn } from '@/components/fade-in';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  type CarouselApi,
-} from "@/components/ui/carousel"
-import { useCallback, useEffect, useState } from 'react';
-import { cn } from '@/lib/utils';
 
 const highlights = [
   {
@@ -48,42 +38,8 @@ export default function Home() {
   const aboutImage2 = placeHolderImages.find((img) => img.id === 'about2');
   const aboutImage3 = placeHolderImages.find((img) => img.id === 'about3');
   const ctaImage = placeHolderImages.find((img) => img.id === 'cta');
-  const productImages = placeHolderImages.filter(img => img.id.startsWith('product'));
+  const productImages = placeHolderImages.filter(img => img.id.startsWith('product')).slice(0, 8);
   
-  const [api, setApi] = useState<CarouselApi>()
-  const [canScrollNext, setCanScrollNext] = useState(true);
-  const [current, setCurrent] = useState(0)
-  const [count, setCount] = useState(0)
-
-  const onDotButtonClick = useCallback((index: number) => {
-    if (!api) {
-      return
-    }
-    api.scrollTo(index)
-  }, [api]);
-
-
-  useEffect(() => {
-    if (!api) {
-      return
-    }
-
-    setCount(api.scrollSnapList().length)
-    setCurrent(api.selectedScrollSnap() + 1)
-
-    const onSelect = () => {
-      setCanScrollNext(api.canScrollNext())
-      setCurrent(api.selectedScrollSnap() + 1)
-    }
-
-    onSelect();
-    api.on("select", onSelect)
-
-    return () => {
-      api.off("select", onSelect)
-    }
-  }, [api])
-
 
   return (
     <div className="flex flex-col text-foreground overflow-hidden">
@@ -156,58 +112,33 @@ export default function Home() {
               </h2>
           </FadeIn>
           
-          <FadeIn className="relative">
-            <Carousel
-              setApi={setApi}
-              opts={{
-                align: "start",
-              }}
-              className="w-full"
-            >
-              <CarouselContent>
-                {productImages.map((image, index) => (
-                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/4">
-                     <Link href="/menu">
-                      <div className="group">
-                          <div className="relative aspect-square rounded-lg overflow-hidden bg-background mb-4 shadow-lg">
-                              <Image
-                                  src={image.imageUrl}
-                                  alt={image.description}
-                                  fill
-                                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                                  sizes="(max-width: 768px) 50vw, 25vw"
-                                  data-ai-hint={image.imageHint}
-                              />
-                          </div>
-                          <div className="flex justify-between items-center mt-4">
-                            <h3 className="font-semibold text-lg">{image.description}</h3>
-                            <p className="text-sm text-muted-foreground">{menuItems.find(m => m.id === `menu-${image.description.toLowerCase().replace(/\s+/g, '')}`)?.price}</p>
-                          </div>
+          <FadeIn>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {productImages.map((image, index) => (
+                <Link href="/menu" key={index}>
+                  <div className="group">
+                      <div className="relative aspect-square rounded-lg overflow-hidden bg-background mb-4 shadow-lg">
+                          <Image
+                              src={image.imageUrl}
+                              alt={image.description}
+                              fill
+                              className="object-cover transition-transform duration-300 group-hover:scale-105"
+                              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                              data-ai-hint={image.imageHint}
+                          />
                       </div>
-                    </Link>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
-            </Carousel>
+                      <div className="flex justify-between items-center mt-4">
+                        <h3 className="font-semibold text-lg">{image.description}</h3>
+                        <p className="text-sm text-muted-foreground">{menuItems.find(m => m.id === `menu-${image.description.toLowerCase().replace(/\s+/g, '')}`)?.price}</p>
+                      </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </FadeIn>
           
           <FadeIn className="text-center mt-16">
-              <div className="flex gap-2 justify-center mb-8">
-                {Array.from({ length: count }).map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => onDotButtonClick(index)}
-                    className={cn(
-                      'h-2 w-2 rounded-full transition-colors',
-                      current - 1 === index ? 'bg-primary' : 'bg-primary/20'
-                    )}
-                    />
-                ))}
-              </div>
-
-            <Button asChild variant={!canScrollNext ? 'default' : 'outline'} className="transition-colors">
+            <Button asChild>
               <Link href="/menu">
                 View Full Menu <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
