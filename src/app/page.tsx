@@ -7,6 +7,7 @@ import { menuItems } from '@/lib/menu-data';
 import { ArrowRight, Wifi, Users, Coffee, MapPin, Phone, Mail } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { FadeIn } from '@/components/fade-in';
 
 const highlights = [
   {
@@ -50,14 +51,14 @@ export default function Home() {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         <div className="container relative mx-auto h-full px-4 flex flex-col justify-end pb-24 md:pb-32">
-          <div className="max-w-2xl text-white">
+          <FadeIn className="max-w-2xl text-white">
              <h1 className="font-headline text-5xl md:text-8xl font-bold tracking-tighter">
                 Space for Ideas.
             </h1>
             <p className="mt-6 text-lg md:text-xl text-white/80 max-w-lg">
                 A thoughtfully designed co-working space where productivity and comfort converge. Find your focus, fuel your creativity.
             </p>
-          </div>
+          </FadeIn>
         </div>
       </section>
 
@@ -65,7 +66,7 @@ export default function Home() {
       <section id="about" className="py-24 md:py-40 bg-background">
         <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
-                <div className="md:order-2">
+                <FadeIn className="md:order-2">
                     <p className="text-primary font-semibold mb-4 text-sm tracking-widest uppercase">Workspace Redefined</p>
                     <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight mb-6">
                         Designed for Flow, Built for Community.
@@ -78,9 +79,9 @@ export default function Home() {
                             Explore Our Space <ArrowRight className="ml-2 h-4 w-4" />
                         </Link>
                     </Button>
-                </div>
+                </FadeIn>
                 {aboutImage1 && (
-                     <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-2xl md:order-1">
+                     <FadeIn className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-2xl md:order-1">
                         <Image
                             src={aboutImage1.imageUrl}
                             alt={aboutImage1.description}
@@ -89,7 +90,7 @@ export default function Home() {
                             sizes="(max-width: 768px) 100vw, 50vw"
                             data-ai-hint={aboutImage1.imageHint}
                         />
-                    </div>
+                    </FadeIn>
                 )}
             </div>
         </div>
@@ -98,42 +99,44 @@ export default function Home() {
       {/* Product Showcase */}
        <section id="products" className="py-24 md:py-40 bg-background">
         <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <FadeIn className="text-center max-w-3xl mx-auto mb-16">
               <p className="text-primary font-semibold mb-4 text-sm tracking-widest uppercase">Our Menu</p>
               <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight">
                 Fuel Your Day
               </h2>
-          </div>
+          </FadeIn>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            {productImages.map(image => (
-              <Link href="/discover#menu" key={image.id}>
-                <div className="group">
-                    <div className="relative aspect-square rounded-lg overflow-hidden bg-background mb-4 shadow-lg">
-                        <Image
-                            src={image.imageUrl}
-                            alt={image.description}
-                            fill
-                            className="object-cover transition-transform duration-300 group-hover:scale-105"
-                            sizes="(max-width: 768px) 50vw, 25vw"
-                            data-ai-hint={image.imageHint}
-                        />
-                    </div>
-                    <div className="flex justify-between items-center mt-4">
-                      <h3 className="font-semibold text-lg">{image.description}</h3>
-                      <p className="text-sm text-muted-foreground">{menuItems.find(m => m.id === image.id.replace('product', 'menu-'))?.price}</p>
-                    </div>
-                </div>
-              </Link>
+            {productImages.map((image, index) => (
+              <FadeIn key={image.id} animationDelay={index * 0.1}>
+                <Link href="/discover#menu">
+                  <div className="group">
+                      <div className="relative aspect-square rounded-lg overflow-hidden bg-background mb-4 shadow-lg">
+                          <Image
+                              src={image.imageUrl}
+                              alt={image.description}
+                              fill
+                              className="object-cover transition-transform duration-300 group-hover:scale-105"
+                              sizes="(max-width: 768px) 50vw, 25vw"
+                              data-ai-hint={image.imageHint}
+                          />
+                      </div>
+                      <div className="flex justify-between items-center mt-4">
+                        <h3 className="font-semibold text-lg">{image.description}</h3>
+                        <p className="text-sm text-muted-foreground">{menuItems.find(m => m.id === image.id.replace('product', 'menu-'))?.price}</p>
+                      </div>
+                  </div>
+                </Link>
+              </FadeIn>
             ))}
           </div>
-          <div className="text-center mt-16">
+          <FadeIn className="text-center mt-16">
             <Button asChild variant="outline">
               <Link href="/discover#menu">
                 View Full Menu <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-          </div>
+          </FadeIn>
         </div>
       </section>
 
@@ -142,7 +145,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
                  {aboutImage2 && (
-                     <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl">
+                     <FadeIn className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl">
                         <Image
                             src={aboutImage2.imageUrl}
                             alt={aboutImage2.description}
@@ -151,19 +154,19 @@ export default function Home() {
                             sizes="(max-width: 768px) 100vw, 50vw"
                             data-ai-hint={aboutImage2.imageHint}
                         />
-                    </div>
+                    </FadeIn>
                 )}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-12">
-                    <div className="col-span-1 sm:col-span-2">
+                    <FadeIn className="col-span-1 sm:col-span-2">
                          <p className="text-primary font-semibold mb-4 text-sm tracking-widest uppercase">The Essentials</p>
                         <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight">Everything You Need, Perfected.</h2>
-                    </div>
-                    {highlights.map((item) => (
-                      <div key={item.title}>
+                    </FadeIn>
+                    {highlights.map((item, index) => (
+                      <FadeIn key={item.title} animationDelay={index * 0.1}>
                         {item.icon}
                         <h3 className="font-semibold text-xl mt-6 mb-3">{item.title}</h3>
                         <p className="text-muted-foreground text-base">{item.description}</p>
-                      </div>
+                      </FadeIn>
                     ))}
                 </div>
             </div>
@@ -175,7 +178,7 @@ export default function Home() {
       <section className="py-24 md:py-40 bg-background">
         <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
-                <div>
+                <FadeIn>
                     <p className="text-primary font-semibold mb-4 text-sm tracking-widest uppercase">A Space That Adapts to You</p>
                     <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight mb-6">
                         From Solo Focus to Team Synergy.
@@ -188,9 +191,9 @@ export default function Home() {
                             Book Your Spot <ArrowRight className="ml-2 h-4 w-4" />
                         </Link>
                     </Button>
-                </div>
+                </FadeIn>
                 {aboutImage3 && (
-                     <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl">
+                     <FadeIn className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl">
                         <Image
                             src={aboutImage3.imageUrl}
                             alt={aboutImage3.description}
@@ -199,7 +202,7 @@ export default function Home() {
                             sizes="(max-width: 768px) 100vw, 50vw"
                             data-ai-hint={aboutImage3.imageHint}
                         />
-                    </div>
+                    </FadeIn>
                 )}
             </div>
         </div>
@@ -208,36 +211,38 @@ export default function Home() {
       {/* Booking / Contact Form */}
       <section id="booking" className="py-24 md:py-40 bg-background">
           <div className="container mx-auto px-4 max-w-4xl">
-              <header className="text-center mb-16">
+              <FadeIn className="text-center mb-16">
                 <p className="text-primary font-semibold mb-4 text-sm tracking-widest uppercase">Join Us</p>
                 <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Join the Movement</h2>
                 <p className="mt-6 max-w-2xl mx-auto text-lg text-muted-foreground">
                     Reserve your place in a community driven by passion and purpose.
                 </p>
-              </header>
+              </FadeIn>
 
-              <Card className="border-border/50 bg-secondary/30 shadow-2xl">
-                <CardContent className="p-8 md:p-12">
-                    <div className="grid md:grid-cols-2 gap-10">
-                        <div>
-                            <h3 className="font-headline text-3xl font-semibold mb-4">Book a Tour</h3>
-                             <p className="text-muted-foreground mb-8">Experience the space firsthand. We'll show you around and treat you to a coffee on the house.</p>
-                            <form className="space-y-4">
-                                <input type="email" placeholder="Enter your email" className="w-full bg-background border-border/50 rounded-md p-3 text-sm" />
-                                <Button type="submit" size="lg" className="w-full">Request a Tour</Button>
-                            </form>
-                        </div>
-                        <div className="border-t md:border-t-0 md:border-l border-border/50 pt-10 md:pt-0 md:pl-10">
-                             <h3 className="font-headline text-3xl font-semibold mb-4">Contact Us</h3>
-                             <div className="space-y-4 text-muted-foreground">
-                                <p className="flex items-center gap-4"><Mail className="h-5 w-5 text-primary" /> hello@pmcoffee.com</p>
-                                <p className="flex items-center gap-4"><Phone className="h-5 w-5 text-primary" /> +62 123 4567 890</p>
-                                <p className="flex items-center gap-4"><MapPin className="h-5 w-5 text-primary" /> Jl. Produktif No. 123, Jakarta</p>
-                            </div>
-                        </div>
-                    </div>
-                </CardContent>
-              </Card>
+              <FadeIn>
+                <Card className="border-border/50 bg-secondary/30 shadow-2xl">
+                  <CardContent className="p-8 md:p-12">
+                      <div className="grid md:grid-cols-2 gap-10">
+                          <div>
+                              <h3 className="font-headline text-3xl font-semibold mb-4">Book a Tour</h3>
+                              <p className="text-muted-foreground mb-8">Experience the space firsthand. We'll show you around and treat you to a coffee on the house.</p>
+                              <form className="space-y-4">
+                                  <input type="email" placeholder="Enter your email" className="w-full bg-background border-border/50 rounded-md p-3 text-sm" />
+                                  <Button type="submit" size="lg" className="w-full">Request a Tour</Button>
+                              </form>
+                          </div>
+                          <div className="border-t md:border-t-0 md:border-l border-border/50 pt-10 md:pt-0 md:pl-10">
+                              <h3 className="font-headline text-3xl font-semibold mb-4">Contact Us</h3>
+                              <div className="space-y-4 text-muted-foreground">
+                                  <p className="flex items-center gap-4"><Mail className="h-5 w-5 text-primary" /> hello@pmcoffee.com</p>
+                                  <p className="flex items-center gap-4"><Phone className="h-5 w-5 text-primary" /> +62 123 4567 890</p>
+                                  <p className="flex items-center gap-4"><MapPin className="h-5 w-5 text-primary" /> Jl. Produktif No. 123, Jakarta</p>
+                              </div>
+                          </div>
+                      </div>
+                  </CardContent>
+                </Card>
+              </FadeIn>
           </div>
       </section>
     </div>
