@@ -354,9 +354,9 @@ export default function Home() {
   useEffect(() => {
     if (!api) return;
     setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap() + 1);
+    setCurrent(api.selectedScrollSnap());
     api.on("select", () => {
-      setCurrent(api.selectedScrollSnap() + 1);
+      setCurrent(api.selectedScrollSnap());
     });
   }, [api]);
   
@@ -445,17 +445,17 @@ export default function Home() {
                     </div>
                 </div>
 
-                <div className="relative">
+                <div className="relative group">
                     <Carousel setApi={setApi} className="w-full">
                         <CarouselContent>
                             {galleryImages.map((image, index) => (
                                 image && <CarouselItem key={index}>
-                                    <div className="aspect-[4/3] relative overflow-hidden rounded-lg">
+                                    <div className="aspect-[4/3] relative overflow-hidden rounded-lg shadow-lg">
                                         <Image
                                             src={image.imageUrl}
                                             alt={image.description}
                                             fill
-                                            className="object-cover"
+                                            className="object-cover transition-transform duration-300 group-hover:scale-105"
                                             sizes="(max-width: 768px) 100vw, 50vw"
                                             data-ai-hint={image.imageHint}
                                         />
@@ -464,20 +464,22 @@ export default function Home() {
                             ))}
                         </CarouselContent>
                     </Carousel>
-                    <div className="flex items-center justify-between mt-4">
-                        <div className="flex items-center gap-2 text-sm">
-                            <span>{String(current).padStart(2, '0')}</span>
-                            <Progress value={(current / count) * 100} className="w-24" />
-                            <span>{String(count).padStart(2, '0')}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                             <Button variant="outline" size="icon" className="h-10 w-10" onClick={scrollPrev} disabled={current === 1}>
-                                <ChevronLeft className="h-5 w-5" />
-                             </Button>
-                             <Button variant="outline" size="icon" className="h-10 w-10" onClick={scrollNext} disabled={current === count}>
-                                <ChevronRight className="h-5 w-5" />
-                             </Button>
-                        </div>
+                    <div className="absolute inset-0 flex items-center justify-between px-2">
+                        <Button variant="ghost" size="icon" className="h-12 w-12 rounded-full bg-background/50 text-foreground hover:bg-background/80 transition-all opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0" onClick={scrollPrev} disabled={current === 0}>
+                            <ChevronLeft className="h-6 w-6" />
+                        </Button>
+                        <Button variant="ghost" size="icon" className="h-12 w-12 rounded-full bg-background/50 text-foreground hover:bg-background/80 transition-all opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0" onClick={scrollNext} disabled={current === count - 1}>
+                            <ChevronRight className="h-6 w-6" />
+                        </Button>
+                    </div>
+                     <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                        {galleryImages.map((_, i) => (
+                            <button
+                                key={i}
+                                onClick={() => api?.scrollTo(i)}
+                                className={cn("h-2 w-2 rounded-full transition-all", current === i ? "w-6 bg-primary" : "bg-background/50 hover:bg-background/80")}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>
@@ -674,4 +676,5 @@ export default function Home() {
 
     </div>
   );
-}
+
+    
