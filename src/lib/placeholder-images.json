@@ -80,6 +80,30 @@
       "imageHint": "sandwich lunch"
     },
     {
+      "id": "product9",
+      "description": "Iced Chocolate",
+      "imageUrl": "https://images.unsplash.com/photo-1562228122-29135a585f83?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "iced chocolate drink"
+    },
+    {
+      "id": "product10",
+      "description": "Artisan Tea",
+      "imageUrl": "https://images.unsplash.com/photo-1563822552-3200133AC489?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "artisan tea pot"
+    },
+    {
+      "id": "product11",
+      "description": "Quinoa Salad",
+      "imageUrl": "https://images.unsplash.com/photo-1551248429-4097c682c478?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "healthy quinoa salad"
+    },
+    {
+      "id": "product12",
+      "description": "Giant Choco Cookie",
+      "imageUrl": "https://images.unsplash.com/photo-1598839958373-c15496a76e93?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "chocolate chip cookie"
+    },
+    {
       "id": "gallery1",
       "description": "A group of people collaborating in a meeting room.",
       "imageUrl": "https://picsum.photos/seed/gallery1/600/400",
