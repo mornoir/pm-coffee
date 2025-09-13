@@ -9,14 +9,14 @@ import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
 
-const allTags = ['Recommended', 'Coffee', 'Eatery', 'Snack & Desserts'];
+const allTags = ['Recommended', 'Coffee', 'Non-Coffee', 'Eatery', 'Snack & Desserts'];
 
 export default function MenuPage() {
   const [activeFilter, setActiveFilter] = useState('Recommended');
 
   const filteredMenuItems = activeFilter === 'Recommended'
     ? menuItems.filter(item => item.tags.includes('recommended'))
-    : menuItems.filter(item => item.tags.includes(activeFilter.toLowerCase().replace(' & ', ' & ')));
+    : menuItems.filter(item => item.tags.includes(activeFilter.toLowerCase().replace(' & ', ' & ').replace('-', ' ')));
 
 
   return (
