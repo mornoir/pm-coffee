@@ -30,14 +30,15 @@ export default function MenuPage() {
 
 
   const getCategoryFromTag = (tag: string) => {
-    return tag.toLowerCase().replace(' & ', '_&_');
+    if (tag === 'Snack & Desserts') return 'snack_&_desserts';
+    return tag.toLowerCase();
   };
 
   const filteredMenuItems = activeFilter === 'Recommended'
     ? menuItems.filter(item => item.tags.includes('recommended'))
     : menuItems.filter(item => {
         const categoryTag = getCategoryFromTag(activeFilter);
-        return item.tags.some(t => t === categoryTag);
+        return item.tags.includes(categoryTag);
     });
 
   const groupByCategory = (items: MenuItem[]): GroupedMenuItems => {
@@ -126,13 +127,13 @@ export default function MenuPage() {
               Object.entries(groupedItems).map(([groupName, items]) => (
                 <div key={groupName} className="mb-12 last:mb-0">
                   <h2 className="font-headline text-3xl font-bold tracking-tight mb-8">{groupName}</h2>
-                  <div className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {items.map(renderMenuItem)}
                   </div>
                 </div>
               ))
             ) : (
-              <div className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {filteredMenuItems.map(renderMenuItem)}
               </div>
             )}
