@@ -8,6 +8,7 @@ import { ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
+import { Card } from '@/components/ui/card';
 
 const allTags = ['Recommended', 'Coffee', 'Non-Coffee', 'Eatery', 'Snack & Desserts'];
 
@@ -19,17 +20,13 @@ export default function MenuPage() {
   const [activeFilter, setActiveFilter] = useState('Recommended');
 
   const getCategoryFromTag = (tag: string) => {
-    return tag.toLowerCase().replace(' & ', '_&_').replace('-', '_');
+    return tag.toLowerCase().replace(' & ', '_&_');
   };
 
   const filteredMenuItems = activeFilter === 'Recommended'
     ? menuItems.filter(item => item.tags.includes('recommended'))
     : menuItems.filter(item => {
         const categoryTag = getCategoryFromTag(activeFilter);
-        // The main tag for non-coffee is 'non-coffee' (with a hyphen)
-        if (activeFilter === 'Non-Coffee') {
-            return item.tags.includes('non-coffee');
-        }
         return item.tags.includes(categoryTag);
     });
 
@@ -55,27 +52,28 @@ export default function MenuPage() {
   const displayGrouped = activeFilter !== 'Recommended';
 
   const renderMenuItem = (item: MenuItem) => (
-    <div key={item.id} className="space-y-4">
-      <div className="flex gap-4 items-start">
-        {item.imageUrl && (
-          <div className="relative w-20 h-20 rounded-md overflow-hidden shadow-sm shrink-0">
-            <Image
-              src={item.imageUrl}
-              alt={item.name}
-              fill
-              className="object-cover"
-              sizes="80px"
-            />
-          </div>
-        )}
-        <div className="flex-grow">
-          <h3 className="font-semibold text-lg">{item.name}</h3>
-          <p className="text-muted-foreground text-sm">{item.description}</p>
+    <Card key={item.id} className="p-4 bg-secondary/30 border-border/50">
+        <div className="flex gap-4 items-start">
+            {item.imageUrl && (
+            <div className="relative w-24 h-24 rounded-md overflow-hidden shadow-sm shrink-0">
+                <Image
+                src={item.imageUrl}
+                alt={item.name}
+                fill
+                className="object-cover"
+                sizes="96px"
+                />
+            </div>
+            )}
+            <div className="flex-grow">
+            <div className="flex justify-between items-start">
+              <h3 className="font-semibold text-lg">{item.name}</h3>
+              <p className="text-muted-foreground font-medium shrink-0">{item.price}</p>
+            </div>
+            <p className="text-muted-foreground text-sm mt-1">{item.description}</p>
+            </div>
         </div>
-        <p className="text-muted-foreground font-medium shrink-0">{item.price}</p>
-      </div>
-      <div className="border-b border-dashed border-border/50"></div>
-    </div>
+    </Card>
   );
 
   return (
@@ -113,18 +111,18 @@ export default function MenuPage() {
             </div>
           </div>
 
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             {displayGrouped && Object.keys(groupedItems).length > 0 ? (
               Object.entries(groupedItems).map(([groupName, items]) => (
                 <div key={groupName} className="mb-12 last:mb-0">
                   <h2 className="font-headline text-3xl font-bold tracking-tight mb-8">{groupName}</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-12 lg:gap-x-16 gap-y-8">
+                  <div className="space-y-6">
                     {items.map(renderMenuItem)}
                   </div>
                 </div>
               ))
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-12 lg:gap-x-16 gap-y-8">
+              <div className="space-y-6">
                 {filteredMenuItems.map(renderMenuItem)}
               </div>
             )}
