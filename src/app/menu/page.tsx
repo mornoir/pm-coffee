@@ -24,7 +24,14 @@ export default function MenuPage() {
 
   const filteredMenuItems = activeFilter === 'Recommended'
     ? menuItems.filter(item => item.tags.includes('recommended'))
-    : menuItems.filter(item => item.tags.includes(getCategoryFromTag(activeFilter)));
+    : menuItems.filter(item => {
+        const categoryTag = getCategoryFromTag(activeFilter);
+        // The main tag for non-coffee is 'non-coffee' (with a hyphen)
+        if (activeFilter === 'Non-Coffee') {
+            return item.tags.includes('non-coffee');
+        }
+        return item.tags.includes(categoryTag);
+    });
 
   const groupByCategory = (items: MenuItem[]): GroupedMenuItems => {
     const categoryKeywords = ['espresso-based', 'matcha', 'chocolate', 'tea', 'smoothie', 'light-meal', 'heavy-meal', 'pastry', 'dessert'];
