@@ -9,6 +9,14 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
 import { Card } from '@/components/ui/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+
 
 const allTags = ['Recommended', 'Coffee', 'Non-Coffee', 'Eatery', 'Snack & Desserts'];
 
@@ -18,6 +26,8 @@ type GroupedMenuItems = {
 
 export default function MenuPage() {
   const [activeFilter, setActiveFilter] = useState('Recommended');
+  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
+
 
   const getCategoryFromTag = (tag: string) => {
     return tag.toLowerCase().replace(' & ', '_&_');
@@ -27,7 +37,7 @@ export default function MenuPage() {
     ? menuItems.filter(item => item.tags.includes('recommended'))
     : menuItems.filter(item => {
         const categoryTag = getCategoryFromTag(activeFilter);
-        return item.tags.includes(categoryTag);
+        return item.tags.some(t => t === categoryTag);
     });
 
   const groupByCategory = (items: MenuItem[]): GroupedMenuItems => {
@@ -52,7 +62,7 @@ export default function MenuPage() {
   const displayGrouped = activeFilter !== 'Recommended';
 
   const renderMenuItem = (item: MenuItem) => (
-    <Card key={item.id} className="p-4 bg-secondary/30 border-border/50">
+    <Card key={item.id} className="p-4 bg-secondary/30 border-border/50 cursor-pointer hover:bg-secondary/50 transition-colors" onClick={() => setSelectedItem(item)}>
         <div className="flex gap-4 items-start">
             {item.imageUrl && (
             <div className="relative w-24 h-24 rounded-md overflow-hidden shadow-sm shrink-0">
@@ -129,6 +139,32 @@ export default function MenuPage() {
           </div>
         </section>
       </div>
+
+       {selectedItem && (
+        <Dialog open={!!selectedItem} onOpenChange={(isOpen) => !isOpen && setSelectedItem(null)}>
+          <DialogContent className="max-w-md p-0">
+            {selectedItem.imageUrl && (
+              <div className="relative w-full h-64 rounded-t-lg overflow-hidden">
+                <Image
+                  src={selectedItem.imageUrl}
+                  alt={selectedItem.name}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            )}
+            <DialogHeader className="p-6">
+              <div className="flex justify-between items-center">
+                 <DialogTitle className="text-2xl font-headline tracking-tight">{selectedItem.name}</DialogTitle>
+                 <p className="text-lg font-medium text-muted-foreground">{selectedItem.price}</p>
+              </div>
+              <DialogDescription className="pt-4 text-base text-muted-foreground">
+                {selectedItem.description}
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 }
