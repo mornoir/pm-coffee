@@ -16,7 +16,7 @@ export default function MenuPage() {
 
   const filteredMenuItems = activeFilter === 'Recommended'
     ? menuItems.filter(item => item.tags.includes('recommended'))
-    : menuItems.filter(item => item.tags.includes(activeFilter.toLowerCase().replace(' & ', '_&_').replace('-', '_')));
+    : menuItems.filter(item => item.tags.includes(activeFilter.toLowerCase().replace(' & ', '_&_')));
 
 
   return (
